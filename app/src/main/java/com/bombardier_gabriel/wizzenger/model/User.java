@@ -20,13 +20,12 @@ import java.util.List;
  * Created by marc-antoinehinse on 2017-10-01.
  */
 public class User {
-
     public String uid;
     public String displayName;
     public String userName;
     public String email;
     public int age;
-    public String photoUrl;
+    public int photoUrl;
 
     public String thumbnailBase64;
     public List<Device> devices;
@@ -37,6 +36,11 @@ public class User {
 
     public User() {
         devices = new ArrayList<>();
+    }
+
+    public User(int img, String displayName){
+        this.displayName = displayName;
+        this.photoUrl = img;
     }
 
     @Exclude
@@ -78,6 +82,46 @@ public class User {
         }
 
         return false;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(int photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }
 

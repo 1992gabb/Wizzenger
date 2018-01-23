@@ -5,22 +5,17 @@
     android:orientation="vertical"
     tools:context="com.bombardier_gabriel.wizzenger.fragments.ConversationsFragment">
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:text="@string/hello_blank_fragment" />
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="7">
+        android:layout_height="0dp"
+        android:layout_weight="0">
     </ListView>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recycler_conversations"
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:scrollbars="vertical" />
 </LinearLayout>

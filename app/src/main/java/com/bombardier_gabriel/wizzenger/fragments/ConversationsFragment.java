@@ -52,8 +52,15 @@ public class ConversationsFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_conversations, container, false);
 
-        listeConvo = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        listeConvo = (RecyclerView) rootView.findViewById(R.id.recycler_conversations);
+        mAdapter = new ConversationsAdapter(convoList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        listeConvo.setLayoutManager(mLayoutManager);
+        listeConvo.setItemAnimator(new DefaultItemAnimator());
+        listeConvo.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        listeConvo.setAdapter(mAdapter);
 
+        getConversations();
 
         return rootView;
     }
@@ -76,19 +83,6 @@ public class ConversationsFragment extends ListFragment {
 
         adapter = new SimpleAdapter(getContext(), vecDonnees,R.layout.layout_one_conversation, from, to);
         listeConversations.setAdapter(adapter);*/
-
-
-
-        mAdapter = new ConversationsAdapter(convoList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        listeConvo.setLayoutManager(mLayoutManager);
-        listeConvo.setItemAnimator(new DefaultItemAnimator());
-        listeConvo.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
-        listeConvo.setAdapter(mAdapter);
-
-        getConversations();
-
-
     }
 
     private void getConversations() {

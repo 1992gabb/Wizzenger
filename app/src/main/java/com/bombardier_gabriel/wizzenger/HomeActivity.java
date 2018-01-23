@@ -49,6 +49,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         FragmentAdapter fragAdapter = new FragmentAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(fragAdapter);
+        viewPager.setOffscreenPageLimit(2);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 

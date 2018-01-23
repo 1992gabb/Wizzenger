@@ -9,8 +9,7 @@ import android.widget.TextView;
 
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
-
-import org.w3c.dom.Text;
+import com.bombardier_gabriel.wizzenger.model.User;
 
 import java.util.List;
 
@@ -18,46 +17,44 @@ import java.util.List;
  * Classe inspirée de https://www.androidhive.info/2016/01/android-working-with-recycler-view/
  */
 
-public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdapter.MyViewHolder> {
+public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyViewHolder> {
 
-    private List<Conversation> convoList;
+    private List<User> contactsList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
-        public TextView nomContact, texteApercu;
+        public TextView nomContact;
 
         public MyViewHolder(View view) {
             super(view);
-            image= (ImageView) view.findViewById(R.id.imgContactConvo);
-            nomContact=(TextView) view.findViewById(R.id.nomContactConvo);
-            texteApercu=(TextView) view.findViewById(R.id.texteApercu);
+            image= (ImageView) view.findViewById(R.id.imgContactContacts);
+            nomContact=(TextView) view.findViewById(R.id.nomContact);
         }
     }
 
 
-    public ConversationsAdapter(List<Conversation> convoList) {
-        this.convoList = convoList;
+    public ContactsAdapter(List<User> contactsList) {
+        this.contactsList = contactsList;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_one_conversation, parent, false);
+                .inflate(R.layout.layout_one_contact, parent, false);
 
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Conversation convo = convoList.get(position);
-        holder.image.setImageResource(convo.getImage());
-        holder.nomContact.setText(convo.getNomContact());
-        holder.texteApercu.setText(convo.getTexteApercu());
+        User user = contactsList.get(position);
+        holder.image.setImageResource(user.getPhotoUrl());
+        holder.nomContact.setText(user.getDisplayName());
     }
 
     @Override
     public int getItemCount() {
-        return convoList.size();
+        return contactsList.size();
     }
 
 }
