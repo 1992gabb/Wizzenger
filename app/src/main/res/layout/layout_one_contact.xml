@@ -21,27 +21,25 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/nomContact"
-            android:layout_width="wrap_content"
+            android:layout_weight="5"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:text="SALUTTT"
+            android:text="Nom du Contact"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/texteApercuContact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="cursive"
-            android:text="SALUTTT"
-            android:textSize="17sp"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/imgWizz"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:background="@drawable/vibration_icon" />
 
     </LinearLayout>
 

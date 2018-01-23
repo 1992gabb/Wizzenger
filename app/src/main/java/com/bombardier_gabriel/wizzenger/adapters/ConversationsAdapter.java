@@ -1,13 +1,17 @@
 package com.bombardier_gabriel.wizzenger.adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bombardier_gabriel.wizzenger.ConversationActivity;
 import com.bombardier_gabriel.wizzenger.R;
+import com.bombardier_gabriel.wizzenger.fragments.ConversationsFragment;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
 
 import org.w3c.dom.Text;
@@ -47,12 +51,21 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
         return new MyViewHolder(itemView);
     }
 
+    //Solution pour le listener trouvée ici: https://stackoverflow.com/questions/42721571/recyclerview-onitemclicklistener
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Conversation convo = convoList.get(position);
         holder.image.setImageResource(convo.getImage());
         holder.nomContact.setText(convo.getNomContact());
         holder.texteApercu.setText(convo.getTexteApercu());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), ConversationActivity.class);
+                v.getContext().startActivity(i);
+            }
+        });
     }
 
     @Override

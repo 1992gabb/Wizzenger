@@ -29,10 +29,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText passwordEditText;
     private static FirebaseAuth firebaseAuth;
 
-    public static void show(Context context) {
+    /*public static void show(Context context) {
         Intent i = new Intent(context, LoginActivity.class);
         context.startActivity(i);
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         firebaseAuth = FirebaseAuth.getInstance();
 
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        //gabb_bombDatabaseProfile.init(this);
+        //DatabaseProfile.init(this);
 
         btnRegister = (Button)findViewById(R.id.btnRegister);
         btnConnect = (Button)findViewById(R.id.btnConnect);

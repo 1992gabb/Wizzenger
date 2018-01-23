@@ -1,12 +1,17 @@
 package com.bombardier_gabriel.wizzenger.adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bombardier_gabriel.wizzenger.ContactInfoActivity;
+import com.bombardier_gabriel.wizzenger.ConversationActivity;
+import com.bombardier_gabriel.wizzenger.LoginActivity;
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
 import com.bombardier_gabriel.wizzenger.model.User;
@@ -24,11 +29,13 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
         public TextView nomContact;
+        public ImageView imageWizz;
 
         public MyViewHolder(View view) {
             super(view);
             image= (ImageView) view.findViewById(R.id.imgContactContacts);
             nomContact=(TextView) view.findViewById(R.id.nomContact);
+            imageWizz = (ImageView) view.findViewById(R.id.imgWizz);
         }
     }
 
@@ -50,6 +57,15 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
         User user = contactsList.get(position);
         holder.image.setImageResource(user.getPhotoUrl());
         holder.nomContact.setText(user.getDisplayName());
+        holder.imageWizz.setImageResource(R.drawable.vibration_icon);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), ContactInfoActivity.class);
+                v.getContext().startActivity(i);
+            }
+        });
     }
 
     @Override
