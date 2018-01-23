@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "102327183740",
+    "firebase_url": "https://wizzenger-briel.firebaseio.com",
+    "project_id": "wizzenger-briel",
+    "storage_bucket": "wizzenger-briel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102327183740:android:fb29e9b261400313",
+        "android_client_info": {
+          "package_name": "com.bombardier_gabriel.wizzenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102327183740-d9ieviikk2oila0mcl2jhll6c0m0mp1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFh0N7dftObB4mQm4_8D-DD9DcwlEYa1U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
