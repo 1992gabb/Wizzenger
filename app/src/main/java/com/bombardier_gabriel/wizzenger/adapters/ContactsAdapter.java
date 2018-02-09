@@ -23,7 +23,6 @@ import java.util.List;
  */
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyViewHolder> {
-
     private List<User> contactsList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

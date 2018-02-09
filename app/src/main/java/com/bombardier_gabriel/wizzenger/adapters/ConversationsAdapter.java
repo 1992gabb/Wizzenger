@@ -28,13 +28,13 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
-        public TextView nomContact, texteApercu;
+        public TextView contactName, textHint;
 
         public MyViewHolder(View view) {
             super(view);
             image= (ImageView) view.findViewById(R.id.imgContactConvo);
-            nomContact=(TextView) view.findViewById(R.id.nomContactConvo);
-            texteApercu=(TextView) view.findViewById(R.id.texteApercu);
+            contactName=(TextView) view.findViewById(R.id.nomContactConvo);
+            textHint=(TextView) view.findViewById(R.id.texteApercu);
         }
     }
 
@@ -55,9 +55,9 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Conversation convo = convoList.get(position);
-        holder.image.setImageResource(convo.getImage());
-        holder.nomContact.setText(convo.getNomContact());
-        holder.texteApercu.setText(convo.getTexteApercu());
+        holder.image.setImageResource(convo.getConvoImage());
+        holder.contactName.setText(convo.getContactName());
+        holder.textHint.setText(convo.getTextHint());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

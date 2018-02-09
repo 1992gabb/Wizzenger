@@ -64,14 +64,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         final int id = v.getId();
-        /*if(v.getId()==R.id.settings_btn){
-            //ToDo show profile
+
+        if(id==R.id.settings_btn){
+            /*
             FirebaseAuth.getInstance().signOut();
             LoginActivity.show(this);
             finish();
-        }*/
-
-        if(id==R.id.settings_btn){
+            */
             Intent i = new Intent(HomeActivity.this, SettingsActivity.class);
             startActivity(i);
         }

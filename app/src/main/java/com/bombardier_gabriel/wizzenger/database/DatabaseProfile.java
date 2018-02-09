@@ -23,6 +23,7 @@ import java.io.ByteArrayOutputStream;
 
 /**
  * Created by gabb_ on 2018-01-08.
+ * Inspired by Google Firebase examples
  */
 
 public class DatabaseProfile {

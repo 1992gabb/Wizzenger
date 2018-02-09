@@ -1,6 +1,5 @@
 package com.bombardier_gabriel.wizzenger.fragments;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -28,7 +27,7 @@ import java.util.Hashtable;
 import java.util.Vector;
 
 /**
- * A simple {@link Fragment} subclass.
+ *
  */
 public class ContactsFragment extends Fragment {
     private RecyclerView listeContacts;
