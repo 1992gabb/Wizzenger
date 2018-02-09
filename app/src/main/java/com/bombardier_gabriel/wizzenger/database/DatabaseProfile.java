@@ -27,7 +27,6 @@ import java.io.ByteArrayOutputStream;
 
 public class DatabaseProfile {
     private static final String TAG = "DatabaseProfile";
-
     private static DatabaseProfile instance;
     private DatabaseReference usersDatabase;
     private User user;

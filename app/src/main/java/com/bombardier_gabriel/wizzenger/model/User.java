@@ -26,7 +26,6 @@ public class User {
     public String email;
     public int age;
     public int photoUrl;
-
     public String thumbnailBase64;
     public List<Device> devices;
     public List<String> contacts;

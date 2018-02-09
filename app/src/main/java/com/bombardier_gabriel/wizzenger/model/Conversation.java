@@ -5,39 +5,39 @@ package com.bombardier_gabriel.wizzenger.model;
  */
 
 public class Conversation {
-    private String nomContact, texteApercu;
-    private int image;
+    private String contactName, textHint;
+    private int convoImage;
     public Conversation(){
 
     }
 
-    public Conversation(int image, String nomContact, String texteApercu){
-        this.image = image;
-        this.nomContact = nomContact;
-        this.texteApercu = texteApercu;
+    public Conversation(int convoImage, String contactName, String texteApercu){
+        this.convoImage = convoImage;
+        this.contactName = contactName;
+        this.textHint = textHint;
     }
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
+    public int getConvoImage() {
+        return convoImage;
     }
 
-    public String getNomContact() {
-        return nomContact;
+    public void setConvoImage(int convoImage) {
+        this.convoImage = convoImage;
     }
 
-    public void setNomContact(String nomContact) {
-        this.nomContact = nomContact;
+    public String getContactName() {
+        return contactName;
     }
 
-    public String getTexteApercu() {
-        return texteApercu;
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
 
-    public void setTexteApercu(String texteApercu) {
-        this.texteApercu = texteApercu;
+    public String getTextHint() {
+        return textHint;
+    }
+
+    public void setTextHint(String textHint) {
+        this.textHint = textHint;
     }
 
 
