@@ -36,7 +36,6 @@ public class DatabaseProfile {
     private DatabaseProfile(final Context context) {
         this.context = context;
         usersDatabase = FirebaseDatabase.getInstance().getReference("users");
-        initMyUser();
     }
 
     public static void init(final Context context) {
@@ -65,7 +64,7 @@ public class DatabaseProfile {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 user = dataSnapshot.getValue(User.class);
                 addFCMToken(context);
-                Log.d(TAG, "User name: " + user.userName + ", email " + user.email);
+                Log.d(TAG, "User name: " + user.getUserName() + ", email " + user.getEmail());
             }
 
             @Override
@@ -76,18 +75,20 @@ public class DatabaseProfile {
         });
     }
 
-    public void createUser(final String uid){
-        user = new User();
-        user.uid = uid;
-
+    //Pour écrire dans la base de données
+    public void writeUser(User user){
+        this.user = user;
         //Créer une image d'avatar
         //Bitmap bitmap = AvatarGenerator.generate(context, 50, 50);
         //ByteArrayOutputStream stream = new ByteArrayOutputStream();
         //bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         //user.thumbnailBase64 = Base64.encodeToString(stream.toByteArray(), Base64.DEFAULT);
 
-        usersDatabase.child(uid).setValue(user);
-        addProfileEventListener();
+        usersDatabase.child(user.getUserName()).child("email").setValue(user.getEmail());
+        usersDatabase.child(user.getUserName()).child("phone").setValue(user.getPhone());
+//        usersDatabase.child(user.getUserName()).child("password").setValue(user.getPassword());
+        usersDatabase.child(user.getUserName()).child("avatar").setValue(user.getPhotoUrl());
+//        addProfileEventListener();
     }
 
     public void addFCMToken(final Context context) {
@@ -99,8 +100,8 @@ public class DatabaseProfile {
                     String deviceId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
                     Log.i(TAG, "onFCMFetchSuccessful");
                     if (user.hasFcmTokenChanged(deviceId, token)) {
-                        Log.i(TAG, "onFCMFetchSuccessful: user.devices=" + user.devices.size());
-                        usersDatabase.child(user.uid).child("devices").setValue(user.devices);
+                        Log.i(TAG, "onFCMFetchSuccessful: user.devices=" + user.getDevicesList().size());
+                        usersDatabase.child(user.getUserName()).child("devices").setValue(user.getDevicesList());
                     }
                 }
             }

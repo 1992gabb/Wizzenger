@@ -20,15 +20,17 @@ import java.util.List;
  * Created by marc-antoinehinse on 2017-10-01.
  */
 public class User {
-    public String uid;
-    public String displayName;
-    public String userName;
-    public String email;
-    public int age;
-    public int photoUrl;
-    public String thumbnailBase64;
-    public List<Device> devices;
-    public List<String> contacts;
+    private String uid;
+    private String displayName;
+    private String userName;
+    private String email;
+    private String password;
+    private int age;
+    private String phone;
+    private int photoUrl;
+    private String thumbnailBase64;
+    private List<Device> devices;
+    private List<String> contacts;
 
     @Exclude
     public Bitmap thumbnail;
@@ -40,6 +42,14 @@ public class User {
     public User(int img, String displayName){
         this.displayName = displayName;
         this.photoUrl = img;
+    }
+
+    public User(String userName, String email, String password, String phone, int photoUrl){
+        this.userName = userName ;
+        this.email= email;
+        this.password= password;
+        this.phone= phone;
+        this.photoUrl = photoUrl;
     }
 
     @Exclude
@@ -122,5 +132,11 @@ public class User {
     public void setPhotoUrl(int photoUrl) {
         this.photoUrl = photoUrl;
     }
+
+    public List<Device> getDevicesList(){return this.devices;}
+
+    public String getPhone(){return this.phone;}
+
+    public String getPassword(){return this.password;}
 }
 

@@ -47,7 +47,7 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <activity android:name=".ConversationActivity" />
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".ContactInfoActivity" />
         <activity android:name=".SettingsActivity"></activity>
     </application>
