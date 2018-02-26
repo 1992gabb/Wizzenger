@@ -20,8 +20,10 @@ import android.widget.Toast;
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.adapters.ContactsAdapter;
 import com.bombardier_gabriel.wizzenger.adapters.ConversationsAdapter;
+import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
 import com.bombardier_gabriel.wizzenger.model.User;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Hashtable;
 import java.util.Vector;
@@ -45,9 +47,9 @@ public class ContactsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_conversations, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_contacts, container, false);
 
-        listeContacts = (RecyclerView) rootView.findViewById(R.id.recycler_conversations);
+        listeContacts = (RecyclerView) rootView.findViewById(R.id.recycler_contacts);
         mAdapter = new ContactsAdapter(contactsList);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -56,6 +58,7 @@ public class ContactsFragment extends Fragment {
         listeContacts.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         listeContacts.setAdapter(mAdapter);
 
+        DatabaseProfile.getInstance().writeContact(FirebaseAuth.getInstance().getCurrentUser(), "aaa@hotmail.com");
         getContacts();
 
         return rootView;

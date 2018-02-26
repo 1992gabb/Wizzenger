@@ -20,7 +20,7 @@ import java.util.List;
  * Created by marc-antoinehinse on 2017-10-01.
  */
 public class User {
-    private String uid;
+    private String id;
     private String displayName;
     private String userName;
     private String email;
@@ -138,5 +138,13 @@ public class User {
     public String getPhone(){return this.phone;}
 
     public String getPassword(){return this.password;}
+
+    public String getid() {
+        return id;
+    }
+
+    public void setid(String id){
+        this.id = id;
+    }
 }
 
