@@ -1,5 +1,6 @@
 package com.bombardier_gabriel.wizzenger.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ public class Conversation {
     private String id, idUser1, idUser2, textHint;
     private int convoImage;
     private String contactName;
-    private List<Message> messages;
+    private List<Message> messages = new ArrayList<Message>();
 
     public Conversation(){
 

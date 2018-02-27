@@ -24,7 +24,7 @@ public class ConversationActivity extends AppCompatActivity {
     private String currentConvo = "salut babe", contactEmail ="";
     private TextView texte;
     private DatabaseReference messagesDatabase;
-    private Conversation conversation;
+    private Conversation conversation = new Conversation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +125,7 @@ public class ConversationActivity extends AppCompatActivity {
         conversation.getMessages().add(messageTemp);
 
         messagesDatabase.child(key).child("id").setValue(key);
-        messagesDatabase.child(key).child("convoId").setValue(currentConvo);
+        messagesDatabase.child(key).child("convoId").setValue(messageTemp.getIdConvo());
         messagesDatabase.child(key).child("senderId").setValue(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         messagesDatabase.child(key).child("timeStamp").setValue(messageTemp.getTimeStamp());
         messagesDatabase.child(key).child("content").setValue(messageTemp.getContent());
