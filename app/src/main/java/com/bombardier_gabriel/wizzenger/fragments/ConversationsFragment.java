@@ -18,8 +18,16 @@ import android.widget.SimpleAdapter;
 import com.bombardier_gabriel.wizzenger.HomeActivity;
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.adapters.ConversationsAdapter;
+import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Vector;
@@ -31,6 +39,8 @@ public class ConversationsFragment extends ListFragment {
     private RecyclerView listeConvo;
     private ConversationsAdapter mAdapter;
     private Vector<Conversation> convoList = new Vector<Conversation>();
+
+    private DatabaseProfile myDatabase;
 
     public ConversationsFragment() {
         // Required empty public constructor
@@ -53,6 +63,8 @@ public class ConversationsFragment extends ListFragment {
         listeConvo.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         listeConvo.setAdapter(mAdapter);
 
+        myDatabase = DatabaseProfile.getInstance();
+
         getConversations();
 
         return rootView;
@@ -65,10 +77,10 @@ public class ConversationsFragment extends ListFragment {
     private void getConversations() {
         //Aller chercher les convo en lien avec l'usager
 
-        Conversation convo = new Conversation(R.drawable.mario, "Mario Bros", "regarde mon dunk");
+        Conversation convo = new Conversation(R.drawable.mario, "babriel", "regarde mon dunk");
         convoList.add(convo);
 
-        Conversation convo2 = new Conversation(R.drawable.mario, "Le moi", "regarde moi");
+        Conversation convo2 = new Conversation(R.drawable.mario, "aaa", "regarde moi");
         convoList.add(convo2);
 
         mAdapter.notifyDataSetChanged();

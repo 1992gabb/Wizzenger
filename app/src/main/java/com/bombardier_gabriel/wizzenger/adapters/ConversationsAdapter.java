@@ -53,7 +53,7 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
 
     //Solution pour le listener trouvée ici: https://stackoverflow.com/questions/42721571/recyclerview-onitemclicklistener
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         Conversation convo = convoList.get(position);
         holder.image.setImageResource(convo.getConvoImage());
         holder.contactName.setText(convo.getContactName());
@@ -63,6 +63,7 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), ConversationActivity.class);
+                i.putExtra("contactName", holder.contactName.getText());
                 v.getContext().startActivity(i);
             }
         });

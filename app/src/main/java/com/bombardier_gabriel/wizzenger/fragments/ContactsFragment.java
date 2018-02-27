@@ -9,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +25,14 @@ import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
 import com.bombardier_gabriel.wizzenger.model.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -35,6 +42,8 @@ public class ContactsFragment extends Fragment {
     private RecyclerView listeContacts;
     private ContactsAdapter mAdapter;
     private Vector<User> contactsList = new Vector<User>();
+    private DatabaseProfile myDatabase;
+    private String convoId;
 
     public ContactsFragment() {
         // Required empty public constructor
@@ -58,7 +67,12 @@ public class ContactsFragment extends Fragment {
         listeContacts.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         listeContacts.setAdapter(mAdapter);
 
-        DatabaseProfile.getInstance().writeContact(FirebaseAuth.getInstance().getCurrentUser(), "aaa@hotmail.com");
+        myDatabase = DatabaseProfile.getInstance();
+
+//        myDatabase.writeContact(FirebaseAuth.getInstance().getCurrentUser(), "aaa@hotmail.com");
+//        myDatabase.writeConvoUsers(FirebaseAuth.getInstance().getCurrentUser(), "aaa@hotmail.com");
+
+
         getContacts();
 
         return rootView;
@@ -71,13 +85,15 @@ public class ContactsFragment extends Fragment {
     private void getContacts() {
         //Aller chercher les conntacts en lien avec l'usager
 
-        User user = new User(R.drawable.mario, "Mario Bros");
+        User user = new User(R.drawable.mario, "babriel");
         contactsList.add(user);
 
-        User user2 = new User(R.drawable.mario, "Luigi");
+        User user2 = new User(R.drawable.mario, "aaa");
         contactsList.add(user2);
 
         mAdapter.notifyDataSetChanged();
     }
+
+
 
 }

@@ -11,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
 import com.bombardier_gabriel.wizzenger.fragments.FragmentAdapter;
+import com.bombardier_gabriel.wizzenger.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -22,11 +24,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView boutonParam;
     private String currentToken;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private DatabaseProfile myDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        myDatabase = DatabaseProfile.getInstance();
 
         /*//If no user connected
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
@@ -58,7 +63,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         tabLayout.setupWithViewPager(viewPager);
 
         boutonParam.setOnClickListener(this);
-
     }
 
     @Override

@@ -75,6 +75,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
    }
 
+   //Analyse les réponses entrées par l'usager et si elles sont valides, le créé et le connecte
     private void validerRegister() {
         if(!TextUtils.isEmpty(emailAddressEditText.getText())
                 && !TextUtils.isEmpty(usernameEditText.getText())
@@ -85,13 +86,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             final String emailAddress = emailAddressEditText.getText().toString();
             final String username = usernameEditText.getText().toString();
             final String password = pwdEditText.getText().toString();
-            String phone = "";
-
-            if(!TextUtils.isEmpty(phoneEditText.getText())){
-                phone = phoneEditText.getText().toString();
-            }
-
-            myDatabase.writeUser(new User(username, emailAddress, password, phone, 0));
+            final String phone = phoneEditText.getText().toString();
 
             firebaseAuth.createUserWithEmailAndPassword(emailAddress, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -99,6 +94,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
+                                myDatabase.writeUser(new User(username, emailAddress, password, phone, 0));
                                 Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = firebaseAuth.getCurrentUser();
                                 Toast.makeText(RegisterActivity.this, "Registration succeeded.",
@@ -110,7 +106,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
                                 Toast.makeText(RegisterActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
-                                updateUI(null);
                             }
                         }
                     });
@@ -120,12 +115,4 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
 
    }
-
-    private void updateUI(FirebaseUser user) {
-        if (user != null) {
-
-        } else {
-
-        }
-    }
 }
