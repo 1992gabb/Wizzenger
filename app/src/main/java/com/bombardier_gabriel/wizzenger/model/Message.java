@@ -7,7 +7,7 @@ import java.util.List;
  */
 
 public class Message {
-    private String id, idConvo, idSender;
+    private String id, convoId, senderId;
     private String timeStamp, content;
 
     public Message(){
@@ -16,8 +16,8 @@ public class Message {
 
     public Message(String id, String idConvo, String idSender,String timeStamp, String content){
             this.id = id;
-            this.idConvo = idConvo;
-            this.idSender = idSender;
+            this.convoId = idConvo;
+            this.senderId = idSender;
             this.timeStamp = timeStamp;
             this.content = content;
     }
@@ -30,20 +30,20 @@ public class Message {
         this.id = id;
     }
 
-    public String getIdConvo() {
-        return idConvo;
+    public String getConvoId() {
+        return convoId;
     }
 
     public void setIdConvo(String idConvo) {
-        this.idConvo = idConvo;
+        this.convoId = idConvo;
     }
 
-    public String getIdSender() {
-        return idSender;
+    public String getSenderId() {
+        return senderId;
     }
 
     public void setIdSender(String idSender) {
-        this.idSender = idSender;
+        this.senderId = idSender;
     }
 
     public String getTimeStamp() {

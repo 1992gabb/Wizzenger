@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Android_Wizzenger.iml" filepath="$PROJECT_DIR$/Android_Wizzenger.iml" />
-      <module fileurl="file://C:\Users\gabb_\OneDrive\Technique Informatique\Session 3\B-65 Synthese\Android_Wizzenger\Wizzenger.iml" filepath="C:\Users\gabb_\OneDrive\Technique Informatique\Session 3\B-65 Synthese\Android_Wizzenger\Wizzenger.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
