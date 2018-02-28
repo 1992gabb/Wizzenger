@@ -59,7 +59,6 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
         messagesDatabase = FirebaseDatabase.getInstance().getReference("messages");
 
-
         btnSend.setOnClickListener(this);
     }
 
@@ -148,7 +147,14 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                 for (Conversation convo : convos){
                     if(convo.getIdUser1()!=null){
                         if(convo.getIdUser1().equals(currentUser.getEmail())){
-                            if(convo.getIdUser2().equals(contactEmail)){
+                           if(convo.getIdUser2().equals(contactEmail)){
+                               currentConvo = convo.getId();
+                               updateUI(currentConvo);
+                               getMessages(currentConvo);
+                               break;
+                           }
+                        }else if(convo.getIdUser2().equals(currentUser.getEmail())){
+                            if(convo.getIdUser1().equals(contactEmail)){
                                 currentConvo = convo.getId();
                                 updateUI(currentConvo);
                                 getMessages(currentConvo);
