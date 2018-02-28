@@ -60,11 +60,11 @@ public class Conversation {
         this.idUser2 = idUser2;
     }
 
-    public String getTextHint() {
+    public String getTexthint() {
         return textHint;
     }
 
-    public void setTextHint(String textHint) {
+    public void setTexthint(String textHint) {
         this.textHint = textHint;
     }
 

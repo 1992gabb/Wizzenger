@@ -28,7 +28,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 /**
@@ -164,7 +167,11 @@ public class DatabaseProfile {
             }});
     }
 
-
+    public void updateTextHint(String id, String message){
+        Map<String, Object> valUpdate = new HashMap<String, Object>();
+        valUpdate.put("textHint", message);
+        convosDatabase.child(id).updateChildren(valUpdate);
+    }
 
 
     public void addFCMToken(final Context context) {

@@ -20,6 +20,7 @@ import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.adapters.ConversationsAdapter;
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
+import com.bombardier_gabriel.wizzenger.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -65,7 +66,7 @@ public class ConversationsFragment extends ListFragment {
 
         myDatabase = DatabaseProfile.getInstance();
 
-        getConversations();
+        getConvosInformations(FirebaseAuth.getInstance().getCurrentUser());
 
         return rootView;
     }
@@ -74,8 +75,8 @@ public class ConversationsFragment extends ListFragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    //Pour tester des fonctionnalités sans BD
     private void getConversations() {
-        //Aller chercher les convo en lien avec l'usager
 
         Conversation convo = new Conversation(R.drawable.mario, "babriel", "regarde mon dunk");
         convoList.add(convo);
@@ -87,6 +88,61 @@ public class ConversationsFragment extends ListFragment {
         convoList.add(convo3);
 
         mAdapter.notifyDataSetChanged();
+    }
+
+    //Pour avoir les informations des conversations
+    public void getConvosInformations(final FirebaseUser currentUser){
+        FirebaseDatabase.getInstance().getReference("conversations").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Conversation> convos = new ArrayList<Conversation>();
+                for (DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
+                    Conversation convo = userDataSnapshot.getValue(Conversation.class);
+                    convos.add(convo);
+                }
+
+                for (Conversation convo : convos){
+                    if(convo.getIdUser1()!=null){
+                       if(convo.getIdUser1().equals(currentUser.getEmail()) || convo.getIdUser2().equals(currentUser.getEmail())){
+                           //La convo t'appartient, ajouter a la liste
+                           if(convo.getIdUser1().equals(currentUser.getEmail())){
+                               getUsername(convo.getIdUser2(), convo.getTexthint());
+                           }else if(convo.getIdUser2().equals(currentUser.getEmail())){
+                               getUsername(convo.getIdUser1(), convo.getTexthint());
+                           }
+                       }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}});
+    }
+
+    //Pour avoir le username d'un utilisateur en fonction de son email et l'ajoute a la liste
+    public void getUsername(final String contactEmail, final String textHint){
+
+        FirebaseDatabase.getInstance().getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<User> users = new ArrayList<User>();
+                for (DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
+                    User user = userDataSnapshot.getValue(User.class);
+                    users.add(user);
+                }
+
+                for (User user : users){
+                    if(user.getEmail().equals(contactEmail)){
+                        convoList.add(new Conversation(R.drawable.mario, user.getUsername(), textHint));
+                        mAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }});
     }
 
 }

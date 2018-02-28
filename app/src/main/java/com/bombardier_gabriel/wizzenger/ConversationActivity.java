@@ -75,10 +75,12 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    //Pour mettre a jour la zone de id convo
     public void updateUI(String value){
         texte.setText(value);
     }
 
+    //Pour mettre a jour l'affichage des messages
     public void updateMessagesZone(){
         List<TextView> viewList= new ArrayList<TextView>();
         for(Message message : conversation.getMessages()){
@@ -95,6 +97,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         viewList.clear();
     }
 
+    //Pour ajouter le message dans la conversation courante
     public void addToMessagesZone(Message message){
         TextView viewTemp = new TextView(this);
         viewTemp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -102,6 +105,8 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         viewTemp.setText(message.getContent());
 
         messZoneLayout.addView(viewTemp);
+
+        updateTextHint(currentConvo, message.getContent());
     }
 
     //Pour avoir l'id d'une conversation (trouve le email du contact et appelle getConvoId)
@@ -127,7 +132,6 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onCancelled(DatabaseError databaseError) {}});
     }
-
 
     //Pour avoir le id d'une conversation dans la base de données
     public void getConvoId(final FirebaseUser currentUser, final String contactEmail){
@@ -212,5 +216,10 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
         addToMessagesZone(messageTemp);
 //        addProfileEventListener();
+    }
+
+    //Pour mettre a jour le dernier message de la convo
+    public void updateTextHint(String id, String message){
+        DatabaseProfile.getInstance().updateTextHint(id, message);
     }
 }

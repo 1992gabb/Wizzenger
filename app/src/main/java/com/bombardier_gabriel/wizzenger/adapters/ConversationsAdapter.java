@@ -57,7 +57,7 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
         Conversation convo = convoList.get(position);
         holder.image.setImageResource(convo.getConvoImage());
         holder.contactName.setText(convo.getContactName());
-        holder.textHint.setText(convo.getTextHint());
+        holder.textHint.setText(convo.getTexthint());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
