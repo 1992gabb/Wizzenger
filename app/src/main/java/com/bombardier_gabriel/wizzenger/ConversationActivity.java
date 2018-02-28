@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
 import com.bombardier_gabriel.wizzenger.model.Message;
 import com.bombardier_gabriel.wizzenger.model.User;
@@ -28,13 +29,14 @@ import java.util.Date;
 import java.util.List;
 
 public class ConversationActivity extends AppCompatActivity implements View.OnClickListener{
-    private String currentConvo = "salut babe", contactEmail ="";
+    private String currentConvo, contactEmail ="";
     private TextView texte;
     private Button btnSend;
     private EditText msgZone;
     private LinearLayout messZoneLayout;
     private DatabaseReference messagesDatabase;
     private Conversation conversation = new Conversation();
+    private int compteur = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +152,14 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                             }
                         }
                     }
+                }
+
+                if(currentConvo == null){
+                    if(compteur == 0){
+                        DatabaseProfile.getInstance().writeConvoUsers(currentUser, contactEmail);
+                    }
+                    compteur++;
+                    getConvoId(currentUser, contactEmail);
                 }
             }
 
