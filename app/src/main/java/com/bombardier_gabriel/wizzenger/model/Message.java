@@ -1,5 +1,6 @@
 package com.bombardier_gabriel.wizzenger.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +42,8 @@ public class Message {
     public String getSenderId() {
         return senderId;
     }
+
+
 
     public void setIdSender(String idSender) {
         this.senderId = idSender;

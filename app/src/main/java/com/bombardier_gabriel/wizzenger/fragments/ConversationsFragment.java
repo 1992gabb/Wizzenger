@@ -75,20 +75,20 @@ public class ConversationsFragment extends ListFragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    //Pour tester des fonctionnalités sans BD
-    private void getConversations() {
-
-        Conversation convo = new Conversation(R.drawable.mario, "babriel", "regarde mon dunk");
-        convoList.add(convo);
-
-        Conversation convo2 = new Conversation(R.drawable.mario, "aaa", "regarde moi");
-        convoList.add(convo2);
-
-        Conversation convo3 = new Conversation(R.drawable.mario, "manolo", "regarde moi");
-        convoList.add(convo3);
-
-        mAdapter.notifyDataSetChanged();
-    }
+//    //Pour tester des fonctionnalités sans BD
+//    private void getConversations() {
+//
+//        Conversation convo = new Conversation(R.drawable.mario, "babriel", "regarde mon dunk");
+//        convoList.add(convo);
+//
+//        Conversation convo2 = new Conversation(R.drawable.mario, "aaa", "regarde moi");
+//        convoList.add(convo2);
+//
+//        Conversation convo3 = new Conversation(R.drawable.mario, "manolo", "regarde moi");
+//        convoList.add(convo3);
+//
+//        mAdapter.notifyDataSetChanged();
+//    }
 
     //Pour avoir les informations des conversations
     public void getConvosInformations(final FirebaseUser currentUser){

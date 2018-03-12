@@ -1,6 +1,7 @@
 package com.bombardier_gabriel.wizzenger;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -57,8 +58,6 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
         texte.setText(contactName);
 
-        messagesDatabase = FirebaseDatabase.getInstance().getReference("messages");
-
         btnSend.setOnClickListener(this);
     }
 
@@ -82,7 +81,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     //Pour mettre a jour l'affichage des messages
     public void updateMessagesZone(){
         List<TextView> viewList= new ArrayList<TextView>();
-        for(Message message : conversation.getMessages()){
+        for(Message message : conversation.getMessagesList()){
             viewList.add(new TextView(this));
             viewList.get(viewList.size()-1).setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -149,6 +148,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                         if(convo.getIdUser1().equals(currentUser.getEmail())){
                            if(convo.getIdUser2().equals(contactEmail)){
                                currentConvo = convo.getId();
+                               messagesDatabase = FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo);
                                updateUI(currentConvo);
                                getMessages(currentConvo);
                                break;
@@ -156,8 +156,9 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                         }else if(convo.getIdUser2().equals(currentUser.getEmail())){
                             if(convo.getIdUser1().equals(contactEmail)){
                                 currentConvo = convo.getId();
+                                messagesDatabase = FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo);
                                 updateUI(currentConvo);
-                                getMessages(currentConvo);
+                               getMessages(currentConvo);
                                 break;
                             }
                         }
@@ -179,20 +180,17 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
     //Pour avoir tous les messages d'une conversation. Construit une conversation contenant la liste de messages
     public void getMessages(final String convoId){
-        FirebaseDatabase.getInstance().getReference("messages").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo).child("messages").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Message> messages = new ArrayList<Message>();
                 for (DataSnapshot messDataSnapshot : dataSnapshot.getChildren()) {
                     Message mess = messDataSnapshot.getValue(Message.class);
-                    messages.add(mess);
-                }
 
-                for (Message mess : messages){
-                    if(mess.getConvoId()!=null){
-                        if(mess.getConvoId().equals(convoId)){
-                            conversation.getMessages().add(mess);
-                        }
+                    if(conversation.getIds().contains(mess.getId())){
+
+                    }else{
+                        conversation.getMessagesList().add(mess);
+
                     }
                 }
 
@@ -203,7 +201,6 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
             public void onCancelled(DatabaseError databaseError) {}});
     }
 
-
     //Pour écrire un message dans la base de données
     public void writeMessage(String message){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -212,13 +209,13 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         String key =  messagesDatabase.push().getKey();
 
         Message messageTemp = new Message(key, currentConvo,FirebaseAuth.getInstance().getCurrentUser().getEmail(), currentDateTime, message);
-        conversation.getMessages().add(messageTemp);
+        conversation.getMessagesList().add(messageTemp);
 
-        messagesDatabase.child(key).child("id").setValue(key);
-        messagesDatabase.child(key).child("convoId").setValue(messageTemp.getConvoId());
-        messagesDatabase.child(key).child("senderId").setValue(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        messagesDatabase.child(key).child("timeStamp").setValue(messageTemp.getTimeStamp());
-        messagesDatabase.child(key).child("content").setValue(messageTemp.getContent());
+        messagesDatabase.child("messages").child(key).child("id").setValue(key);
+        messagesDatabase.child("messages").child(key).child("convoId").setValue(messageTemp.getConvoId());
+        messagesDatabase.child("messages").child(key).child("senderId").setValue(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        messagesDatabase.child("messages").child(key).child("timeStamp").setValue(messageTemp.getTimeStamp());
+        messagesDatabase.child("messages").child(key).child("content").setValue(messageTemp.getContent());
 
         addToMessagesZone(messageTemp);
 //        addProfileEventListener();

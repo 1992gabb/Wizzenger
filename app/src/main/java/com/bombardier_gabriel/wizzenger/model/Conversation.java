@@ -1,6 +1,7 @@
 package com.bombardier_gabriel.wizzenger.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -11,7 +12,8 @@ public class Conversation {
     private String id, idUser1, idUser2, textHint;
     private int convoImage;
     private String contactName;
-    private List<Message> messages = new ArrayList<Message>();
+    private HashMap<String,HashMap<String,String>> messages = new HashMap<String,HashMap<String,String>>();
+    List<Message> messagesList = new ArrayList<Message>();
 
     public Conversation(){
 
@@ -76,11 +78,11 @@ public class Conversation {
         this.convoImage = convoImage;
     }
 
-    public List<Message> getMessages() {
-        return messages;
+    public List<Message> getMessagesList() {
+        return messagesList;
     }
 
-    public void setMessages(List<Message> messages) {
+    public void setMessages(HashMap<String,HashMap<String,String>> messages) {
         this.messages = messages;
     }
 
@@ -90,5 +92,15 @@ public class Conversation {
 
     public void setContactName(String contactName) {
         this.contactName = contactName;
+    }
+
+    public List<String> getIds(){
+        List<String> ids = new ArrayList<String>();
+
+        for(Message message : messagesList){
+            ids.add(message.getId());
+        }
+
+        return ids;
     }
 }
