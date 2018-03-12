@@ -1,9 +1,11 @@
 package com.bombardier_gabriel.wizzenger;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -83,8 +85,15 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         List<TextView> viewList= new ArrayList<TextView>();
         for(Message message : conversation.getMessagesList()){
             viewList.add(new TextView(this));
-            viewList.get(viewList.size()-1).setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            if(message.getSenderId().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                params.gravity = Gravity.RIGHT;
+            }else {
+                params.gravity = Gravity.START;
+            }
+            viewList.get(viewList.size()-1).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Dosis-Regular.ttf"));
+
+            viewList.get(viewList.size()-1).setLayoutParams(params);
             viewList.get(viewList.size()-1).setText(message.getContent());
         }
 
@@ -149,7 +158,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                            if(convo.getIdUser2().equals(contactEmail)){
                                currentConvo = convo.getId();
                                messagesDatabase = FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo);
-                               updateUI(currentConvo);
+//                               updateUI(convo.getIdUser1());
                                getMessages(currentConvo);
                                break;
                            }
@@ -157,7 +166,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                             if(convo.getIdUser1().equals(contactEmail)){
                                 currentConvo = convo.getId();
                                 messagesDatabase = FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo);
-                                updateUI(currentConvo);
+//                                updateUI(convo.getIdUser2());
                                getMessages(currentConvo);
                                 break;
                             }

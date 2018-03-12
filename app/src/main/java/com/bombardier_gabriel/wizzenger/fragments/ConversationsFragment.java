@@ -47,8 +47,7 @@ public class ConversationsFragment extends ListFragment {
         // Required empty public constructor
     }
 
-    public void onActivityCreated(Bundle savedInstanceState)
-    {
+    public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -66,8 +65,6 @@ public class ConversationsFragment extends ListFragment {
 
         myDatabase = DatabaseProfile.getInstance();
 
-        getConvosInformations(FirebaseAuth.getInstance().getCurrentUser());
-
         return rootView;
     }
     @Override
@@ -75,20 +72,27 @@ public class ConversationsFragment extends ListFragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-//    //Pour tester des fonctionnalités sans BD
-//    private void getConversations() {
-//
-//        Conversation convo = new Conversation(R.drawable.mario, "babriel", "regarde mon dunk");
-//        convoList.add(convo);
-//
-//        Conversation convo2 = new Conversation(R.drawable.mario, "aaa", "regarde moi");
-//        convoList.add(convo2);
-//
-//        Conversation convo3 = new Conversation(R.drawable.mario, "manolo", "regarde moi");
-//        convoList.add(convo3);
-//
-//        mAdapter.notifyDataSetChanged();
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        convoList.clear();
+        getConvosInformations(FirebaseAuth.getInstance().getCurrentUser());
+    }
+
+    //    //Pour tester des fonctionnalités sans BD
+    private void getConversations() {
+
+        Conversation convo = new Conversation(R.drawable.mario, "babriel", "regarde mon dunk");
+        convoList.add(convo);
+
+        Conversation convo2 = new Conversation(R.drawable.mario, "aaa", "regarde moi");
+        convoList.add(convo2);
+
+        Conversation convo3 = new Conversation(R.drawable.mario, "manolo", "regarde moi");
+        convoList.add(convo3);
+
+        mAdapter.notifyDataSetChanged();
+    }
 
     //Pour avoir les informations des conversations
     public void getConvosInformations(final FirebaseUser currentUser){
