@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,21 +33,23 @@ import java.util.Date;
 import java.util.List;
 
 public class ConversationActivity extends AppCompatActivity implements View.OnClickListener{
-    private String currentConvo, contactEmail ="";
+    private String currentConvo, contactName, contactEmail ="", currentDate = "";
     private TextView texte;
     private Button btnSend;
+    private ImageView btnBack, btnWizz;
     private EditText msgZone;
     private LinearLayout messZoneLayout;
     private DatabaseReference messagesDatabase;
     private Conversation conversation = new Conversation();
     private int compteur = 0;
+    private boolean dateSet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversation);
 
-        String contactName ="";
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             contactName = extras.getString("contactName");
@@ -55,12 +58,16 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
         texte = (TextView) findViewById(R.id.text_field3);
         btnSend = (Button) findViewById(R.id.send_button);
+        btnBack = (ImageView) findViewById(R.id.convo_back_button);
+        btnWizz = (ImageView) findViewById(R.id.convo_wizz_button);
         msgZone = (EditText) findViewById(R.id.message_entry_zone);
         messZoneLayout = (LinearLayout) findViewById(R.id.mess_zone_layout);
 
         texte.setText(contactName);
 
         btnSend.setOnClickListener(this);
+        btnBack.setOnClickListener(this);
+        btnWizz.setOnClickListener(this);
     }
 
     @Override
@@ -73,6 +80,15 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                 msgZone.setText("");
             }
         }
+
+        if(id==R.id.convo_back_button){
+            Intent i = new Intent(ConversationActivity.this, HomeActivity.class);
+            startActivity(i);
+        }
+
+        if(id==R.id.convo_wizz_button){
+            writeMessage("WIZZ");
+        }
     }
 
     //Pour mettre a jour la zone de id convo
@@ -84,17 +100,19 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     public void updateMessagesZone(){
         List<TextView> viewList= new ArrayList<TextView>();
         for(Message message : conversation.getMessagesList()){
-            viewList.add(new TextView(this));
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            if(message.getSenderId().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                params.gravity = Gravity.RIGHT;
-            }else {
-                params.gravity = Gravity.START;
+            if(!dateSet){
+                dateSet = true;
+                currentDate = message.getTimeStamp().substring(0,10);
+                viewList.add(createTimeView(currentDate));
             }
-            viewList.get(viewList.size()-1).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Dosis-Regular.ttf"));
 
-            viewList.get(viewList.size()-1).setLayoutParams(params);
-            viewList.get(viewList.size()-1).setText(message.getContent());
+            if(message.getTimeStamp().substring(0, 10).equals(currentDate)){
+                viewList.add(createMessageView(message));
+            }else{
+                currentDate = message.getTimeStamp().substring(0,10);
+                viewList.add(createTimeView(currentDate));
+                viewList.add(createMessageView(message));
+            }
         }
 
         for(TextView view : viewList){
@@ -104,16 +122,35 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         viewList.clear();
     }
 
-    //Pour ajouter le message dans la conversation courante
-    public void addToMessagesZone(Message message){
-        TextView viewTemp = new TextView(this);
-        viewTemp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-        viewTemp.setText(message.getContent());
+    //Pour créer une vue contenant le message
+    public TextView createMessageView(Message message) {
+        TextView temp = new TextView(this);
 
-        messZoneLayout.addView(viewTemp);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        if (message.getSenderId().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+            params.gravity = Gravity.RIGHT;
+        } else {
+            params.gravity = Gravity.START;
+        }
 
-        updateTextHint(currentConvo, message.getContent());
+        temp.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
+        temp.setLayoutParams(params);
+        temp.setText(message.getContent());
+
+        return temp;
+    }
+
+    //Pour créer une vue contenant la date
+    public TextView createTimeView(String time){
+        TextView temp = new TextView(this);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER;
+        temp.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Dosis-Regular.ttf"));
+        temp.setLayoutParams(params);
+        temp.setText(time);
+
+        return temp;
     }
 
     //Pour avoir l'id d'une conversation (trouve le email du contact et appelle getConvoId)
@@ -187,7 +224,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
             public void onCancelled(DatabaseError databaseError) {}});
     }
 
-    //Pour avoir tous les messages d'une conversation. Construit une conversation contenant la liste de messages
+    //Pour avoir les 20 derniers messages d'une conversation. Construit une conversation contenant la liste de messages
     public void getMessages(final String convoId){
         FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo).child("messages").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -199,7 +236,6 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
                     }else{
                         conversation.getMessagesList().add(mess);
-
                     }
                 }
 
@@ -226,7 +262,13 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         messagesDatabase.child("messages").child(key).child("timeStamp").setValue(messageTemp.getTimeStamp());
         messagesDatabase.child("messages").child(key).child("content").setValue(messageTemp.getContent());
 
-        addToMessagesZone(messageTemp);
+        messZoneLayout.addView(createMessageView(messageTemp));
+
+        if(message.equals("WIZZ")){
+            updateTextHint(currentConvo, "**Un bon vieux Wizz**");
+        }else{
+            updateTextHint(currentConvo, messageTemp.getContent());
+        }
 //        addProfileEventListener();
     }
 
