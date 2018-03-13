@@ -52,7 +52,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         User user = contactsList.get(position);
         holder.image.setImageResource(user.getPhotoUrl());
         holder.nomContact.setText(user.getDisplayName());
@@ -62,6 +62,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), ContactInfoActivity.class);
+                i.putExtra("contactName", holder.nomContact.getText().toString());
                 v.getContext().startActivity(i);
             }
         });
