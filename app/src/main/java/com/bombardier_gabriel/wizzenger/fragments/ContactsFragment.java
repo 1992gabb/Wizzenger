@@ -22,12 +22,14 @@ import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.adapters.ContactsAdapter;
 import com.bombardier_gabriel.wizzenger.adapters.ConversationsAdapter;
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
+import com.bombardier_gabriel.wizzenger.model.Contact;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
 import com.bombardier_gabriel.wizzenger.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -49,8 +51,7 @@ public class ContactsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public void onActivityCreated(Bundle savedInstanceState)
-    {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -77,23 +78,76 @@ public class ContactsFragment extends Fragment {
 
         return rootView;
     }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void getContacts() {
-        //Aller chercher les conntacts en lien avec l'usager
+//    private void getContacts() {
+//        //Aller chercher les conntacts en lien avec l'usager
+//
+//        User user = new User(R.drawable.mario, "babriel");
+//        contactsList.add(user);
+//
+//        User user2 = new User(R.drawable.mario, "aaa");
+//        contactsList.add(user2);
+//
+//        mAdapter.notifyDataSetChanged();
+//    }
 
-        User user = new User(R.drawable.mario, "babriel");
-        contactsList.add(user);
+    private void getContacts(){
+        FirebaseDatabase.getInstance().getReference("contacts").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Contact> contacts = new ArrayList<Contact>();
+                for (DataSnapshot contactDataSnapshot : dataSnapshot.getChildren()) {
+                    Contact contact = contactDataSnapshot.getValue(Contact.class);
+                    contacts.add(contact);
+                }
 
-        User user2 = new User(R.drawable.mario, "aaa");
-        contactsList.add(user2);
+                for (Contact contact : contacts) {
+                    if (contact.getUserID().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                        createUserFromContact(contact.getContactID());
+                    } else if (contact.getContactID().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                        createUserFromContact(contact.getUserID());
+                    }
+                }
+            }
 
-        mAdapter.notifyDataSetChanged();
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }});
+    }
+
+    private void createUserFromContact(final String email){
+        FirebaseDatabase.getInstance().getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<User> users = new ArrayList<User>();
+                for (DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
+                    User user = userDataSnapshot.getValue(User.class);
+                    users.add(user);
+                }
+
+                for (User user : users){
+                    if(user.getEmail().equals(email)){
+                        contactsList.add(new User(user.getUsername(), user.getEmail(), user.getPhone(), user.getPhotoUrl()));
+                        mAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }});
     }
 
 
 
+
+
 }
+

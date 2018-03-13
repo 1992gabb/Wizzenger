@@ -52,6 +52,13 @@ public class User {
         this.photoUrl = photoUrl;
     }
 
+    public User(String userName, String email, String phone, int photoUrl){
+        this.userName = userName ;
+        this.email= email;
+        this.phone= phone;
+        this.photoUrl = photoUrl;
+    }
+
     @Exclude
     public void addDevice(Device device) {
         devices.add(device);

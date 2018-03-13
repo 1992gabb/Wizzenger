@@ -55,7 +55,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         User user = contactsList.get(position);
         holder.image.setImageResource(user.getPhotoUrl());
-        holder.nomContact.setText(user.getDisplayName());
+        holder.nomContact.setText(user.getUsername());
         holder.imageWizz.setImageResource(R.drawable.vibration_icon);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
