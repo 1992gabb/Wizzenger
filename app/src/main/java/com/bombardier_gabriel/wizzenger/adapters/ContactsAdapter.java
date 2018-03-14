@@ -29,12 +29,14 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
         public ImageView image;
         public TextView nomContact;
         public ImageView imageWizz;
+        public ImageView imageMess;
 
         public MyViewHolder(View view) {
             super(view);
             image= (ImageView) view.findViewById(R.id.imgContactContacts);
             nomContact=(TextView) view.findViewById(R.id.nomContact);
             imageWizz = (ImageView) view.findViewById(R.id.imgWizz);
+            imageMess = (ImageView) view.findViewById(R.id.contact_mess_icon);
         }
     }
 
@@ -56,13 +58,36 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
         User user = contactsList.get(position);
         holder.image.setImageResource(user.getPhotoUrl());
         holder.nomContact.setText(user.getUsername());
-        holder.imageWizz.setImageResource(R.drawable.vibration_icon);
+        holder.imageWizz.setImageResource(R.drawable.ic_wizz);  //Modifier pour l'image du user
 
+        //Si on clique sur le contact, ouvre les infos
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), ContactInfoActivity.class);
                 i.putExtra("contactName", holder.nomContact.getText().toString());
+                v.getContext().startActivity(i);
+            }
+        });
+
+        //Si on clique sur le bouton message, ouvre la convo
+        holder.imageMess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), ConversationActivity.class);
+                i.putExtra("contactName", holder.nomContact.getText().toString());
+                i.putExtra("wizz", "non");
+                v.getContext().startActivity(i);
+            }
+        });
+
+        //Si on clique sur le bouton wizz, ouvre la convo et envoie un wizz
+        holder.imageWizz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), ConversationActivity.class);
+                i.putExtra("contactName", holder.nomContact.getText().toString());
+                i.putExtra("wizz", "oui");
                 v.getContext().startActivity(i);
             }
         });

@@ -13,7 +13,7 @@
         android:id="@+id/imgContactContacts"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_weight="0.25" />
+        android:layout_weight="0.2" />
 
     <LinearLayout
         android:id="@+id/layoutContacts"
@@ -35,11 +35,20 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/imgWizz"
-            android:layout_weight="1"
+            android:id="@+id/contact_mess_icon"
+            android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:background="@drawable/vibration_icon" />
+            android:background="@drawable/ic_mess"
+            android:layout_margin="5dp"/>
+
+        <ImageView
+            android:id="@+id/imgWizz"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:background="@drawable/ic_wizz"
+            android:padding="100dp"/>
 
     </LinearLayout>
 

@@ -70,7 +70,7 @@ public class ContactsFragment extends Fragment {
 
         myDatabase = DatabaseProfile.getInstance();
 
-//        myDatabase.writeContact(FirebaseAuth.getInstance().getCurrentUser(), "aaa@hotmail.com");
+//        myDatabase.writeContact(FirebaseAuth.getInstance().getCurrentUser(), "manolo@hotmail.com");
 //        myDatabase.writeConvoUsers(FirebaseAuth.getInstance().getCurrentUser(), "aaa@hotmail.com");
 
 
