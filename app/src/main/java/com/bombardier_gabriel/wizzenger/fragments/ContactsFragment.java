@@ -1,10 +1,12 @@
 package com.bombardier_gabriel.wizzenger.fragments;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,10 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.bombardier_gabriel.wizzenger.ConversationActivity;
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.adapters.ContactsAdapter;
 import com.bombardier_gabriel.wizzenger.adapters.ConversationsAdapter;
@@ -40,12 +44,14 @@ import java.util.Vector;
 /**
  *
  */
-public class ContactsFragment extends Fragment {
+public class ContactsFragment extends Fragment{
     private RecyclerView listeContacts;
     private ContactsAdapter mAdapter;
     private Vector<User> contactsList = new Vector<User>();
     private DatabaseProfile myDatabase;
     private String convoId;
+    private ImageView addButton, removeButton;
+    private FragmentManager fm;
 
     public ContactsFragment() {
         // Required empty public constructor
@@ -60,6 +66,37 @@ public class ContactsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_contacts, container, false);
 
         listeContacts = (RecyclerView) rootView.findViewById(R.id.recycler_contacts);
+        addButton = (ImageView) rootView.findViewById(R.id.contact_add_button);
+        removeButton = (ImageView) rootView.findViewById(R.id.contact_remove_button);
+
+        //Pour gérer ce qui se passe si on appuie sur les boutons
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fm = getActivity().getSupportFragmentManager();
+                InputFragment inputFragment = new InputFragment();
+
+                Bundle args = new Bundle();
+                args.putString("action", "ajouter");
+                inputFragment.setArguments(args);
+
+                inputFragment.show(fm, "Dialog Fragment");
+            }
+        });
+
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputFragment inputFragment = new InputFragment();
+
+                Bundle args = new Bundle();
+                args.putString("action", "supprimer");
+                inputFragment.setArguments(args);
+
+                inputFragment.show(fm, "Dialog Fragment");
+            }
+        });
+
         mAdapter = new ContactsAdapter(contactsList);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());

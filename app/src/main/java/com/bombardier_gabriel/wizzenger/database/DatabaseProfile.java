@@ -1,5 +1,6 @@
 package com.bombardier_gabriel.wizzenger.database;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.provider.Settings;
@@ -107,14 +108,17 @@ public class DatabaseProfile {
     }
 
     //Pour créer un contact dans la base de données
-    public void writeContact(final FirebaseUser currentUser, final String contactEmail){
+    public void writeContact(final FirebaseUser currentUser, final String contactEmail, final Activity currentActivity){
         final String key =  contactsDatabase.push().getKey();
-        contactsDatabase.child(key).child("id").setValue(key);
 
         usersDatabase.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<User> users = new ArrayList<User>();
+                boolean trouveUser = false;
+                boolean trouveNouveau = false;
+                String emailUser="", emailNouveau="";
+
                 for (com.google.firebase.database.DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
                     User user = userDataSnapshot.getValue(User.class);
                     users.add(user);
@@ -122,18 +126,60 @@ public class DatabaseProfile {
 
                 for (User user : users){
                     if(user.getEmail().equals(currentUser.getEmail())){
-                        contactsDatabase.child(key).child("userID").setValue(user.getEmail());
-//                        contactsDatabase.child(key).child("username").setValue(user.getUserName());
+                        emailUser = user.getEmail();
+                        trouveUser = true;
                     }
                     if(user.getEmail().equals(contactEmail)){
-                        contactsDatabase.child(key).child("contactID").setValue(user.getEmail());
-//                        contactsDatabase.child(key).child("username").setValue(user.getUserName());
+                        emailNouveau = user.getEmail();
+                        trouveNouveau = true;
                     }
+                }
+
+                if(trouveUser == false || trouveNouveau == false){
+                    Toast.makeText(currentActivity, "Erreur, l'usager n'existe pas", Toast.LENGTH_LONG).show();
+                }else{
+                    contactsDatabase.child(key).child("id").setValue(key);
+                    contactsDatabase.child(key).child("userID").setValue(emailUser);
+                    contactsDatabase.child(key).child("contactID").setValue(emailNouveau);
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {}});
+    }
+
+    //Pour supprimer un contact dans la base de données (seulement le lien, pas le user)
+    public void removeContact(final FirebaseUser currentUser, final String contactEmail, final Activity currentActivity){
+//        final String key =  contactsDatabase.push().getKey();
+//        contactsDatabase.child(key).child("id").setValue(key);
+//
+//        usersDatabase.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                List<User> users = new ArrayList<User>();
+//                boolean trouve = false;
+//                for (com.google.firebase.database.DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
+//                    User user = userDataSnapshot.getValue(User.class);
+//                    users.add(user);
+//                }
+//
+//                for (User user : users){
+//                    if(user.getEmail().equals(currentUser.getEmail())){
+//                        contactsDatabase.child(key).child("userID").setValue(user.getEmail());
+//                        trouve = true;
+//                    }
+//                    if(user.getEmail().equals(contactEmail)){
+//                        contactsDatabase.child(key).child("contactID").setValue(user.getEmail());
+//                        trouve = true;
+//                    }
+//                }
+//                if(trouve ==false){
+//                    Toast.makeText(currentActivity, "Erreur, l'usager n'existe pas", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {}});
     }
 
     //Pour ouvrir une conversation dans la base de données
