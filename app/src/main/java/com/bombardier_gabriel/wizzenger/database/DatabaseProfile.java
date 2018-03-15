@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.bombardier_gabriel.wizzenger.adapters.ContactsAdapter;
+import com.bombardier_gabriel.wizzenger.model.Contact;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
 import com.bombardier_gabriel.wizzenger.model.Message;
 import com.bombardier_gabriel.wizzenger.model.User;
@@ -150,36 +151,43 @@ public class DatabaseProfile {
 
     //Pour supprimer un contact dans la base de données (seulement le lien, pas le user)
     public void removeContact(final FirebaseUser currentUser, final String contactEmail, final Activity currentActivity){
-//        final String key =  contactsDatabase.push().getKey();
-//        contactsDatabase.child(key).child("id").setValue(key);
-//
-//        usersDatabase.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                List<User> users = new ArrayList<User>();
-//                boolean trouve = false;
-//                for (com.google.firebase.database.DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
-//                    User user = userDataSnapshot.getValue(User.class);
-//                    users.add(user);
-//                }
-//
-//                for (User user : users){
-//                    if(user.getEmail().equals(currentUser.getEmail())){
-//                        contactsDatabase.child(key).child("userID").setValue(user.getEmail());
-//                        trouve = true;
-//                    }
-//                    if(user.getEmail().equals(contactEmail)){
-//                        contactsDatabase.child(key).child("contactID").setValue(user.getEmail());
-//                        trouve = true;
-//                    }
-//                }
-//                if(trouve ==false){
-//                    Toast.makeText(currentActivity, "Erreur, l'usager n'existe pas", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {}});
+        contactsDatabase.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Contact> contacts = new ArrayList<Contact>();
+                boolean trouveUser = false;
+                boolean trouveNouveau = false;
+
+                for (com.google.firebase.database.DataSnapshot contactDataSnapshot : dataSnapshot.getChildren()) {
+                    Contact contact = contactDataSnapshot.getValue(Contact.class);
+                    contacts.add(contact);
+                }
+
+                for (Contact contact : contacts){
+                    if(contact.getUserID().equals(currentUser.getEmail())){
+                        trouveUser = true;
+                        if(contact.getContactID().equals(contactEmail)){
+                            trouveNouveau = true;
+                            contactsDatabase.child(contact.getId()).removeValue();
+                        }
+                    }
+                    if(contact.getContactID().equals(currentUser.getEmail())){
+                        trouveNouveau = true;
+                        if(contact.getUserID().equals(contactEmail)){
+                            trouveUser = true;
+                            contactsDatabase.child(contact.getId()).removeValue();
+                        }
+                    }
+               }
+                if(trouveUser == false || trouveNouveau == false){
+                    Toast.makeText(currentActivity, "Erreur, le contact n'existe pas", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(currentActivity, "Le contact a bien été supprimé.", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}});
     }
 
     //Pour ouvrir une conversation dans la base de données

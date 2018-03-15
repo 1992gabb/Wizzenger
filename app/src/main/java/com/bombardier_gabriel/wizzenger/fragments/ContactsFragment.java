@@ -87,6 +87,7 @@ public class ContactsFragment extends Fragment{
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fm = getActivity().getSupportFragmentManager();
                 InputFragment inputFragment = new InputFragment();
 
                 Bundle args = new Bundle();
