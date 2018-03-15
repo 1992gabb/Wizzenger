@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="5"
-                android:text="Ajouter un contact: " />
+                android:text="@string/add_contact" />
 
             <ImageView
                 android:id="@+id/contact_add_button"
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="5"
-                android:text="Retirer un contact: " />
+                android:text="@string/remove_contact" />
 
             <ImageView
                 android:id="@+id/contact_remove_button"

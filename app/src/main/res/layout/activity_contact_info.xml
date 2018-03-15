@@ -19,7 +19,7 @@
         android:layout_height="0dp"
         android:layout_weight="4"
         android:gravity="start|center"
-        android:text="Contact"
+        android:text="@string/contact_text"
         android:textSize="18sp" />
 
     <ImageView
@@ -39,7 +39,7 @@
         android:layout_gravity="center"
         android:layout_weight="2"
         android:gravity="center|start"
-        android:text="Courriel: aaaaaaa@hotmail.com"
+        android:text="@string/email_test"
         android:textAlignment="center"
         android:textSize="18sp" />
 
@@ -50,7 +50,7 @@
         android:layout_gravity="center"
         android:layout_weight="2"
         android:gravity="center|start"
-        android:text="Téléphone: 514 111-1111"
+        android:text="@string/phone_test"
         android:textAlignment="center"
         android:textSize="18sp" />
 
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="5"
-            android:text="Retirer le contact: " />
+            android:text="@string/remove_contact" />
 
         <ImageView
             android:id="@+id/contact_remove_button"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="5"
-            android:text="Ne pas déranger: " />
+            android:text="@string/do_not_disturb" />
 
         <Switch
             android:id="@+id/contact_disturb_switch"

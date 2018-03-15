@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center"
-        android:text="S'enregister"
+        android:text="@string/action_register"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -39,7 +39,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="Courriel: "
+                android:text="@string/prompt_email"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -67,7 +67,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="Nom d'usager: "
+                android:text="@string/prompt_username"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -76,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="username"
+                android:hint="@string/prompt_username"
                 android:inputType="text" />
 
         </LinearLayout>
@@ -95,7 +95,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="Téléphone (opt.): "
+                android:text="@string/prompt_phone"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -121,7 +121,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="Mot de passe: "
+                android:text="@string/prompt_password"
                 android:textSize="16sp"
 
                 android:textStyle="bold" />
@@ -149,7 +149,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="Confirmez mdp: : "
+                android:text="@string/prompt_password2"
                 android:textSize="16sp"
 
                 android:textStyle="bold" />
@@ -170,7 +170,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="S'enregistrer" />
+            android:text="@string/action_register" />
 
     </LinearLayout>
 </LinearLayout>

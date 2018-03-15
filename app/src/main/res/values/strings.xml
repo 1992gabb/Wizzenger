@@ -4,18 +4,35 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="conversations_title">Conversations</string>
     <string name="contacts_title">Contacts</string>
+    <string name="param_title">Paramètres</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="action_register">Register</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="tab_conversations">Conversations</string>
-    <string name="tab_contacts">Contacts</string>
-    <string name="conversations_empty">No Conversations Yet</string>
-    <string name="contacts_empty">No Contacts Yet</string>
+    <string name="prompt_email">Courriel</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="prompt_password2">Confirmez mdp: </string>
+    <string name="prompt_username">Nom d\'usager</string>
+    <string name="prompt_phone">Téléphone (opt.) </string>
+    <string name="action_sign_in">Connection</string>
+    <string name="action_register">S\'enregistrer</string>
+    <string name="error_invalid_email">Ce courriel est invalide</string>
+    <string name="error_invalid_password">Le mot de passe est trop court</string>
+    <string name="error_incorrect_password">Le mot de passe est invalide</string>
+    <string name="error_field_required">Cette entrée est requise</string>
+
+    <!-- Strings related to home page -->
+    <string name="conversations_empty">Pas de conversations encore!</string>
+    <string name="contacts_empty">Pas de contacts encore!</string>
+
+    <!-- Strings related to fonctionnalities -->
+    <string name="contact_text">Contact</string>
+    <string name="enter_email">Entrez le courriel du contact: </string>
+    <string name="email_test">Courriel: aaaaaaa@hotmail.com</string>
+    <string name="phone_test">Téléphone: 514 111 1111</string>
+    <string name="add_contact">Ajouter un contact: </string>
+    <string name="remove_contact">Retirer un contact: </string>
+    <string name="do_not_disturb">Ne pas déranger : </string>
+    <string name="send">Envoyer</string>
+    <string name="validate">Valider</string>
+    <string name="contact_name">Nom du contact</string>
+
 </resources>
