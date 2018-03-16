@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
@@ -43,6 +45,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     private Conversation conversation = new Conversation();
     private int compteur = 0;
     private boolean dateSet = false;
+    private ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +65,15 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         btnWizz = (ImageView) findViewById(R.id.convo_wizz_button);
         msgZone = (EditText) findViewById(R.id.message_entry_zone);
         messZoneLayout = (LinearLayout) findViewById(R.id.mess_zone_layout);
+        scrollView = (ScrollView) findViewById(R.id.scroll);
+        scrollView.getParent().requestChildFocus(scrollView,scrollView);
 
         texte.setText(contactName);
 
         btnSend.setOnClickListener(this);
         btnBack.setOnClickListener(this);
         btnWizz.setOnClickListener(this);
+
     }
 
     @Override
@@ -97,28 +103,34 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     }
 
     //Pour mettre a jour l'affichage des messages
-    public void updateMessagesZone(){
+    public void updateMessagesZone(Message message){
         List<TextView> viewList= new ArrayList<TextView>();
-        for(Message message : conversation.getMessagesList()){
-            if(!dateSet){
-                dateSet = true;
-                currentDate = message.getTimeStamp().substring(0,10);
-                viewList.add(createTimeView(currentDate));
-            }
 
-            if(message.getTimeStamp().substring(0, 10).equals(currentDate)){
-                viewList.add(createMessageView(message));
-            }else{
-                currentDate = message.getTimeStamp().substring(0,10);
-                viewList.add(createTimeView(currentDate));
-                viewList.add(createMessageView(message));
-            }
+        if(!dateSet){
+            dateSet = true;
+            currentDate = message.getTimeStamp().substring(0,10);
+            viewList.add(createTimeView(currentDate));
+        }
+
+        if(message.getTimeStamp().substring(0, 10).equals(currentDate)){
+            viewList.add(createMessageView(message));
+        }else{
+            currentDate = message.getTimeStamp().substring(0,10);
+            viewList.add(createTimeView(currentDate));
+            viewList.add(createMessageView(message));
         }
 
         for(TextView view : viewList){
             messZoneLayout.addView(view);
         }
 
+        scrollView.getParent().requestChildFocus(scrollView,scrollView);
+        scrollView.post(new Runnable() {
+            public void run() {
+                scrollView.smoothScrollTo( 0, scrollView.getChildAt( 0 ).getBottom() );
+            }
+        });
+//        scrollView.scrollTo(0, scrollView.getBottom());
         viewList.clear();
     }
 
@@ -226,20 +238,19 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
     //Pour avoir les 20 derniers messages d'une conversation. Construit une conversation contenant la liste de messages
     public void getMessages(final String convoId){
-        FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo).child("messages").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo).child("messages").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot messDataSnapshot : dataSnapshot.getChildren()) {
                     Message mess = messDataSnapshot.getValue(Message.class);
 
-                    if(conversation.getIds().contains(mess.getId())){
-
-                    }else{
-                        conversation.getMessagesList().add(mess);
+                    if(!conversation.getIds().contains(mess.getId())){
+                        if(mess.getContent()!=null){
+                            conversation.getMessagesList().add(mess);
+                            updateMessagesZone(mess);
+                        }
                     }
                 }
-
-                updateMessagesZone();
             }
 
             @Override

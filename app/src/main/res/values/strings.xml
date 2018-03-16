@@ -12,7 +12,7 @@
     <string name="prompt_password2">Confirmez mdp: </string>
     <string name="prompt_username">Nom d\'usager</string>
     <string name="prompt_phone">Téléphone (opt.) </string>
-    <string name="action_sign_in">Connection</string>
+    <string name="action_sign_in">Connexion</string>
     <string name="action_register">S\'enregistrer</string>
     <string name="error_invalid_email">Ce courriel est invalide</string>
     <string name="error_invalid_password">Le mot de passe est trop court</string>
