@@ -60,11 +60,11 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
         holder.contactName.setText(convo.getContactName());
         holder.textHint.setText(convo.getTexthint());
 
-        if(convo.getTexthint().equals("**Un bon vieux Wizz**")){
-            holder.image.startAnimation(AnimationUtils.loadAnimation(holder.contactName.getContext(), R.anim.wizz_animation));
-            holder.contactName.startAnimation(AnimationUtils.loadAnimation(holder.contactName.getContext(), R.anim.wizz_animation));
-            holder.textHint.startAnimation(AnimationUtils.loadAnimation(holder.contactName.getContext(), R.anim.wizz_animation));
-        }
+//        if(convo.getTexthint().equals("**Un bon vieux Wizz**")){
+//            holder.image.startAnimation(AnimationUtils.loadAnimation(holder.contactName.getContext(), R.anim.wizz_animation));
+//            holder.contactName.startAnimation(AnimationUtils.loadAnimation(holder.contactName.getContext(), R.anim.wizz_animation));
+//            holder.textHint.startAnimation(AnimationUtils.loadAnimation(holder.contactName.getContext(), R.anim.wizz_animation));
+//        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
