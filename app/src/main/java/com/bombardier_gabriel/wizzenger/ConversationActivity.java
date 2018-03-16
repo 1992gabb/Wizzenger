@@ -94,6 +94,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
         if(id==R.id.convo_wizz_button){
             writeMessage("WIZZ");
+            getMessages(currentConvo);
         }
     }
 
@@ -246,8 +247,23 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
                     if(!conversation.getIds().contains(mess.getId())){
                         if(mess.getContent()!=null){
-                            conversation.getMessagesList().add(mess);
-                            updateMessagesZone(mess);
+                            if(mess.getType().equals("text")){
+                                conversation.getMessagesList().add(mess);
+                                updateMessagesZone(mess);
+                            }else if(mess.getType().equals("wizz")){
+                                if(mess.getWizzTriggered().equals("false")){
+                                    if(!mess.getSenderId().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                                        animationWizz();
+//                                    FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo).child("messages").child(mess.getId()).child("wizzTriggered").setValue("true");
+                                        conversation.getMessagesList().add(mess);
+                                        updateMessagesZone(mess);
+                                    }
+                                }else{
+                                    conversation.getMessagesList().add(mess);
+                                    updateMessagesZone(mess);
+                                }
+
+                            }
                         }
                     }
                 }
@@ -273,11 +289,15 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         messagesDatabase.child("messages").child(key).child("timeStamp").setValue(messageTemp.getTimeStamp());
         messagesDatabase.child("messages").child(key).child("content").setValue(messageTemp.getContent());
 
+
         messZoneLayout.addView(createMessageView(messageTemp));
 
         if(message.equals("WIZZ")){
+            messagesDatabase.child("messages").child(key).child("type").setValue("wizz");
+            messagesDatabase.child("messages").child(key).child("wizzTriggered").setValue("false");
             updateTextHint(currentConvo, "**Un bon vieux Wizz**");
         }else{
+            messagesDatabase.child("messages").child(key).child("type").setValue("text");
             updateTextHint(currentConvo, messageTemp.getContent());
         }
 //        addProfileEventListener();
@@ -286,5 +306,10 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     //Pour mettre a jour le dernier message de la convo
     public void updateTextHint(String id, String message){
         DatabaseProfile.getInstance().updateTextHint(id, message);
+    }
+
+    //Pour faire vibrer l'écran lors de l'envoi d'un wizz
+    public void animationWizz(){
+
     }
 }
