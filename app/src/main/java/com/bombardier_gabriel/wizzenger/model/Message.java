@@ -10,16 +10,12 @@ import java.util.List;
 public class Message {
     private String id, convoId, senderId;
     private String timeStamp, content;
-    private String type = "none";
-    private String wizzTriggered = "none";
+    private String type;
+    private String wizzTriggered;
 
-
-
-    public Message(){
+    public Message (){
 
     }
-
-
 
     public Message(String id, String idConvo, String idSender, String timeStamp, String content){
             this.id = id;
@@ -27,6 +23,8 @@ public class Message {
             this.senderId = idSender;
             this.timeStamp = timeStamp;
             this.content = content;
+            this.type = "none";
+            this.wizzTriggered = "none";
     }
 
     public String getId() {
@@ -41,24 +39,12 @@ public class Message {
         return convoId;
     }
 
-    public void setIdConvo(String idConvo) {
-        this.convoId = idConvo;
-    }
-
     public String getSenderId() {
         return senderId;
     }
 
-    public void setIdSender(String idSender) {
-        this.senderId = idSender;
-    }
-
     public String getTimeStamp() {
         return timeStamp;
-    }
-
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
     }
 
     public String getContent() {
@@ -71,13 +57,5 @@ public class Message {
 
     public String getType() {return type;}
 
-    public void setType(String type) {this.type = type;}
-
-    public String getWizzTriggered() {
-        return wizzTriggered;
-    }
-
-    public void setWizzTriggered(String wizzTriggered) {
-        this.wizzTriggered = wizzTriggered;
-    }
+    public String getWizzTriggered() {return wizzTriggered;}
 }

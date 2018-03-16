@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +59,12 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
         holder.image.setImageResource(convo.getConvoImage());
         holder.contactName.setText(convo.getContactName());
         holder.textHint.setText(convo.getTexthint());
+
+        if(convo.getTexthint().equals("**Un bon vieux Wizz**")){
+            holder.image.startAnimation(AnimationUtils.loadAnimation(holder.contactName.getContext(), R.anim.wizz_animation));
+            holder.contactName.startAnimation(AnimationUtils.loadAnimation(holder.contactName.getContext(), R.anim.wizz_animation));
+            holder.textHint.startAnimation(AnimationUtils.loadAnimation(holder.contactName.getContext(), R.anim.wizz_animation));
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

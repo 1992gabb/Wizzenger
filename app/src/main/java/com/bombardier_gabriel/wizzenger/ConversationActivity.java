@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -262,7 +264,6 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                                     conversation.getMessagesList().add(mess);
                                     updateMessagesZone(mess);
                                 }
-
                             }
                         }
                     }
@@ -310,6 +311,8 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
     //Pour faire vibrer l'écran lors de l'envoi d'un wizz
     public void animationWizz(){
+        final Animation animWizz = AnimationUtils.loadAnimation(this, R.anim.wizz_animation);
+        scrollView.startAnimation(animWizz);
 
     }
 }
