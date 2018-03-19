@@ -4,23 +4,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <ImageView
-        android:id="@+id/contact_back_button"
-        android:layout_width="30dp"
-        android:layout_height="0dp"
-        android:layout_gravity="left"
-        android:layout_weight="1"
-        android:background="@drawable/ic_arrow_back" />
-
-    <TextView
-        android:id="@+id/contact_contact_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
-        android:gravity="start|center"
-        android:text="@string/contact_text"
-        android:textSize="18sp" />
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/contact_back_button"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="13dp"
+            android:layout_gravity="left|center"
+            android:layout_weight="1"
+            android:background="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:id="@+id/contact_contact_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="9"
+            android:gravity="start|center"
+            android:text="@string/contact_text"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
 
     <ImageView
         android:id="@+id/contact_avatar"
@@ -30,7 +42,7 @@
         android:background="@drawable/mario"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
-        android:layout_marginBottom="80dp"/>
+        android:layout_marginBottom="20dp"/>
 
     <TextView
         android:id="@+id/contact_contact_email"
@@ -62,6 +74,7 @@
         android:layout_weight="2">
 
         <TextView
+            android:id="@+id/contact_title_delete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -70,10 +83,11 @@
 
         <ImageView
             android:id="@+id/contact_remove_button"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/button_remove"/>
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/button_remove" />
     </LinearLayout>
 
     <LinearLayout
@@ -84,6 +98,7 @@
         android:layout_weight="2">
 
         <TextView
+            android:id="@+id/contact_title_disturb"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

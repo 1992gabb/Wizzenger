@@ -1,6 +1,7 @@
 package com.bombardier_gabriel.wizzenger;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +23,7 @@ public class ContactInfoActivity extends AppCompatActivity implements View.OnCli
     private String contactName, contactEmail;
     private ImageView backButton, removeButton, avatar;
     private Switch disturbSwitch;
-    private TextView contactNameView, contactEmailView, contactPhoneView;
+    private TextView contactNameView, contactEmailView, contactPhoneView, titreSupprimer, titreDisturb;
     private User currentContact;
 
     @Override
@@ -36,6 +37,8 @@ public class ContactInfoActivity extends AppCompatActivity implements View.OnCli
         contactNameView = (TextView) findViewById(R.id.contact_contact_name);
         contactEmailView = (TextView) findViewById(R.id.contact_contact_email);
         contactPhoneView = (TextView) findViewById(R.id.contact_contact_phone);
+        titreSupprimer = (TextView) findViewById(R.id.contact_title_delete);
+        titreDisturb = (TextView) findViewById(R.id.contact_title_disturb);
         disturbSwitch = (Switch) findViewById(R.id.contact_disturb_switch);
         backButton = (ImageView) findViewById(R.id.contact_back_button);
         removeButton = (ImageView) findViewById(R.id.contact_remove_button);
@@ -48,6 +51,12 @@ public class ContactInfoActivity extends AppCompatActivity implements View.OnCli
             getContactInfo();
         }
 
+        //Pour les fonts
+        contactNameView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
+        contactEmailView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
+        contactPhoneView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
+        titreSupprimer.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
+        titreDisturb.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
 
         backButton.setOnClickListener(this);
         removeButton.setOnClickListener(this);
