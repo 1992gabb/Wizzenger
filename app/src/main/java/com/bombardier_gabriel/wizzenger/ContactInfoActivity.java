@@ -28,6 +28,9 @@ public class ContactInfoActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
         setContentView(R.layout.activity_contact_info);
 
         contactNameView = (TextView) findViewById(R.id.contact_contact_name);
