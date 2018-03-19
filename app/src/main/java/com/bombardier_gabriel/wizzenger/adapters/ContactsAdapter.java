@@ -7,13 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bombardier_gabriel.wizzenger.ContactInfoActivity;
-import com.bombardier_gabriel.wizzenger.ConversationActivity;
-import com.bombardier_gabriel.wizzenger.LoginActivity;
+import com.bombardier_gabriel.wizzenger.activities.ContactInfoActivity;
+import com.bombardier_gabriel.wizzenger.activities.ConversationActivity;
 import com.bombardier_gabriel.wizzenger.R;
-import com.bombardier_gabriel.wizzenger.model.Conversation;
 import com.bombardier_gabriel.wizzenger.model.User;
 
 import java.util.List;

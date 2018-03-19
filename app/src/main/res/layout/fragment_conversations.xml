@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.bombardier_gabriel.wizzenger.fragments.ConversationsFragment">
+    tools:context="com.bombardier_gabriel.wizzenger.fragments.mainFragments.ConversationsFragment">
 
     <ListView
         android:id="@android:id/list"

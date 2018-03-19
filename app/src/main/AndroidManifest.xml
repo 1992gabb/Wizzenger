@@ -13,25 +13,25 @@
         android:theme="@style/AppTheme">
 
         <!--Pour gérer certaines caractéristiques des activities-->
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".ConversationActivity"
+        <activity android:name=".activities.HomeActivity" />
+        <activity android:name=".activities.ConversationActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".ContactInfoActivity" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.ContactInfoActivity" />
+        <activity android:name=".activities.SettingsActivity"></activity>
 
-        <service android:name=".MyFirebaseMessagingService">
+        <service android:name=".firebaseServices.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".MyFirebaseInstanceIDService">
+        <service android:name=".firebaseServices.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

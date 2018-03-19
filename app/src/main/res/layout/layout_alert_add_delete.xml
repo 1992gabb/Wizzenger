@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:text="@string/alert_email_title"
+        android:text="@string/enter_email"
         android:gravity="center"/>
 
     <EditText
@@ -23,7 +23,7 @@
         android:layout_weight="1.5"/>
 
     <Button
-        android:id="@+id/alert_email_validate"
+        android:id="@+id/alert_button_validate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/validate"

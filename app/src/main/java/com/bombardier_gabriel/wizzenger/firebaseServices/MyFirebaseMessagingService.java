@@ -1,4 +1,4 @@
-package com.bombardier_gabriel.wizzenger;
+package com.bombardier_gabriel.wizzenger.firebaseServices;
 
 
 import com.google.firebase.messaging.FirebaseMessagingService;

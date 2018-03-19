@@ -1,4 +1,4 @@
-package com.bombardier_gabriel.wizzenger.fragments;
+package com.bombardier_gabriel.wizzenger.fragments.inputFragments;
 
 /**
  * Created by gabb_ on 2018-03-14.
@@ -17,39 +17,30 @@ import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class InputFragment extends DialogFragment {
+public class CloseInputFragment extends DialogFragment {
     public static String email;
-    private EditText emailZone;
+    private EditText pwdZone;
     private Button validateButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.layout_alert_email, container, false);
+        View rootView = inflater.inflate(R.layout.layout_alert_close, container, false);
 
-        Bundle mArgs = getArguments();
-        final String action = mArgs.getString("action");
+        getDialog().setTitle("Fermer le compte");
 
-//        getDialog().setTitle(action);
-
-
-        emailZone = (EditText) rootView.findViewById(R.id.alert_contact_email);
-        validateButton = (Button) rootView.findViewById(R.id.alert_button);
+        pwdZone = (EditText) rootView.findViewById(R.id.alert_close_password);
+        validateButton = (Button) rootView.findViewById(R.id.alert_close_validate);
 
         //Action lorsque l'on clique sur valider
         validateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                email = emailZone.getText().toString();
-
-                if(action.equals("ajouter")){
-                    DatabaseProfile.getInstance().writeContact(FirebaseAuth.getInstance().getCurrentUser(), email, getActivity());
-                }else if(action.equals("supprimer")){
-                    DatabaseProfile.getInstance().removeContact(FirebaseAuth.getInstance().getCurrentUser(), email, getActivity());
-                }
+                //Valider si le mot de passe est bon ou non
                 dismiss();
             }
         });
 
         return rootView;
     }
+
 }

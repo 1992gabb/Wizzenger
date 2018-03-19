@@ -2,9 +2,9 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="800dp"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     android:minWidth="500dp"
-    android:minHeight="100dp"
+    android:minHeight="200dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     android:orientation="vertical">
@@ -13,17 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:text="@string/alert_email_title"
+        android:text="@string/alert_avatar_title"
         android:gravity="center"/>
 
-    <EditText
-        android:id="@+id/alert_contact_email"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"/>
+    <Button
+        android:id="@+id/alert_button_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose"
+        android:layout_gravity="center"/>
+
 
     <Button
-        android:id="@+id/alert_email_validate"
+        android:id="@+id/alert_avatar_validate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/validate"

@@ -1,4 +1,4 @@
-package com.bombardier_gabriel.wizzenger.fragments;
+package com.bombardier_gabriel.wizzenger.adapters;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.bombardier_gabriel.wizzenger.R;
+import com.bombardier_gabriel.wizzenger.fragments.mainFragments.ContactsFragment;
+import com.bombardier_gabriel.wizzenger.fragments.mainFragments.ConversationsFragment;
 
 import java.util.ArrayList;
 import java.util.List;

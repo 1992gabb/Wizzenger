@@ -1,9 +1,6 @@
-package com.bombardier_gabriel.wizzenger.fragments;
+package com.bombardier_gabriel.wizzenger.fragments.mainFragments;
 
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,33 +8,24 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
-import com.bombardier_gabriel.wizzenger.ConversationActivity;
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.adapters.ContactsAdapter;
-import com.bombardier_gabriel.wizzenger.adapters.ConversationsAdapter;
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
+import com.bombardier_gabriel.wizzenger.fragments.inputFragments.AddDeleteInputFragment;
 import com.bombardier_gabriel.wizzenger.model.Contact;
-import com.bombardier_gabriel.wizzenger.model.Conversation;
 import com.bombardier_gabriel.wizzenger.model.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Vector;
 
@@ -74,7 +62,7 @@ public class ContactsFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 fm = getActivity().getSupportFragmentManager();
-                InputFragment inputFragment = new InputFragment();
+                AddDeleteInputFragment inputFragment = new AddDeleteInputFragment();
 
                 Bundle args = new Bundle();
                 args.putString("action", "ajouter");
@@ -88,7 +76,7 @@ public class ContactsFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 fm = getActivity().getSupportFragmentManager();
-                InputFragment inputFragment = new InputFragment();
+                AddDeleteInputFragment inputFragment = new AddDeleteInputFragment();
 
                 Bundle args = new Bundle();
                 args.putString("action", "supprimer");

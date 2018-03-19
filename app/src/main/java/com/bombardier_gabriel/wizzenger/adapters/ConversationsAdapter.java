@@ -5,17 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bombardier_gabriel.wizzenger.ConversationActivity;
+import com.bombardier_gabriel.wizzenger.activities.ConversationActivity;
 import com.bombardier_gabriel.wizzenger.R;
-import com.bombardier_gabriel.wizzenger.fragments.ConversationsFragment;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

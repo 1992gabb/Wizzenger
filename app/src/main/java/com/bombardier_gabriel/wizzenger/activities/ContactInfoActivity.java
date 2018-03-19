@@ -1,4 +1,4 @@
-package com.bombardier_gabriel.wizzenger;
+package com.bombardier_gabriel.wizzenger.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.model.User;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;

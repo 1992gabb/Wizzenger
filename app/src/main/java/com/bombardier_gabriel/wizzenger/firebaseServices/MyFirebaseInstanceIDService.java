@@ -1,4 +1,4 @@
-package com.bombardier_gabriel.wizzenger;
+package com.bombardier_gabriel.wizzenger.firebaseServices;
 
 import android.util.Log;
 

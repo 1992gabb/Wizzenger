@@ -1,7 +1,6 @@
-package com.bombardier_gabriel.wizzenger;
+package com.bombardier_gabriel.wizzenger.activities;
 
 import android.content.Intent;
-import android.media.Image;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -9,11 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
-import com.bombardier_gabriel.wizzenger.fragments.FragmentAdapter;
-import com.bombardier_gabriel.wizzenger.model.User;
+import com.bombardier_gabriel.wizzenger.adapters.FragmentAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.iid.FirebaseInstanceId;

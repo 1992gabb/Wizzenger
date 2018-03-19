@@ -34,5 +34,14 @@
     <string name="send">Envoyer</string>
     <string name="validate">Valider</string>
     <string name="contact_name">Nom du contact</string>
+    <string name="choose">Choisir</string>
+
+    <!-- Strings related to dialog fragments -->
+    <string name="alert_avatar_title">Choisissez un nouvel avatar</string>
+    <string name="alert_close_title">Entrez votre mot de passe pour fermer le compte</string>
+    <string name="alert_password_title">Modifier votre mot de passe</string>
+    <string name="alert_username_title">Entrez votre nouveau username</string>
+    <string name="alert_add_delete_title">Entrez le mot de passe</string>
+    <string name="alert_email_title">Modifier votre email</string>
 
 </resources>
