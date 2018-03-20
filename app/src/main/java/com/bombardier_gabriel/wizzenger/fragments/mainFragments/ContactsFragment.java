@@ -86,7 +86,7 @@ public class ContactsFragment extends Fragment{
             }
         });
 
-        mAdapter = new ContactsAdapter(contactsList);
+        mAdapter = new ContactsAdapter(contactsList, getActivity());
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         listeContacts.setLayoutManager(mLayoutManager);

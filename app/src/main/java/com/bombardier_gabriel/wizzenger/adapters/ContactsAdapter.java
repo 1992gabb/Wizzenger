@@ -1,6 +1,8 @@
 package com.bombardier_gabriel.wizzenger.adapters;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,25 +23,28 @@ import java.util.List;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyViewHolder> {
     private List<User> contactsList;
+    private Activity activity;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ImageView image;
-        public TextView nomContact;
+        public ImageView avatar;
+        public TextView contactName;
         public ImageView imageWizz;
         public ImageView imageMess;
 
         public MyViewHolder(View view) {
             super(view);
-            image= (ImageView) view.findViewById(R.id.imgContactContacts);
-            nomContact=(TextView) view.findViewById(R.id.nomContact);
+            avatar= (ImageView) view.findViewById(R.id.imgContactContacts);
+            contactName =(TextView) view.findViewById(R.id.nomContact);
+            contactName.setTypeface(Typeface.createFromAsset(activity.getAssets(), "fonts/Dosis-Regular.ttf"));
             imageWizz = (ImageView) view.findViewById(R.id.imgWizz);
             imageMess = (ImageView) view.findViewById(R.id.contact_mess_icon);
         }
     }
 
 
-    public ContactsAdapter(List<User> contactsList) {
+    public ContactsAdapter(List<User> contactsList, Activity activity) {
         this.contactsList = contactsList;
+        this.activity = activity;
     }
 
     @Override
@@ -53,8 +58,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         User user = contactsList.get(position);
-        holder.image.setImageResource(user.getPhotoUrl());
-        holder.nomContact.setText(user.getUsername());
+        holder.avatar.setImageResource(user.getPhotoUrl());
+        holder.contactName.setText(user.getUsername());
         holder.imageWizz.setImageResource(R.drawable.ic_wizz);  //Modifier pour l'image du user
 
         //Si on clique sur le contact, ouvre les infos
@@ -62,7 +67,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), ContactInfoActivity.class);
-                i.putExtra("contactName", holder.nomContact.getText().toString());
+                i.putExtra("contactName", holder.contactName.getText().toString());
                 v.getContext().startActivity(i);
             }
         });
@@ -72,7 +77,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), ConversationActivity.class);
-                i.putExtra("contactName", holder.nomContact.getText().toString());
+                i.putExtra("contactName", holder.contactName.getText().toString());
                 i.putExtra("wizz", "non");
                 v.getContext().startActivity(i);
             }
@@ -83,7 +88,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), ConversationActivity.class);
-                i.putExtra("contactName", holder.nomContact.getText().toString());
+                i.putExtra("contactName", holder.contactName.getText().toString());
                 i.putExtra("wizz", "oui");
                 v.getContext().startActivity(i);
             }

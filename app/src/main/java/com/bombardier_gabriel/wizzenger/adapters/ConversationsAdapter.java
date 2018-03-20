@@ -1,6 +1,8 @@
 package com.bombardier_gabriel.wizzenger.adapters;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import java.util.List;
 public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdapter.MyViewHolder> {
 
     private List<Conversation> convoList;
+    public Activity activity;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
@@ -30,13 +33,15 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
             super(view);
             image= (ImageView) view.findViewById(R.id.imgContactConvo);
             contactName=(TextView) view.findViewById(R.id.nomContactConvo);
+            contactName.setTypeface(Typeface.createFromAsset(activity.getAssets(), "fonts/Dosis-Regular.ttf"));
             textHint=(TextView) view.findViewById(R.id.texteApercu);
         }
     }
 
 
-    public ConversationsAdapter(List<Conversation> convoList) {
+    public ConversationsAdapter(List<Conversation> convoList, Activity activity) {
         this.convoList = convoList;
+        this.activity = activity;
     }
 
     @Override

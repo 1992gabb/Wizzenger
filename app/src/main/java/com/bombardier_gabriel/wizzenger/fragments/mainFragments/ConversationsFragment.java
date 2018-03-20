@@ -50,7 +50,7 @@ public class ConversationsFragment extends ListFragment {
         View rootView = inflater.inflate(R.layout.fragment_conversations, container, false);
 
         listeConvo = (RecyclerView) rootView.findViewById(R.id.recycler_conversations);
-        mAdapter = new ConversationsAdapter(convoList);
+        mAdapter = new ConversationsAdapter(convoList, getActivity());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         listeConvo.setLayoutManager(mLayoutManager);
         listeConvo.setItemAnimator(new DefaultItemAnimator());
