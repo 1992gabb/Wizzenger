@@ -34,28 +34,25 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         myDatabase = DatabaseProfile.getInstance();
 
-        /*//If no user connected
+        //If no user connected
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             LoginActivity.show(this);
             finish();
-        }*/
+        }
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         currentToken = FirebaseInstanceId.getInstance().getToken();
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
-        textZone = (TextView) findViewById(R.id.text_field);
         boutonParam = (ImageView) findViewById(R.id.settings_btn);
 
-        textZone.setText(user.getEmail());
-
-        if(getIntent().getExtras()!=null){
-            for(String key: getIntent().getExtras().keySet()){
-                if(key.equals("title")){
-                    textZone.setText(key);
-                }
-            }
-        }
+//        if(getIntent().getExtras()!=null){
+//            for(String key: getIntent().getExtras().keySet()){
+//                if(key.equals("title")){
+//                    textZone.setText(key);
+//                }
+//            }
+//        }
 
         FragmentAdapter fragAdapter = new FragmentAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(fragAdapter);

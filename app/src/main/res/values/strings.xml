@@ -28,8 +28,8 @@
     <string name="enter_email">Entrez le courriel du contact: </string>
     <string name="email_test">Courriel: aaaaaaa@hotmail.com</string>
     <string name="phone_test">Téléphone: 514 111 1111</string>
-    <string name="add_contact">Ajouter un contact: </string>
-    <string name="remove_contact">Retirer un contact: </string>
+    <string name="add_contact">Ajouter: </string>
+    <string name="remove_contact">Retirer: </string>
     <string name="do_not_disturb">Ne pas déranger : </string>
     <string name="send">Envoyer</string>
     <string name="validate">Valider</string>
