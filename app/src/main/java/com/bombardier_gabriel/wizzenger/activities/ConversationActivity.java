@@ -254,13 +254,12 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                             }else if(mess.getType().equals("wizz")){
                                 if(mess.getWizzTriggered()!=null){
                                     if(mess.getWizzTriggered().equals("false")){
+                                        animationWizz();
                                         if(!mess.getSenderId().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
-                                            animationWizz();
-//                                    FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo).child("messages").child(mess.getId()).child("wizzTriggered").setValue("true");
+                                            FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo).child("messages").child(mess.getId()).child("wizzTriggered").setValue("true");
                                             conversation.getMessagesList().add(mess);
                                             updateMessagesZone(mess);
                                         }else{
-                                            animationWizz();
                                             conversation.getMessagesList().add(mess);
                                             updateMessagesZone(mess);
                                         }
