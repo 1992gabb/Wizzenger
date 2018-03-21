@@ -54,7 +54,7 @@ public class ConversationsFragment extends ListFragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         listeConvo.setLayoutManager(mLayoutManager);
         listeConvo.setItemAnimator(new DefaultItemAnimator());
-        listeConvo.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+
         listeConvo.setAdapter(mAdapter);
 
         myDatabase = DatabaseProfile.getInstance();
@@ -79,7 +79,7 @@ public class ConversationsFragment extends ListFragment {
         Conversation convo = new Conversation(R.drawable.mario, "babriel", "regarde mon dunk");
         convoList.add(convo);
 
-        Conversation convo2 = new Conversation(R.drawable.mario, "aaa", "regarde moi");
+        Conversation convo2 = new Conversation(R.drawable.mario, "login_rounded_border", "regarde moi");
         convoList.add(convo2);
 
         Conversation convo3 = new Conversation(R.drawable.mario, "manolo", "regarde moi");

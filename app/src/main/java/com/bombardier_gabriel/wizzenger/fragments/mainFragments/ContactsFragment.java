@@ -91,13 +91,12 @@ public class ContactsFragment extends Fragment{
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         listeContacts.setLayoutManager(mLayoutManager);
         listeContacts.setItemAnimator(new DefaultItemAnimator());
-        listeContacts.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         listeContacts.setAdapter(mAdapter);
 
         myDatabase = DatabaseProfile.getInstance();
 
 //        myDatabase.writeContact(FirebaseAuth.getInstance().getCurrentUser(), "guest1@hotmail.com");
-//        myDatabase.writeConvoUsers(FirebaseAuth.getInstance().getCurrentUser(), "aaa@hotmail.com");
+//        myDatabase.writeConvoUsers(FirebaseAuth.getInstance().getCurrentUser(), "login_rounded_border@hotmail.com");
 
 
         getContacts();
@@ -116,7 +115,7 @@ public class ContactsFragment extends Fragment{
 //        User user = new User(R.drawable.mario, "babriel");
 //        contactsList.add(user);
 //
-//        User user2 = new User(R.drawable.mario, "aaa");
+//        User user2 = new User(R.drawable.mario, "login_rounded_border");
 //        contactsList.add(user2);
 //
 //        mAdapter.notifyDataSetChanged();
