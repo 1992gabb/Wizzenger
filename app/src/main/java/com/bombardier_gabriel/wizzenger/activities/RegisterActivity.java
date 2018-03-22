@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private TextView emailAddressTitle, usernameTitle, phoneTitle, pwdTitle, pwd2Title, pageTitle;
     private static FirebaseAuth firebaseAuth;
     private DatabaseProfile myDatabase;
+    private PhoneNumberFormattingTextWatcher phoneWatcher;
 
     public static void show(Context context) {
         Intent i = new Intent(context, LoginActivity.class);
@@ -52,10 +54,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         firebaseAuth = FirebaseAuth.getInstance();
         myDatabase = DatabaseProfile.getInstance();
 
+        phoneWatcher = new PhoneNumberFormattingTextWatcher();
         btnRegister = (Button) findViewById(R.id.btn_register);
         emailAddressEditText = (EditText) findViewById(R.id.email_register);
         usernameEditText = (EditText) findViewById(R.id.username_register);
         phoneEditText = (EditText) findViewById(R.id.phone_register);
+        phoneEditText.addTextChangedListener(phoneWatcher);
         pwdEditText = (EditText) findViewById(R.id.pwd_register);
         pwd2EditText = (EditText) findViewById(R.id.pwd2_register);
         emailAddressTitle = (TextView) findViewById(R.id.register_email_title);

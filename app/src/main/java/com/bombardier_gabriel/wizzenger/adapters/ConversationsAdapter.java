@@ -33,7 +33,6 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
             super(view);
             image= (ImageView) view.findViewById(R.id.imgContactConvo);
             contactName=(TextView) view.findViewById(R.id.nomContactConvo);
-            contactName.setTypeface(Typeface.createFromAsset(activity.getAssets(), "fonts/Dosis-Regular.ttf"));
             textHint=(TextView) view.findViewById(R.id.texteApercu);
         }
     }

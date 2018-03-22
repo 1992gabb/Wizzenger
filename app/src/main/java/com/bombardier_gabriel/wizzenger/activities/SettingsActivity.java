@@ -17,6 +17,9 @@ import com.bombardier_gabriel.wizzenger.fragments.inputFragments.CloseInputFragm
 import com.bombardier_gabriel.wizzenger.fragments.inputFragments.EmailInputFragment;
 import com.bombardier_gabriel.wizzenger.fragments.inputFragments.PasswordInputFragment;
 import com.bombardier_gabriel.wizzenger.fragments.inputFragments.UsernameInputFragment;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener{
     private LinearLayout generalLayout, accountLayout;
@@ -53,6 +56,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         titleVolume.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
         titleVibrate.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
 
+        logoutButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
         avatarButton.setOnClickListener(this);
         usernameButton.setOnClickListener(this);
@@ -74,6 +78,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.settings_button_logout:
                 //Se déconnecter tout simplement
+                FirebaseAuth.getInstance().signOut();
+                LoginActivity.show(this);
                 break;
 
             case R.id.settings_button_avatar:

@@ -56,7 +56,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress"
+                android:lines = "1"/>
 
         </LinearLayout>
 
@@ -86,7 +87,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:hint="@string/prompt_username"
-                android:inputType="text" />
+                android:inputType="text"
+                android:lines = "1"/>
 
         </LinearLayout>
 
@@ -114,7 +116,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:lines = "1"
+                android:inputType="phone"/>
 
         </LinearLayout>
 
@@ -144,7 +148,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:lines = "1"/>
 
         </LinearLayout>
 
@@ -174,7 +179,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:lines = "1"/>
 
         </LinearLayout>
 
