@@ -46,14 +46,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         boutonParam = (ImageView) findViewById(R.id.settings_btn);
 
-//        if(getIntent().getExtras()!=null){
-//            for(String key: getIntent().getExtras().keySet()){
-//                if(key.equals("title")){
-//                    textZone.setText(key);
-//                }
-//            }
-//        }
-
         FragmentAdapter fragAdapter = new FragmentAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(fragAdapter);
         viewPager.setOffscreenPageLimit(2);
@@ -68,11 +60,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         final int id = v.getId();
 
         if(id==R.id.settings_btn){
-            /*
-            FirebaseAuth.getInstance().signOut();
-            LoginActivity.show(this);
-            finish();
-            */
             Intent i = new Intent(HomeActivity.this, SettingsActivity.class);
             startActivity(i);
         }
