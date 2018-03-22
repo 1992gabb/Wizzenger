@@ -39,7 +39,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     private Button btnSend;
     private ImageView btnBack, btnWizz;
     private EditText msgZone;
-    private LinearLayout messZoneLayout;
+    private LinearLayout messZoneLayout, mainLayout;
     private DatabaseReference messagesDatabase;
     private Conversation conversation = new Conversation();
     private int compteur = 0;
@@ -66,6 +66,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         btnWizz = (ImageView) findViewById(R.id.convo_wizz_button);
         msgZone = (EditText) findViewById(R.id.message_entry_zone);
         messZoneLayout = (LinearLayout) findViewById(R.id.mess_zone_layout);
+        mainLayout = (LinearLayout) findViewById(R.id.convo_main_layout);
         scrollView = (ScrollView) findViewById(R.id.scroll);
         scrollView.getParent().requestChildFocus(scrollView,scrollView);
 
@@ -315,7 +316,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     //Pour faire vibrer l'écran lors de l'envoi d'un wizz
     public void animationWizz(){
         final Animation animWizz = AnimationUtils.loadAnimation(this, R.anim.wizz_animation);
-        scrollView.startAnimation(animWizz);
+        mainLayout.startAnimation(animWizz);
 
     }
 }
