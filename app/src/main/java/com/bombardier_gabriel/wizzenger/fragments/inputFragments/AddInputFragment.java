@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
+import com.bombardier_gabriel.wizzenger.fragments.mainFragments.ConversationsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AddInputFragment extends DialogFragment {

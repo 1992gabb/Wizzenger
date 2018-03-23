@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Vector;
 
@@ -77,10 +79,14 @@ public class ContactsFragment extends Fragment{
 //        myDatabase.writeContact(FirebaseAuth.getInstance().getCurrentUser(), "guest1@hotmail.com");
 //        myDatabase.writeConvoUsers(FirebaseAuth.getInstance().getCurrentUser(), "login_rounded_border@hotmail.com");
 
-
-        getContacts();
-
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        contactsList.clear();
+        getContacts();
     }
 
     @Override
