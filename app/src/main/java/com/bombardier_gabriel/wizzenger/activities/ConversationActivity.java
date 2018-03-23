@@ -275,11 +275,14 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                         }
                     }
                 }
-                if(extras.getString("wizz").equals("oui") && !wizzSend) {
-                    wizzSend = true;
-                    writeMessage("WIZZ");
-                    animationWizz();
+                if(extras.getString("wizz")!=null){
+                    if(extras.getString("wizz").equals("oui") && !wizzSend) {
+                        wizzSend = true;
+                        writeMessage("WIZZ");
+                        animationWizz();
+                    }
                 }
+
 
             }
 

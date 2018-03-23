@@ -1,8 +1,12 @@
 package com.bombardier_gabriel.wizzenger.adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
+import android.os.Bundle;
+import android.os.Vibrator;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +17,8 @@ import android.widget.TextView;
 import com.bombardier_gabriel.wizzenger.activities.ContactInfoActivity;
 import com.bombardier_gabriel.wizzenger.activities.ConversationActivity;
 import com.bombardier_gabriel.wizzenger.R;
+import com.bombardier_gabriel.wizzenger.fragments.inputFragments.AddInputFragment;
+import com.bombardier_gabriel.wizzenger.fragments.inputFragments.DeleteInputFragment;
 import com.bombardier_gabriel.wizzenger.model.User;
 
 import java.util.List;
@@ -90,6 +96,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
                 i.putExtra("contactName", holder.contactName.getText().toString());
                 i.putExtra("wizz", "oui");
                 v.getContext().startActivity(i);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                FragmentManager fm = ((AppCompatActivity)activity).getSupportFragmentManager();
+                DeleteInputFragment inputFragment = new DeleteInputFragment();
+
+                inputFragment.show(fm, "Dialog Fragment");
+                return false;
             }
         });
     }

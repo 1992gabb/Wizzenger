@@ -90,6 +90,7 @@
             android:layout_height="match_parent"
             android:lines="8"
             android:background="@drawable/text_entry_back"
+            android:inputType="textCapSentences"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"/>
 

@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +15,7 @@ import android.widget.ImageView;
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.adapters.ContactsAdapter;
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
-import com.bombardier_gabriel.wizzenger.fragments.inputFragments.AddDeleteInputFragment;
+import com.bombardier_gabriel.wizzenger.fragments.inputFragments.AddInputFragment;
 import com.bombardier_gabriel.wizzenger.model.Contact;
 import com.bombardier_gabriel.wizzenger.model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,12 +60,7 @@ public class ContactsFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 fm = getActivity().getSupportFragmentManager();
-                AddDeleteInputFragment inputFragment = new AddDeleteInputFragment();
-
-                Bundle args = new Bundle();
-                args.putString("action", "ajouter");
-                inputFragment.setArguments(args);
-
+                AddInputFragment inputFragment = new AddInputFragment();
                 inputFragment.show(fm, "Dialog Fragment");
             }
         });
@@ -154,8 +148,6 @@ public class ContactsFragment extends Fragment{
 
             }});
     }
-
-
 
 
 
