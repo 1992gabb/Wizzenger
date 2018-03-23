@@ -45,6 +45,8 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     private int compteur = 0;
     private boolean dateSet = false;
     private ScrollView scrollView;
+    private Bundle extras;
+    private Boolean wizzSend = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
         setContentView(R.layout.activity_conversation);
 
-        Bundle extras = getIntent().getExtras();
+        extras =  getIntent().getExtras();
         if (extras != null) {
             contactName = extras.getString("contactName");
             getConvo(contactName);
@@ -273,6 +275,12 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                         }
                     }
                 }
+                if(extras.getString("wizz").equals("oui") && !wizzSend) {
+                    wizzSend = true;
+                    writeMessage("WIZZ");
+                    animationWizz();
+                }
+
             }
 
             @Override

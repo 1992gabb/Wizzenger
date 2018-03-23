@@ -35,7 +35,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
             super(view);
             avatar= (ImageView) view.findViewById(R.id.imgContactContacts);
             contactName =(TextView) view.findViewById(R.id.nomContact);
-            contactName.setTypeface(Typeface.createFromAsset(activity.getAssets(), "fonts/Dosis-Regular.ttf"));
             imageWizz = (ImageView) view.findViewById(R.id.imgWizz);
             imageMess = (ImageView) view.findViewById(R.id.contact_mess_icon);
         }

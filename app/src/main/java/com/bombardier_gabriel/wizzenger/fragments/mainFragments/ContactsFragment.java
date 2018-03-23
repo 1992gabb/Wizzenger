@@ -38,7 +38,7 @@ public class ContactsFragment extends Fragment{
     private Vector<User> contactsList = new Vector<User>();
     private DatabaseProfile myDatabase;
     private String convoId;
-    private ImageView addButton, removeButton;
+    private ImageView addButton;
     private FragmentManager fm;
 
     public ContactsFragment() {
@@ -55,7 +55,6 @@ public class ContactsFragment extends Fragment{
 
         listeContacts = (RecyclerView) rootView.findViewById(R.id.recycler_contacts);
         addButton = (ImageView) rootView.findViewById(R.id.contact_add_button);
-        removeButton = (ImageView) rootView.findViewById(R.id.contact_remove_button);
 
         //Pour gérer ce qui se passe si on appuie sur les boutons
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -66,20 +65,6 @@ public class ContactsFragment extends Fragment{
 
                 Bundle args = new Bundle();
                 args.putString("action", "ajouter");
-                inputFragment.setArguments(args);
-
-                inputFragment.show(fm, "Dialog Fragment");
-            }
-        });
-
-        removeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fm = getActivity().getSupportFragmentManager();
-                AddDeleteInputFragment inputFragment = new AddDeleteInputFragment();
-
-                Bundle args = new Bundle();
-                args.putString("action", "supprimer");
                 inputFragment.setArguments(args);
 
                 inputFragment.show(fm, "Dialog Fragment");
