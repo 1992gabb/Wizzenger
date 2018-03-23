@@ -1,7 +1,9 @@
 package com.bombardier_gabriel.wizzenger.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -46,7 +48,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     private boolean dateSet = false;
     private ScrollView scrollView;
     private Bundle extras;
-    private Boolean wizzSend = false;
+    private Boolean wizzSend = false, vibrated = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -241,7 +243,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
             public void onCancelled(DatabaseError databaseError) {}});
     }
 
-    //Pour avoir les 20 derniers messages d'une conversation. Construit une conversation contenant la liste de messages
+    //Pour avoir les messages d'une conversation. Construit une conversation contenant la liste de messages
     public void getMessages(final String convoId){
         FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo).child("messages").addValueEventListener(new ValueEventListener() {
             @Override
@@ -250,6 +252,11 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                     Message mess = messDataSnapshot.getValue(Message.class);
 
                     if(!conversation.getIds().contains(mess.getId())){
+                        if(!vibrated){
+                            vibrated = true;
+                            vibrate(60);
+                        }
+
                         if(mess.getContent()!=null && mess.getSenderId()!=null && mess.getType()!=null && mess.getSenderId()!=null){
                             if(mess.getType().equals("text")){
                                 conversation.getMessagesList().add(mess);
@@ -275,6 +282,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                         }
                     }
                 }
+                vibrated = false;
                 if(extras.getString("wizz")!=null){
                     if(extras.getString("wizz").equals("oui") && !wizzSend) {
                         wizzSend = true;
@@ -327,8 +335,15 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
     //Pour faire vibrer l'écran lors de l'envoi d'un wizz
     public void animationWizz(){
+        vibrate(1200);
         final Animation animWizz = AnimationUtils.loadAnimation(this, R.anim.wizz_animation);
         mainLayout.startAnimation(animWizz);
 
+    }
+
+    //Pour faire vibrer le téléphone
+    public void vibrate(int duration){
+        final Vibrator vibrator = (Vibrator)  getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(duration);
     }
 }
