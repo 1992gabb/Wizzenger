@@ -294,6 +294,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         messagesDatabase.child("messages").child(key).child("senderId").setValue(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         messagesDatabase.child("messages").child(key).child("timeStamp").setValue(messageTemp.getTimeStamp());
         messagesDatabase.child("messages").child(key).child("content").setValue(messageTemp.getContent());
+        FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo).child("lastMessageDate").setValue(messageTemp.getTimeStamp());
 
         updateMessagesZone(messageTemp);
 

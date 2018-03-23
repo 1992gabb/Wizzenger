@@ -1,5 +1,6 @@
 package com.bombardier_gabriel.wizzenger.fragments.mainFragments;
 
+import android.graphics.Path;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
@@ -24,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Vector;
 
@@ -32,6 +35,7 @@ import java.util.Vector;
  */
 public class ConversationsFragment extends ListFragment {
     private RecyclerView listeConvo;
+    private LinearLayoutManager mLayoutManager;
     private ConversationsAdapter mAdapter;
     private Vector<Conversation> convoList = new Vector<Conversation>();
 
@@ -51,7 +55,8 @@ public class ConversationsFragment extends ListFragment {
 
         listeConvo = (RecyclerView) rootView.findViewById(R.id.recycler_conversations);
         mAdapter = new ConversationsAdapter(convoList, getActivity());
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager.setReverseLayout(true);
         listeConvo.setLayoutManager(mLayoutManager);
         listeConvo.setItemAnimator(new DefaultItemAnimator());
 
@@ -71,9 +76,14 @@ public class ConversationsFragment extends ListFragment {
         super.onResume();
         convoList.clear();
         getConvosInformations(FirebaseAuth.getInstance().getCurrentUser());
+
+        Comparator comparator = Collections.reverseOrder();
+
+        Collections.sort(convoList, comparator);
+
     }
 
-    //    //Pour tester des fonctionnalités sans BD
+    //Pour tester des fonctionnalités sans BD
     private void getConversations() {
 
         Conversation convo = new Conversation(R.drawable.mario, "babriel", "regarde mon dunk");
@@ -90,7 +100,7 @@ public class ConversationsFragment extends ListFragment {
 
     //Pour avoir les informations des conversations
     public void getConvosInformations(final FirebaseUser currentUser){
-        FirebaseDatabase.getInstance().getReference("conversations").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("conversations").orderByChild("lastMessageDate").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<Conversation> convos = new ArrayList<Conversation>();
