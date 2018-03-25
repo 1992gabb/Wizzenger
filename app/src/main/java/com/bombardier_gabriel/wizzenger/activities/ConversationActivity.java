@@ -159,7 +159,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
             temp.setTextColor(Color.BLACK);
         }
 
-        temp.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
+//        temp.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
 
         temp.setLayoutParams(params);
         temp.setText(message.getContent());
