@@ -2,6 +2,7 @@ package com.bombardier_gabriel.wizzenger.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
@@ -148,11 +149,18 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         if (message.getSenderId().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
             params.gravity = Gravity.RIGHT;
+            temp.setBackgroundResource(R.drawable.message_background_sender);
+            temp.setPadding(20,20,20,20);
+            temp.setTextColor(Color.WHITE);
         } else {
             params.gravity = Gravity.START;
+            temp.setBackgroundResource(R.drawable.message_background_contact);
+            temp.setPadding(20,20,20,20);
+            temp.setTextColor(Color.BLACK);
         }
 
         temp.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
+
         temp.setLayoutParams(params);
         temp.setText(message.getContent());
 
