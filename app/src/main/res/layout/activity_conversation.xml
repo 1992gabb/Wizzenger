@@ -14,30 +14,30 @@
 
         <ImageView
             android:id="@+id/convo_back_button"
-            android:layout_width="0dp"
+            android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_margin="13dp"
-            android:layout_weight="1"
             android:background="@drawable/ic_arrow_back" />
 
         <TextView
             android:id="@+id/text_field3"
-            android:layout_width="0dp"
+            android:layout_width="280dp"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:layout_weight="8"
             android:gravity="start|center"
             android:text="@string/conversations_title"
             android:textSize="18sp" />
 
-
-        <Switch
-            android:id="@+id/convo_switch"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
+        <ImageView
+            android:id="@+id/convo_info_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:gravity="center"
-            android:paddingRight="15dp" />
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/ic_info"/>
 
     </LinearLayout>
 

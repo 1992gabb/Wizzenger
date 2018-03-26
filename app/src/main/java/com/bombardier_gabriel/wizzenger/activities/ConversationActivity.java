@@ -54,7 +54,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     private String currentConvo, contactName, contactEmail ="", currentDate = "";
     private TextView texte;
     private Button btnSend;
-    private ImageView btnBack, btnWizz;
+    private ImageView btnBack, btnWizz, btnInfo;
     private EditText msgZone;
     private LinearLayout messZoneLayout, mainLayout;
     private DatabaseReference messagesDatabase;
@@ -84,6 +84,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         btnSend = (Button) findViewById(R.id.send_button);
         btnBack = (ImageView) findViewById(R.id.convo_back_button);
         btnWizz = (ImageView) findViewById(R.id.convo_wizz_button);
+        btnInfo = (ImageView) findViewById(R.id.convo_info_button);
         msgZone = (EditText) findViewById(R.id.message_entry_zone);
         messZoneLayout = (LinearLayout) findViewById(R.id.mess_zone_layout);
         mainLayout = (LinearLayout) findViewById(R.id.convo_main_layout);
@@ -95,6 +96,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         btnSend.setOnClickListener(this);
         btnBack.setOnClickListener(this);
         btnWizz.setOnClickListener(this);
+        btnInfo.setOnClickListener(this);
 
     }
 
