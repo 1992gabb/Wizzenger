@@ -1,6 +1,8 @@
 package com.bombardier_gabriel.wizzenger.activities;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +15,21 @@ import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
 import com.bombardier_gabriel.wizzenger.adapters.FragmentAdapter;
 import com.bombardier_gabriel.wizzenger.firebaseServices.MyFirebaseInstanceIDService;
+import com.bombardier_gabriel.wizzenger.model.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
     private ViewPager viewPager;
@@ -45,6 +59,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         currentToken = FirebaseInstanceId.getInstance().getToken();
+        addTokenToUser(currentToken);
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         boutonParam = (ImageView) findViewById(R.id.settings_btn);
@@ -56,6 +71,30 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         tabLayout.setupWithViewPager(viewPager);
 
         boutonParam.setOnClickListener(this);
+    }
+
+    private void addTokenToUser(final String currentToken) {
+        FirebaseDatabase.getInstance().getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<User> users = new ArrayList<User>();
+                for (DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
+                    User user = userDataSnapshot.getValue(User.class);
+                    users.add(user);
+                }
+
+                for (final User user : users) {
+                    if (user.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                        FirebaseDatabase.getInstance().getReference("users").child(user.getid()).child("token").setValue(currentToken);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

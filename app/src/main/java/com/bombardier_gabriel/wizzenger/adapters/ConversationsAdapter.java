@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.bombardier_gabriel.wizzenger.activities.ConversationActivity;
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -24,14 +27,15 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
 
     private List<Conversation> convoList;
     public Activity activity;
+    private RequestOptions requestOptions;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ImageView image;
+        public ImageView avatar;
         public TextView contactName, textHint;
 
         public MyViewHolder(View view) {
             super(view);
-            image= (ImageView) view.findViewById(R.id.imgContactConvo);
+            avatar= (ImageView) view.findViewById(R.id.imgContactConvo);
             contactName=(TextView) view.findViewById(R.id.nomContactConvo);
             textHint=(TextView) view.findViewById(R.id.texteApercu);
         }
@@ -41,6 +45,9 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
     public ConversationsAdapter(List<Conversation> convoList, Activity activity) {
         this.convoList = convoList;
         this.activity = activity;
+
+        this.requestOptions = new RequestOptions();
+        requestOptions.placeholder(R.drawable.default_avatar);
     }
 
     @Override
@@ -55,15 +62,9 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Conversation convo = convoList.get(position);
-        holder.image.setImageResource(convo.getConvoImage());
+        Glide.with(activity).setDefaultRequestOptions(requestOptions).load(convo.getAvatar()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.avatar);
         holder.contactName.setText(convo.getContactName());
         holder.textHint.setText(convo.getTexthint());
-
-//        if(convo.getTexthint().equals("**Un bon vieux Wizz**")){
-//            holder.image.startAnimation(AnimationUtils.loadAnimation(holder.contactName.getContext(), R.anim.wizz_animation));
-//            holder.contactName.startAnimation(AnimationUtils.loadAnimation(holder.contactName.getContext(), R.anim.wizz_animation));
-//            holder.textHint.startAnimation(AnimationUtils.loadAnimation(holder.contactName.getContext(), R.anim.wizz_animation));
-//        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

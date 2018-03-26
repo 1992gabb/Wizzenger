@@ -1,6 +1,9 @@
 package com.bombardier_gabriel.wizzenger.fragments.mainFragments;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,11 +21,15 @@ import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
 import com.bombardier_gabriel.wizzenger.fragments.inputFragments.AddInputFragment;
 import com.bombardier_gabriel.wizzenger.model.Contact;
 import com.bombardier_gabriel.wizzenger.model.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -141,10 +148,30 @@ public class ContactsFragment extends Fragment{
                     users.add(user);
                 }
 
-                for (User user : users){
+                for (final User user : users){
                     if(user.getEmail().equals(email)){
-                        contactsList.add(new User(user.getUsername(), user.getEmail(), user.getPhone(), user.getPhotoUrl()));
-                        mAdapter.notifyDataSetChanged();
+                        // Pour aller chercher l'avatar
+                        StorageReference pathReference = FirebaseStorage.getInstance().getReference().child("avatars/"+user.getEmail());
+
+                        final long THREE_MEGABYTE = 3 * 1024 * 1024;
+                        pathReference.getBytes(THREE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                            @Override
+                            public void onSuccess(byte[] bytes) {
+                                user.setAvatar(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+                                contactsList.add(user);
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                                contactsList.add(user);
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        });
+
+//                        contactsList.add(new User(user.getUsername(), user.getEmail(), user.getPhone(), user.getPhotoUrl()));
+
                     }
                 }
             }

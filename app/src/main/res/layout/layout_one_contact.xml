@@ -11,12 +11,12 @@
 
     <ImageView
         android:id="@+id/imgContactContacts"
-        android:layout_width="0dp"
+        android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:padding="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="3dp"
+        android:padding="1dp"
+        android:scaleType="centerCrop"
         android:background="@drawable/circle_border"/>
 
     <LinearLayout

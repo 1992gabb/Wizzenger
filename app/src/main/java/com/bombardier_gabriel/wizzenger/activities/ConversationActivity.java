@@ -17,7 +17,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
@@ -30,11 +37,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
+
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 public class ConversationActivity extends AppCompatActivity implements View.OnClickListener{
     private String currentConvo, contactName, contactEmail ="", currentDate = "";
@@ -50,6 +64,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     private ScrollView scrollView;
     private Bundle extras;
     private Boolean wizzSend = false, vibrated = true;
+    private User nowUser, contactUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,8 +209,11 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
                 for (User user : users){
                     if(user.getUsername().equals(contactName)){
+                        contactUser = user;
                         contactEmail = user.getEmail();
                         getConvoId(FirebaseAuth.getInstance().getCurrentUser(), contactEmail);
+                    }else if(user.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                        nowUser = user;
                     }
                 }
             }
@@ -298,8 +316,6 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                         animationWizz();
                     }
                 }
-
-
             }
 
             @Override
@@ -333,7 +349,57 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
             messagesDatabase.child("messages").child(key).child("type").setValue("text");
             updateTextHint(currentConvo, messageTemp.getContent());
         }
+
+        sendPushNotification(messageTemp.getContent());
 //        addProfileEventListener();
+    }
+
+    private void sendPushNotification(String messageContent) {
+        HashMap data = new HashMap<>();
+        data.put("sender",nowUser.getUsername());
+        data.put("message",messageContent);
+        sendPushToSingleInstance(this, data, contactUser.getToken());
+    }
+
+
+//    https://stackoverflow.com/questions/37990140/how-to-send-one-to-one-message-using-firebase-messaging
+    public static void sendPushToSingleInstance(final Context activity, final HashMap dataValue /*your data from the activity*/, final String instanceIdToken /*firebase instance token you will find in documentation that how to get this*/ ) {
+
+        final String url = "https://fcm.googleapis.com/fcm/send";
+        StringRequest myReq = new StringRequest(Request.Method.POST,url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+
+            @Override
+            public byte[] getBody() throws com.android.volley.AuthFailureError {
+                Map<String, Object> rawParameters = new Hashtable();
+                rawParameters.put("data", new JSONObject(dataValue));
+                rawParameters.put("to", instanceIdToken);
+                return new JSONObject(rawParameters).toString().getBytes();
+            };
+
+            public String getBodyContentType()
+            {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "key="+"AIzaSyAbZmkXhLrplD9cLt1Oj6Q8CIi397gkcQE");
+                return headers;
+            }
+
+        };
+
+        Volley.newRequestQueue(activity).add(myReq);
     }
 
     //Pour mettre a jour le dernier message de la convo

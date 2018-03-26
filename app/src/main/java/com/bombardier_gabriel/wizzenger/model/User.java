@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by marc-antoinehinse on 2017-10-01.
+ * Created by gabb on 2017-10-01.
  */
 public class User {
     private String id;
@@ -28,9 +28,19 @@ public class User {
     private int age;
     private String phone;
     private int photoUrl;
+    private Bitmap avatar;
     private String thumbnailBase64;
     private List<Device> devices;
     private List<String> contacts;
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     @Exclude
     public Bitmap thumbnail;
@@ -50,6 +60,14 @@ public class User {
         this.password= password;
         this.phone= phone;
         this.photoUrl = photoUrl;
+    }
+
+    public User(String userName, String email, String password, String phone, Bitmap avatar){
+        this.userName = userName ;
+        this.email= email;
+        this.password= password;
+        this.phone= phone;
+        this.avatar = avatar;
     }
 
     public User(String userName, String email, String phone, int photoUrl){
@@ -152,6 +170,16 @@ public class User {
 
     public void setid(String id){
         this.id = id;
+    }
+
+    @Exclude
+    public Bitmap getAvatar() {
+        return avatar;
+    }
+
+    @Exclude
+    public void setAvatar(Bitmap avatar) {
+        this.avatar = avatar;
     }
 }
 

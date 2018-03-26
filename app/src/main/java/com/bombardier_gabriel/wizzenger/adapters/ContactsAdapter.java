@@ -3,6 +3,7 @@ package com.bombardier_gabriel.wizzenger.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.FragmentManager;
@@ -20,8 +21,15 @@ import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.fragments.inputFragments.AddInputFragment;
 import com.bombardier_gabriel.wizzenger.fragments.inputFragments.DeleteInputFragment;
 import com.bombardier_gabriel.wizzenger.model.User;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Classe inspirée de https://www.androidhive.info/2016/01/android-working-with-recycler-view/
@@ -30,6 +38,7 @@ import java.util.List;
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyViewHolder> {
     private List<User> contactsList;
     private Activity activity;
+    private RequestOptions requestOptions;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView avatar;
@@ -50,6 +59,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     public ContactsAdapter(List<User> contactsList, Activity activity) {
         this.contactsList = contactsList;
         this.activity = activity;
+
+        this.requestOptions = new RequestOptions();
+        requestOptions.placeholder(R.drawable.default_avatar);
     }
 
     @Override
@@ -63,9 +75,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         User user = contactsList.get(position);
-        holder.avatar.setImageResource(user.getPhotoUrl());
+
+        Glide.with(activity).setDefaultRequestOptions(requestOptions).load(user.getAvatar()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.avatar);
+
         holder.contactName.setText(user.getUsername());
-        holder.imageWizz.setImageResource(R.drawable.ic_wizz);  //Modifier pour l'image du user
+        holder.imageWizz.setImageResource(R.drawable.ic_wizz);
 
         //Si on clique sur le contact, ouvre les infos
         holder.itemView.setOnClickListener(new View.OnClickListener() {

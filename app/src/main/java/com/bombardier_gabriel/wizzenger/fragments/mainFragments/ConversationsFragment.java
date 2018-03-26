@@ -1,7 +1,9 @@
 package com.bombardier_gabriel.wizzenger.fragments.mainFragments;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Path;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,12 +19,16 @@ import com.bombardier_gabriel.wizzenger.adapters.ConversationsAdapter;
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
 import com.bombardier_gabriel.wizzenger.model.Conversation;
 import com.bombardier_gabriel.wizzenger.model.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -141,8 +147,27 @@ public class ConversationsFragment extends ListFragment {
 
                 for (User user : users){
                     if(user.getEmail().equals(contactEmail)){
-                        convoList.add(new Conversation(R.drawable.mario, user.getUsername(), textHint));
-                        mAdapter.notifyDataSetChanged();
+                        // Pour aller chercher l'avatar
+                        StorageReference pathReference = FirebaseStorage.getInstance().getReference().child("avatars/"+user.getEmail());
+                        final Conversation temp = new Conversation();
+                        temp.setContactName(user.getUsername());
+                        temp.setTexthint(textHint);
+
+                        final long THREE_MEGABYTE = 3 * 1024 * 1024;
+                        pathReference.getBytes(THREE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                            @Override
+                            public void onSuccess(byte[] bytes) {
+                                temp.setAvatar(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+                                convoList.add(temp);
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                convoList.add(temp);
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        });
                     }
                 }
             }

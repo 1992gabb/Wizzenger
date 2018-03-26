@@ -1,7 +1,10 @@
 package com.bombardier_gabriel.wizzenger.model;
 
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
+import com.google.firebase.database.Exclude;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,6 +24,7 @@ public class Conversation {
     private HashMap<String, HashMap<String, String>> messages = new HashMap<String, HashMap<String, String>>();
     List<Message> messagesList = new ArrayList<Message>();
     private String lastMessageDate;
+    private Bitmap avatar;
 
     public String getLastMessageDate() {
         return lastMessageDate;
@@ -118,32 +122,15 @@ public class Conversation {
 
         return ids;
     }
+
+    @Exclude
+    public Bitmap getAvatar() {
+        return avatar;
+    }
+
+    @Exclude
+    public void setAvatar(Bitmap avatar) {
+        this.avatar = avatar;
+    }
 }
-//
-//    @Override
-//    public int compareTo(@NonNull Conversation convo) {
-//
-//        String otherLastMess = convo.getLastMessageDate();
-//        String currentLastMess = this.getLastMessageDate();
-//
-//        Date otherDate = new Date(), currentDate = new Date();
-//
-//        DateFormat df = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-//
-//        try{
-//            otherDate = df.parse(otherLastMess);
-//            currentDate = df.parse(currentLastMess);
-//        } catch(Exception e){
-//
-//        }
-//
-//        switch (currentDate.compareTo(otherDate)){
-//            case -1:  Log.i("CompareDates","today is sooner than parsedDate");  break;
-//            case 0:   Log.i("CompareDates","today and parsedDateare equal");  break;
-//            case 1:   Log.i("CompareDates","today is later than parsedDate");  break;
-//            default:  Log.i("CompareDates","Invalid results from date comparison"); break;
-//        }
-//
-//        return 0;
-//    }
-//}
+
