@@ -1,14 +1,19 @@
 package com.bombardier_gabriel.wizzenger.activities;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +28,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener{
-    private LinearLayout generalLayout, accountLayout;
-    private Button logoutButton, avatarButton, usernameButton, emailButton, passwordButton, closeButton;
-    private TextView titleDisturb, titleVolume, titleVibrate;
+    private LinearLayout accountLayout;
+    private Button logoutButton, avatarButton, usernameButton, passwordButton, closeButton;
     private ImageView backButton;
     private FragmentManager fm;
 
@@ -37,11 +41,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         setContentView(R.layout.activity_settings);
 
-        generalLayout = (LinearLayout) findViewById(R.id.settings_general_layout);
         accountLayout = (LinearLayout) findViewById(R.id.settings_account_layout);
-        titleDisturb = (TextView) findViewById(R.id.settings_title_disturb);
-        titleVolume = (TextView) findViewById(R.id.settings_title_sound);
-        titleVibrate = (TextView) findViewById(R.id.settings_title_vibration);
         backButton = (ImageView) findViewById(R.id.settings_back_button);
         logoutButton = (Button) findViewById(R.id.settings_button_logout);
         avatarButton = (Button) findViewById(R.id.settings_button_avatar);
@@ -52,9 +52,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         //Pour les fonts
         modifierFonts("fonts/Dosis-Regular.ttf", accountLayout);
         logoutButton.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
-        titleDisturb.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
-        titleVolume.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
-        titleVibrate.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
 
         logoutButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
