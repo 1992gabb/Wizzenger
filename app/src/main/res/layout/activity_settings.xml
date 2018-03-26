@@ -132,13 +132,6 @@
             android:text="Modifier le nom d'usager"/>
 
         <Button
-            android:id="@+id/settings_button_email"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Modifier le courriel"/>
-
-        <Button
             android:id="@+id/settings_button_password"
             android:layout_width="wrap_content"
             android:layout_height="0dp"

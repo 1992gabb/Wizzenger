@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.fragments.inputFragments.AvatarInputFragment;
@@ -45,7 +46,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         logoutButton = (Button) findViewById(R.id.settings_button_logout);
         avatarButton = (Button) findViewById(R.id.settings_button_avatar);
         usernameButton = (Button) findViewById(R.id.settings_button_usernam);
-        emailButton = (Button) findViewById(R.id.settings_button_email);
         passwordButton = (Button) findViewById(R.id.settings_button_password);
         closeButton = (Button) findViewById(R.id.settings_button_close);
 
@@ -60,7 +60,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         backButton.setOnClickListener(this);
         avatarButton.setOnClickListener(this);
         usernameButton.setOnClickListener(this);
-        emailButton.setOnClickListener(this);
         passwordButton.setOnClickListener(this);
         closeButton.setOnClickListener(this);
     }
@@ -93,21 +92,17 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 usernameInputFragment.show(fm, "Dialog Fragment");
                 break;
 
-            case R.id.settings_button_email:
-                EmailInputFragment emailInputFragment = new EmailInputFragment();
-
-                emailInputFragment.show(fm, "Dialog Fragment");
-                break;
-
             case R.id.settings_button_password:
                 PasswordInputFragment passwordInputFragment = new PasswordInputFragment();
                 passwordInputFragment.show(fm, "Dialog Fragment");
                 break;
 
             case R.id.settings_button_close:
-                CloseInputFragment closeInputFragment = new CloseInputFragment();
+//                CloseInputFragment closeInputFragment = new CloseInputFragment();
+//
+//                closeInputFragment.show(fm, "Dialog Fragment");
 
-                closeInputFragment.show(fm, "Dialog Fragment");
+                Toast.makeText(SettingsActivity.this, "Veuillez rééssayer plus tard.", Toast.LENGTH_SHORT).show();
                 break;
         }
 

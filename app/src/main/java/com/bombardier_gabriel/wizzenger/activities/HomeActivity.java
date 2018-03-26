@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
 import com.bombardier_gabriel.wizzenger.adapters.FragmentAdapter;
+import com.bombardier_gabriel.wizzenger.firebaseServices.MyFirebaseInstanceIDService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -38,6 +39,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             LoginActivity.show(this);
             finish();
+        }else{
+            currentToken = FirebaseInstanceId.getInstance().getToken();
         }
 
         FirebaseUser user = firebaseAuth.getCurrentUser();

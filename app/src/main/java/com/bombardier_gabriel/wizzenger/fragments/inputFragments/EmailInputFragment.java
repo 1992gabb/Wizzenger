@@ -36,7 +36,7 @@ public class EmailInputFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 //Envoyer une confirmation du courriel avant de le modifier!
-
+                email = emailZone.getText().toString();
                 dismiss();
             }
         });

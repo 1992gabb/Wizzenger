@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
@@ -36,6 +37,7 @@ public class CloseInputFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 //Valider si le mot de passe est bon ou non
+
                 dismiss();
             }
         });

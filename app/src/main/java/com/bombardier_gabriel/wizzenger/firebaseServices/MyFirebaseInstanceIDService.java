@@ -12,6 +12,7 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
     private static final String TAG = "MyFirebaseIIDService";
+    public static String currentToken;
 
     /**
      * Called if InstanceID token is updated.
@@ -20,9 +21,9 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
         // Get updated InstanceID token.
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG, "Refreshed token: " + refreshedToken);
-        sendRegistrationToServer(refreshedToken);
+        currentToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "Refreshed token: " + currentToken);
+        sendRegistrationToServer(currentToken);
     }
 
     private void sendRegistrationToServer(String token) {
