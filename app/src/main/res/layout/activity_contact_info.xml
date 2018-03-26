@@ -9,7 +9,8 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:orientation="horizontal"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/login_bg">
 
         <ImageView
             android:id="@+id/contact_back_button"
@@ -32,17 +33,13 @@
 
     </LinearLayout>
 
-
-
     <ImageView
         android:id="@+id/contact_avatar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6"
-        android:background="@drawable/mario"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:background="@drawable/circle_border"/>
 
     <TextView
         android:id="@+id/contact_contact_email"
@@ -78,40 +75,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="5"
+            android:gravity="end"
+            android:layout_weight="1"
             android:text="@string/remove_contact" />
 
         <ImageView
             android:id="@+id/contact_remove_button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:src="@drawable/button_remove" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_gravity="center"
-        android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="2">
-
-        <TextView
-            android:id="@+id/contact_title_disturb"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="5"
-            android:text="@string/do_not_disturb" />
-
-        <Switch
-            android:id="@+id/contact_disturb_switch"
-            android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/button_remove"/>
     </LinearLayout>
 
 

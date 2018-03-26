@@ -159,19 +159,16 @@ public class ContactsFragment extends Fragment{
                             public void onSuccess(byte[] bytes) {
                                 user.setAvatar(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
                                 contactsList.add(user);
-                                mAdapter.notifyDataSetChanged();
+                                mAdapter.notifyItemInserted(contactsList.size() - 1);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception exception) {
                                 // Handle any errors
                                 contactsList.add(user);
-                                mAdapter.notifyDataSetChanged();
+                                mAdapter.notifyItemInserted(contactsList.size() - 1);
                             }
                         });
-
-//                        contactsList.add(new User(user.getUsername(), user.getEmail(), user.getPhone(), user.getPhotoUrl()));
-
                     }
                 }
             }

@@ -118,6 +118,12 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
             writeMessage("WIZZ");
             animationWizz();
         }
+
+        if(id == R.id.convo_info_button){
+            Intent i = new Intent(v.getContext(), ContactInfoActivity.class);
+            i.putExtra("contactName", contactName);
+            v.getContext().startActivity(i);
+        }
     }
 
     //Pour mettre a jour la zone de id convo

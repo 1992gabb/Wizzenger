@@ -153,29 +153,33 @@ public class ConversationsFragment extends ListFragment {
                         temp.setContactName(user.getUsername());
                         temp.setTexthint(textHint);
 
-                        final long THREE_MEGABYTE = 3 * 1024 * 1024;
-                        pathReference.getBytes(THREE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        final long ONE_MEGABYTE = 1024 * 1024;
+                        pathReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                             @Override
                             public void onSuccess(byte[] bytes) {
                                 temp.setAvatar(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
                                 convoList.add(temp);
-                                mAdapter.notifyDataSetChanged();
+                                mAdapter.notifyItemInserted(convoList.size() - 1);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception exception) {
                                 convoList.add(temp);
-                                mAdapter.notifyDataSetChanged();
+                                mAdapter.notifyItemInserted(convoList.size() - 1);
                             }
                         });
                     }
+
                 }
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }});
+
+
     }
 
 }
