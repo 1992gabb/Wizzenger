@@ -69,32 +69,6 @@ public class DatabaseProfile {
         return instance;
     }
 
-    public void initMyUser() {
-        if(FirebaseAuth.getInstance().getCurrentUser() != null) {
-            addProfileEventListener();
-        }
-    }
-
-    //Permet de recharger les informations d'un usager s'il les change
-    private void addProfileEventListener() {
-        final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Log.i(TAG, "addProfileEventListener: uid=" + uid);
-        usersDatabase.child(uid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                user = dataSnapshot.getValue(User.class);
-                addFCMToken(context);
-                Log.d(TAG, "User name: " + user.getUsername() + ", email " + user.getEmail());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-    }
-
     //Pour écrire un usager dans la base de données
     public void writeUser(User user){
         this.user = user;
@@ -164,19 +138,16 @@ public class DatabaseProfile {
                 }
 
                 for (Contact contact : contacts){
-                    if(contact.getUserID().equals(currentUser.getEmail())){
+                    String plotte1 = currentUser.getEmail();
+                    String plotte2 = contactEmail;
+                    if(contact.getUserID().equals(currentUser.getEmail()) && contact.getContactID().equals(contactEmail)){
                         trouveUser = true;
-                        if(contact.getContactID().equals(contactEmail)){
-                            trouveNouveau = true;
-                            contactsDatabase.child(contact.getId()).removeValue();
-                        }
-                    }
-                    if(contact.getContactID().equals(currentUser.getEmail())){
                         trouveNouveau = true;
-                        if(contact.getUserID().equals(contactEmail)){
-                            trouveUser = true;
-                            contactsDatabase.child(contact.getId()).removeValue();
-                        }
+                        contactsDatabase.child(contact.getId()).removeValue();
+                    }else if(contact.getUserID().equals(contactEmail) && contact.getContactID().equals(currentUser.getEmail())){
+                        trouveUser = true;
+                        trouveNouveau = true;
+                        contactsDatabase.child(contact.getId()).removeValue();
                     }
                }
                 if(trouveUser == false || trouveNouveau == false){
@@ -210,7 +181,6 @@ public class DatabaseProfile {
                     }
                     if(user.getEmail().equals(contactEmail)){
                         convosDatabase.child(key).child("idUser2").setValue(contactEmail);
-//                        contactsDatabase.child(key).child("username").setValue(user.getUserName());
                     }
                 }
             }

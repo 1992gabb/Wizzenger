@@ -74,7 +74,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        User user = contactsList.get(position);
+        final User user = contactsList.get(position);
 
         Glide.with(activity).setDefaultRequestOptions(requestOptions).load(user.getAvatar()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.avatar);
 
@@ -118,6 +118,10 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
             public boolean onLongClick(View v) {
                 FragmentManager fm = ((AppCompatActivity)activity).getSupportFragmentManager();
                 DeleteInputFragment inputFragment = new DeleteInputFragment();
+
+                Bundle args = new Bundle();
+                args.putString("contactEmail",user.getEmail());
+                inputFragment.setArguments(args);
 
                 inputFragment.show(fm, "Dialog Fragment");
                 return false;

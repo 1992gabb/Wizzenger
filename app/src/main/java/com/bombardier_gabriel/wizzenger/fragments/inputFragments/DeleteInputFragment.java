@@ -36,6 +36,12 @@ public class DeleteInputFragment extends DialogFragment {
         noButton = (Button) rootView.findViewById(R.id.alert_button_no);
         title = (TextView) rootView.findViewById(R.id.alert_delete_title);
 
+        Bundle args = getArguments();
+
+        if(args!=null){
+            email = args.getString("contactEmail");
+        }
+
         //Action lorsque l'on clique sur valider
         validateButton.setOnClickListener(new View.OnClickListener() {
             @Override
