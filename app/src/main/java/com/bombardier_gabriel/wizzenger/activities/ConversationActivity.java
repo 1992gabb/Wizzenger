@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -37,8 +37,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.RemoteMessage;
 
 import org.json.JSONObject;
 
@@ -312,6 +310,23 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                                         updateMessagesZone(mess);
                                     }
                                 }
+                            }else if(mess.getType().equals("sound")){
+                                if(mess.getWizzTriggered()!=null){
+                                    if(mess.getWizzTriggered().equals("false")){
+                                        //faire l'animation du son en fonction du content
+                                        if(!mess.getSenderId().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                                            FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo).child("messages").child(mess.getId()).child("wizzTriggered").setValue("true");
+                                            conversation.getMessagesList().add(mess);
+                                            updateMessagesZone(mess);
+                                        }else{
+                                            conversation.getMessagesList().add(mess);
+                                            updateMessagesZone(mess);
+                                        }
+                                    }else{
+                                        conversation.getMessagesList().add(mess);
+                                        updateMessagesZone(mess);
+                                    }
+                                }
                             }
                         }
                     }
@@ -369,7 +384,6 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         sendPushToSingleInstance(this, data, contactUser.getToken());
     }
 
-
 //    https://stackoverflow.com/questions/37990140/how-to-send-one-to-one-message-using-firebase-messaging
     public static void sendPushToSingleInstance(final Context activity, final HashMap dataValue /*your data from the activity*/, final String instanceIdToken /*firebase instance token you will find in documentation that how to get this*/ ) {
 
@@ -420,7 +434,8 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         vibrate(1200);
         final Animation animWizz = AnimationUtils.loadAnimation(this, R.anim.wizz_animation);
         mainLayout.startAnimation(animWizz);
-
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.wizz_sound);
+        mp.start();
     }
 
     //Pour faire vibrer le téléphone

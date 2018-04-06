@@ -159,13 +159,13 @@ public class ConversationsFragment extends ListFragment {
                             public void onSuccess(byte[] bytes) {
                                 temp.setAvatar(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
                                 convoList.add(temp);
-                                mAdapter.notifyItemInserted(convoList.size() - 1);
+                                mAdapter.notifyDataSetChanged();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception exception) {
                                 convoList.add(temp);
-                                mAdapter.notifyItemInserted(convoList.size() - 1);
+                                mAdapter.notifyDataSetChanged();
                             }
                         });
                     }
