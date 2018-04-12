@@ -83,13 +83,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         pwd2Title.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
         pageTitle.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
 
-        //A des fins de test seulement
-        emailAddressEditText.setText("sssb@hotmail.com");
-        usernameEditText.setText("sssb");
-        phoneEditText.setText("111-111-1111");
-        pwdEditText.setText("allooo");
-        pwd2EditText.setText("allooo");
-
         btnRegister.setOnClickListener(this);
     }
 
