@@ -360,13 +360,13 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         messagesDatabase.child("messages").child(key).child("senderId").setValue(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         messagesDatabase.child("messages").child(key).child("timeStamp").setValue(messageTemp.getTimeStamp());
         messagesDatabase.child("messages").child(key).child("content").setValue(messageTemp.getContent());
+        messagesDatabase.child("messages").child(key).child("wizzTriggered").setValue("false");
         FirebaseDatabase.getInstance().getReference("conversations").child(currentConvo).child("lastMessageDate").setValue(messageTemp.getTimeStamp());
 
         updateMessagesZone(messageTemp);
 
         if(message.equals("WIZZ")){
             messagesDatabase.child("messages").child(key).child("type").setValue("wizz");
-            messagesDatabase.child("messages").child(key).child("wizzTriggered").setValue("false");
             updateTextHint(currentConvo, "**Un bon vieux Wizz**");
         }else{
             messagesDatabase.child("messages").child(key).child("type").setValue("text");
