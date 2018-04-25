@@ -74,7 +74,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void addTokenToUser(final String currentToken) {
-        FirebaseDatabase.getInstance().getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("users").keepSynced(true);
+        FirebaseDatabase.getInstance().getReference("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<User> users = new ArrayList<User>();
@@ -88,6 +89,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         FirebaseDatabase.getInstance().getReference("users").child(user.getid()).child("token").setValue(currentToken);
                     }
                 }
+
+                FirebaseDatabase.getInstance().getReference("users").removeEventListener(this);
             }
 
             @Override

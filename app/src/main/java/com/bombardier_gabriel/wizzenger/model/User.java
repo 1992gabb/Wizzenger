@@ -28,11 +28,12 @@ public class User {
     private int age;
     private String phone;
     private int photoUrl;
-    private Bitmap avatar;
+    private Bitmap image;
     private String thumbnailBase64;
     private List<Device> devices;
     private List<String> contacts;
     private String token;
+    private int avatar;
 
     public String getToken() {
         return token;
@@ -54,20 +55,20 @@ public class User {
         this.photoUrl = img;
     }
 
-    public User(String userName, String email, String password, String phone, int photoUrl){
-        this.userName = userName ;
-        this.email= email;
-        this.password= password;
-        this.phone= phone;
-        this.photoUrl = photoUrl;
-    }
-
-    public User(String userName, String email, String password, String phone, Bitmap avatar){
+    public User(String userName, String email, String password, String phone, int avatar){
         this.userName = userName ;
         this.email= email;
         this.password= password;
         this.phone= phone;
         this.avatar = avatar;
+    }
+
+    public User(String userName, String email, String password, String phone, Bitmap image){
+        this.userName = userName ;
+        this.email= email;
+        this.password= password;
+        this.phone= phone;
+        this.image = image;
     }
 
     public User(String userName, String email, String phone, int photoUrl){
@@ -172,14 +173,22 @@ public class User {
         this.id = id;
     }
 
-    @Exclude
-    public Bitmap getAvatar() {
+    public int getAvatar() {
         return avatar;
     }
 
-    @Exclude
-    public void setAvatar(Bitmap avatar) {
+    public void setAvatar(int avatar){
         this.avatar = avatar;
+    }
+
+    @Exclude
+    public Bitmap getImage() {
+        return image;
+    }
+
+    @Exclude
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 }
 

@@ -23,9 +23,15 @@ import android.widget.Toast;
 
 import com.bombardier_gabriel.wizzenger.R;
 import com.bombardier_gabriel.wizzenger.database.DatabaseProfile;
+import com.bombardier_gabriel.wizzenger.model.Conversation;
+import com.bombardier_gabriel.wizzenger.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -33,6 +39,8 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AvatarInputFragment extends DialogFragment {
     public static String email;
@@ -77,6 +85,27 @@ public class AvatarInputFragment extends DialogFragment {
                 StorageReference newAvatarRef = storageRef.child("avatars").child(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                 UploadTask uploadTask = newAvatarRef.putBytes(data);
 
+                FirebaseDatabase.getInstance().getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        List<User> users = new ArrayList<User>();
+                        for (DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
+                            User user = userDataSnapshot.getValue(User.class);
+                            users.add(user);
+                        }
+
+                        for (User user : users){
+                            if(user.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                                FirebaseDatabase.getInstance().getReference("users").child(user.getid()).child("avatar").setValue(1);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }});
+
                 if(uploadTask!=null){
                     // Register observers to listen for when the download is done or if it fails
                     uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -106,7 +135,6 @@ public class AvatarInputFragment extends DialogFragment {
         final View rootView = inflater.inflate(R.layout.layout_alert_avatar, container, false);
 
         validateButton = (Button) rootView.findViewById(R.id.alert_avatar_validate);
-        chooseButton = (Button) rootView.findViewById(R.id.alert_button_file);
 
         storageRef = FirebaseStorage.getInstance().getReference();
 

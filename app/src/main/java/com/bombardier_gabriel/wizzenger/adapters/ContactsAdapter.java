@@ -76,7 +76,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final User user = contactsList.get(position);
 
-        Glide.with(activity).setDefaultRequestOptions(requestOptions).load(user.getAvatar()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.avatar);
+        Glide.with(activity).setDefaultRequestOptions(requestOptions).load(user.getImage()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.avatar);
 
         holder.contactName.setText(user.getUsername());
         holder.imageWizz.setImageResource(R.drawable.ic_wizz);

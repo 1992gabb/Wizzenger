@@ -101,8 +101,8 @@ public class ContactInfoActivity extends AppCompatActivity implements View.OnCli
         pathReference.getBytes(THREE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
-                currentContact.setAvatar(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
-                Glide.with(getApplicationContext()).setDefaultRequestOptions(requestOptions).load(currentContact.getAvatar()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(avatar);
+                currentContact.setImage(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+                Glide.with(getApplicationContext()).setDefaultRequestOptions(requestOptions).load(currentContact.getImage()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(avatar);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

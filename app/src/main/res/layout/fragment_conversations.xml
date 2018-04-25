@@ -16,7 +16,8 @@
         android:id="@+id/recycler_conversations"
         android:paddingTop="0dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="vertical"
         android:background="#FFF"/>
+
 </LinearLayout>

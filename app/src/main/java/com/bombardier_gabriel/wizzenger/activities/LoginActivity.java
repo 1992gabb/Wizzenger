@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView titleView;
     private static FirebaseAuth firebaseAuth;
 
+
     public static void show(Context context) {
         Intent i = new Intent(context, LoginActivity.class);
         context.startActivity(i);

@@ -48,9 +48,16 @@ public class DatabaseProfile {
     private User user;
     private Context context;
     DatabaseReference myRef;
+    private boolean persEnabled = false;
 
     private DatabaseProfile(final Context context) {
         this.context = context;
+
+        if(persEnabled == false){
+            persEnabled = true;
+            FirebaseDatabase.getInstance().setPersistenceEnabled(false);
+        }
+
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         usersDatabase = rootRef.child("users");
         contactsDatabase = FirebaseDatabase.getInstance().getReference("contacts");

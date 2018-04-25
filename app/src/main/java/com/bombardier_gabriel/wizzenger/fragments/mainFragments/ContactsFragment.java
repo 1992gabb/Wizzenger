@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,10 +45,10 @@ public class ContactsFragment extends Fragment{
     private RecyclerView listeContacts;
     private ContactsAdapter mAdapter;
     private Vector<User> contactsList = new Vector<User>();
-    private DatabaseProfile myDatabase;
     private String convoId;
     private ImageView addButton;
     private FragmentManager fm;
+    private List<User> vUsers = new ArrayList<>();
 
     public ContactsFragment() {
         // Required empty public constructor
@@ -81,37 +82,14 @@ public class ContactsFragment extends Fragment{
         listeContacts.setItemAnimator(new DefaultItemAnimator());
         listeContacts.setAdapter(mAdapter);
 
-        myDatabase = DatabaseProfile.getInstance();
-
-//        myDatabase.writeContact(FirebaseAuth.getInstance().getCurrentUser(), "guest1@hotmail.com");
-//        myDatabase.writeConvoUsers(FirebaseAuth.getInstance().getCurrentUser(), "login_rounded_border@hotmail.com");
-
         return rootView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        contactsList.clear();
-        getContacts();
+        createUsersList();
     }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-//    private void getContacts() {
-//        //Aller chercher les conntacts en lien avec l'usager
-//
-//        User user = new User(R.drawable.mario, "babriel");
-//        contactsList.add(user);
-//
-//        User user2 = new User(R.drawable.mario, "login_rounded_border");
-//        contactsList.add(user2);
-//
-//        mAdapter.notifyDataSetChanged();
-//    }
 
     private void getContacts(){
         FirebaseDatabase.getInstance().getReference("contacts").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -139,38 +117,54 @@ public class ContactsFragment extends Fragment{
     }
 
     private void createUserFromContact(final String email){
+        for (final User user : vUsers){
+            if(user.getEmail().equals(email)){
+                // Pour aller chercher l'avatar
+                if(user.getAvatar() == 1){
+                    StorageReference pathReference = FirebaseStorage.getInstance().getReference().child("avatars/"+user.getEmail());
+                    final long ONE_MEGABYTE = 1024 * 1024;
+
+                    pathReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            user.setImage(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+                            contactsList.add(user);
+                            Log.d("error", "tyl");
+                            //mAdapter.notifyItemInserted(contactsList.size() - 1);
+                            mAdapter.notifyItemRangeInserted(contactsList.size() - 1,contactsList.size());
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                            contactsList.add(user);
+                            //mAdapter.notifyItemInserted(contactsList.size() - 1);
+                            mAdapter.notifyItemRangeInserted(contactsList.size() - 1,contactsList.size());
+                            Log.d("error", exception.getMessage());
+                        }
+                    });
+                }else{
+                    contactsList.add(user);
+                    mAdapter.notifyItemInserted(contactsList.size() - 1);
+                    //mAdapter.notifyItemRangeInserted(contactsList.size() - 1,contactsList.size());
+                }
+                break;
+            }
+        }
+    }
+
+    public void createUsersList(){
+        vUsers.clear();
+        contactsList.clear();
         FirebaseDatabase.getInstance().getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<User> users = new ArrayList<User>();
                 for (DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
                     User user = userDataSnapshot.getValue(User.class);
-                    users.add(user);
+                    vUsers.add(user);
                 }
 
-                for (final User user : users){
-                    if(user.getEmail().equals(email)){
-                        // Pour aller chercher l'avatar
-                        StorageReference pathReference = FirebaseStorage.getInstance().getReference().child("avatars/"+user.getEmail());
-
-                        final long THREE_MEGABYTE = 3 * 1024 * 1024;
-                        pathReference.getBytes(THREE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                            @Override
-                            public void onSuccess(byte[] bytes) {
-                                user.setAvatar(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
-                                contactsList.add(user);
-                                mAdapter.notifyItemInserted(contactsList.size() - 1);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle any errors
-                                contactsList.add(user);
-                                mAdapter.notifyItemInserted(contactsList.size() - 1);
-                            }
-                        });
-                    }
-                }
+                getContacts();
             }
 
             @Override
@@ -178,8 +172,6 @@ public class ContactsFragment extends Fragment{
 
             }});
     }
-
-
 
 }
 

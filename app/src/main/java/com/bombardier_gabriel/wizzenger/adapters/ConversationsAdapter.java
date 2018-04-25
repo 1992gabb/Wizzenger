@@ -31,13 +31,14 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView avatar;
-        public TextView contactName, textHint;
+        public TextView contactName, textHint, timeStamp;
 
         public MyViewHolder(View view) {
             super(view);
             avatar= (ImageView) view.findViewById(R.id.imgContactConvo);
             contactName=(TextView) view.findViewById(R.id.nomContactConvo);
             textHint=(TextView) view.findViewById(R.id.texteApercu);
+            timeStamp=(TextView) view.findViewById(R.id.timeStamp);
         }
     }
 
@@ -65,6 +66,7 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
         Glide.with(activity).setDefaultRequestOptions(requestOptions).load(convo.getAvatar()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.avatar);
         holder.contactName.setText(convo.getContactName());
         holder.textHint.setText(convo.getTexthint());
+        holder.timeStamp.setText(convo.getLastMessageDate());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -48,5 +48,16 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/timeStamp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:fontFamily="sans-serif-light"
+        android:text="17:05:18"
+        android:textSize="17sp"
+        android:textColor="@android:color/black"
+        android:gravity="center"/>
+
 
 </LinearLayout>

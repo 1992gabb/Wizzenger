@@ -17,18 +17,10 @@
         android:gravity="center"/>
 
     <Button
-        android:id="@+id/alert_button_file"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/choose"
-        android:layout_gravity="center"/>
-
-
-    <Button
         android:id="@+id/alert_avatar_validate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/validate"
+        android:text="@string/choose"
         android:layout_gravity="center"/>
 
 </LinearLayout>
