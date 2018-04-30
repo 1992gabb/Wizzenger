@@ -66,7 +66,7 @@ public class ConversationsFragment extends ListFragment {
         listeConvo = (RecyclerView) rootView.findViewById(R.id.recycler_conversations);
         mAdapter = new ConversationsAdapter(convoList, getActivity());
         mLayoutManager = new LinearLayoutManager(getContext());
-        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setReverseLayout(false);
         listeConvo.setLayoutManager(mLayoutManager);
         listeConvo.setItemAnimator(new DefaultItemAnimator());
 
