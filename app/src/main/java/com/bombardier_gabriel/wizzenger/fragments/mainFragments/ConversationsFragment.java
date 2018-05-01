@@ -65,12 +65,14 @@ public class ConversationsFragment extends ListFragment {
 
         listeConvo = (RecyclerView) rootView.findViewById(R.id.recycler_conversations);
         mAdapter = new ConversationsAdapter(convoList, getActivity());
+        listeConvo.setAdapter(mAdapter);
         mLayoutManager = new LinearLayoutManager(getContext());
-        mLayoutManager.setReverseLayout(false);
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
         listeConvo.setLayoutManager(mLayoutManager);
         listeConvo.setItemAnimator(new DefaultItemAnimator());
 
-        listeConvo.setAdapter(mAdapter);
+
 
         myDatabase = DatabaseProfile.getInstance();
 
@@ -80,17 +82,24 @@ public class ConversationsFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(convoList.size()>0){
+            convoList.clear();
+            mAdapter.notifyDataSetChanged();
+        }
         getConvosInformations(FirebaseAuth.getInstance().getCurrentUser());
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-//        convoList.clear();
-//        getConvosInformations(FirebaseAuth.getInstance().getCurrentUser());
+        //convoList.clear();
+ //       mAdapter.notifyDataSetChanged();
+        //getConvosInformations(FirebaseAuth.getInstance().getCurrentUser());
 //
 //        Comparator comparator = Collections.reverseOrder();
 //        Collections.sort(convoList, comparator);
+//        mAdapter.notifyDataSetChanged();
 
     }
 
@@ -105,6 +114,9 @@ public class ConversationsFragment extends ListFragment {
                     convos.add(convo);
                 }
 
+                //Trier convos ici
+                Collections.sort(convoList);
+
                 for (Conversation convo : convos){
                     if(convo.getIdUser1()!=null){
                        if(convo.getIdUser1().equals(currentUser.getEmail()) || convo.getIdUser2().equals(currentUser.getEmail())){
@@ -117,6 +129,9 @@ public class ConversationsFragment extends ListFragment {
                        }
                     }
                 }
+
+
+
             }
 
             @Override
@@ -170,28 +185,25 @@ public class ConversationsFragment extends ListFragment {
                                 public void onSuccess(byte[] bytes) {
                                     temp.setAvatar(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
                                     convoList.add(temp);
-                                    //mAdapter.notifyDataSetChanged();
-                                    mAdapter.notifyItemRangeInserted(convoList.size() - 1,convoList.size());
+                                    mAdapter.notifyItemInserted(convoList.size()-1);
+                                    mLayoutManager.scrollToPosition(convoList.size()-1);
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception exception) {
                                     convoList.add(temp);
-                                   //mAdapter.notifyDataSetChanged();
-                                    mAdapter.notifyItemRangeInserted(convoList.size() - 1,convoList.size());
+                                    mAdapter.notifyItemInserted(convoList.size()-1);
+                                    mLayoutManager.scrollToPosition(convoList.size()-1);
                                 }
                             });
                         }else{
                             convoList.add(temp);
-                            //mAdapter.notifyDataSetChanged();
-                            mAdapter.notifyItemRangeInserted(convoList.size() - 1,convoList.size());
+                            mAdapter.notifyItemInserted(convoList.size()-1);
+                            mLayoutManager.scrollToPosition(convoList.size()-1);
                         }
                         break;
                     }
                 }
-
-                //Pour scroller en haut,  a corriger
-                //listeConvo.getLayoutManager().scrollToPosition(convoList.size());
             }
 
             @Override

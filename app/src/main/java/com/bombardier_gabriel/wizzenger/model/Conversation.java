@@ -17,7 +17,7 @@ import java.util.List;
  * Created by gabb_ on 2018-01-20.
  */
 
-public class Conversation {
+public class Conversation implements Comparable{
     private String id, idUser1, idUser2, textHint;
     private int convoImage;
     private String contactName;
@@ -131,6 +131,21 @@ public class Conversation {
     @Exclude
     public void setAvatar(Bitmap avatar) {
         this.avatar = avatar;
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        Conversation other = (Conversation) o;
+
+        int result = this.lastMessageDate.compareTo(other.getLastMessageDate());
+
+        if (result < 0){
+            return -1;
+        }else if (result == 0){
+            return 0;
+        }else{
+            return 1;
+        }
     }
 }
 
