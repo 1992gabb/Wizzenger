@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnRegister.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Dosis-Regular.ttf"));
 
         emailAddressEditText.setText("gabb_bomb@hotmail.com");
-        passwordEditText.setText("AAAaaa111");
+        passwordEditText.setText("");
 
         btnRegister.setOnClickListener(this);
         btnConnect.setOnClickListener(this);
