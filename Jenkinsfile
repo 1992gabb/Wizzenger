@@ -11,7 +11,7 @@ node {
        
 	stage('UI Test') {
         	echo 'Testing..'  
-		bat '${ANDROID_HOME}/emulator -avd <avd_name> [<options>]'
+		bat '${ANDROID_HOME}/emulator -avd <Pixel_2_API_28>'
 		bat 'gradlew.bat test'
     	}
 	
