@@ -6,7 +6,7 @@ node {
 	
     	stage('Build') {
 		//sh 'make' 
-		sh 'chmod +x gradlew && ./gradlew --no-daemon --stacktrace clean :app:assembleDebug'
+		bat 'chmod +x gradlew && ./gradlew --no-daemon --stacktrace clean :app:assembleDebug'
                 
 	}
        
