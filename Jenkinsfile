@@ -1,5 +1,4 @@
 node {
-    stages {
 		stage('Update'){
 			steps{
 				checkout scm
@@ -38,5 +37,5 @@ node {
 			}
 				
 		}
-    }
+    
 }
