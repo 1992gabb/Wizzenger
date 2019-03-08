@@ -6,8 +6,7 @@ node {
 	
     	stage('Build') {
 		//sh 'make' 
-		./gradlew assembleDebugAndroidTest
-		./gradlew assembleDebug
+		bat 'gradlew.bat assembleDebug'
 	}
        
 	stage('UI Test') {
