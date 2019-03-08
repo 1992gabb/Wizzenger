@@ -16,8 +16,11 @@ pipeline {
                 echo 'Deploying....'
             }
         }
-		stage('Archive') {
-			archiveArtifacts 'app/build/outputs/apk/*'	
+	stage('Archive') {
+		steps{
+			archiveArtifacts 'app/build/outputs/apk/*'
 		}
+				
+	}
     }
 }
