@@ -11,7 +11,7 @@ node {
        
 	stage('UI Test') {
         	echo 'Testing..'  
-		bat 'gradlew.bat test'
+		bat 'gradlew.bat test connectedAndroidTest'
     	}
 	
 	//stage('Archivage') {
