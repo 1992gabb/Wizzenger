@@ -2,8 +2,10 @@ pipeline {
     agent any
     stages {
 		stage('Update'){
-			checkout scm
-			sh 'git submodule update --init'
+			steps{
+				checkout scm
+				sh 'git submodule update --init'
+			}
 		}
         stage('Build') {
             steps {
