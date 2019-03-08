@@ -1,7 +1,7 @@
 node {
 	stage('Update'){
 		checkout([$class: 'GitSCM', branches: [[name: '*/master']],
-     		userRemoteConfigs: [[url: 'http://git-server/user/repository.git']]])	
+     		userRemoteConfigs: [[url: 'https://github.com/gbombardier/Android_Wizzenger.git']]])	
 	}
 	
     	stage('Build') {
