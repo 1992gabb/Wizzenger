@@ -13,7 +13,7 @@ node {
         	echo 'Testing..'  
     	}
 	
-	stage('Archivage') {
-        	archiveArtifacts artifacts: 'app/build/outputs/apk/*', fingerprint: true    
-    	}
+	//stage('Archivage') {
+        	//archiveArtifacts artifacts: 'app/build/outputs/apk/*', fingerprint: true    
+    	//}
 }
