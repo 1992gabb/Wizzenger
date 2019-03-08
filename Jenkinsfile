@@ -1,10 +1,11 @@
 node {
 	stage('Update'){
-		git pull https://github.com/gbombardier/Android_Wizzenger.git	
+		
 	}
 	
     	stage('Build') {
-		build 'Wizzenger_Test'   
+		sh 'make' 
+                archiveArtifacts artifacts: 'app/build/outputs/apk/*', fingerprint: true  
 	}
        
 	stage('UI Test') {
