@@ -10,7 +10,8 @@ node {
 	}
        
 	stage('UI Test') {
-        	echo 'Testing..'  
+        	echo 'Testing..' 
+		bat 'emulator -avd Pixel_2_API_28'
 		bat 'gradlew.bat test'
     	}
 	
