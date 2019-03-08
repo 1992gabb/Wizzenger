@@ -16,7 +16,7 @@ node {
     }
 		
 	stage('Archive') {
-		archiveArtifacts 'app/build/outputs/apk/*'			
+		archiveArtifacts 'app/build/outputs/apk/debug/app-debug.apk'			
 	}
     
 }
