@@ -6,8 +6,8 @@ node {
 	
     	stage('Build') {
 		//sh 'make' 
-		bat 'chmod +x gradlew && ./gradlew --no-daemon --stacktrace clean :app:assembleDebug'
-                
+		./gradlew assembleDebugAndroidTest
+		./gradlew assembleDebug
 	}
        
 	stage('UI Test') {
