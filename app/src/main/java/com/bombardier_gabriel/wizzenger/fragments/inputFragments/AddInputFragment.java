@@ -32,7 +32,7 @@ public class AddInputFragment extends DialogFragment {
         View rootView = inflater.inflate(R.layout.layout_alert_add, container, false);
 
         final Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(100);
+        //vibrator.vibrate(100);
 
         emailZone = (EditText) rootView.findViewById(R.id.alert_contact_email);
         validateButton = (Button) rootView.findViewById(R.id.alert_button_validate);

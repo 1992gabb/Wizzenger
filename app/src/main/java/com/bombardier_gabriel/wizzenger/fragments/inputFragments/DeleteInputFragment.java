@@ -30,7 +30,7 @@ public class DeleteInputFragment extends DialogFragment {
         View rootView = inflater.inflate(R.layout.layout_alert_delete, container, false);
 
         final Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(100);
+        //vibrator.vibrate(100);
 
         validateButton = (Button) rootView.findViewById(R.id.alert_button_yes);
         noButton = (Button) rootView.findViewById(R.id.alert_button_no);

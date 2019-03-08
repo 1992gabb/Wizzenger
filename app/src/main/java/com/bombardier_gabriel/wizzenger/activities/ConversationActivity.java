@@ -286,7 +286,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                     if(!conversation.getIds().contains(mess.getId())){
                         if(!vibrated){
                             vibrated = true;
-                            vibrate(60);
+                            //vibrate(60);
                         }
 
                         if(mess.getContent()!=null && mess.getSenderId()!=null && mess.getType()!=null && mess.getSenderId()!=null){
@@ -431,7 +431,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
     //Pour faire vibrer l'écran lors de l'envoi d'un wizz
     public void animationWizz(){
-        vibrate(1200);
+        //vibrate(1200);
         final Animation animWizz = AnimationUtils.loadAnimation(this, R.anim.wizz_animation);
         mainLayout.startAnimation(animWizz);
         final MediaPlayer mp = MediaPlayer.create(this, R.raw.wizz_sound);
@@ -441,6 +441,6 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     //Pour faire vibrer le téléphone
     public void vibrate(int duration){
         final Vibrator vibrator = (Vibrator)  getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(duration);
+        //vibrator.vibrate(duration);
     }
 }
