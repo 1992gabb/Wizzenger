@@ -11,7 +11,7 @@ node {
        
 	stage('UI Test') {
         	echo 'Testing..' 
-		bat 'emulator -avd Pixel_2_API_28'
+		bat 'C:/Users/gbombardier/AppData/Local/Android/Sdk/tools/emulator.exe -avd Pixel_2_API_28'
 		bat 'gradlew.bat test'
     	}
 	
