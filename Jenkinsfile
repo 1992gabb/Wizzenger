@@ -1,4 +1,4 @@
-node('android') {
+pipeline {
     step([$class: 'StashNotifier'])
     checkout scm
     stage('Build') {
