@@ -4,14 +4,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-				try {
-					sh './gradlew --refresh-dependencies clean assemble'
-					lock('emulator') {
-						sh './gradlew connectedCheck'
-					}
-					currentBuild.result = 'SUCCESS'
-				} catch(error) {
-					currentBuild.result = 'FAILURE'
+				sh './gradlew --refresh-dependencies clean assemble'
+				lock('emulator') {
+					sh './gradlew connectedCheck'
 				}
             }		    
 	    }
