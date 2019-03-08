@@ -119,7 +119,7 @@ public class AvatarInputFragment extends DialogFragment {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                             Toast.makeText(getActivity(), "Ca marche!!!", Toast.LENGTH_SHORT).show();
-                            Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            //Uri downloadUrl = taskSnapshot.getDownloadUrl();
                             dismiss();
                         }
                     });
