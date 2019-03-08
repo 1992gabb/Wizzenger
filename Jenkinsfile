@@ -11,7 +11,8 @@ node {
        
 	stage('UI Test') {
         	echo 'Testing..'  
-		bat 'gradlew.bat test connectedAndroidTest'
+		bat '${ANDROID_HOME}/emulator -avd <avd_name> [<options>]'
+		bat 'gradlew.bat test'
     	}
 	
 	//stage('Archivage') {
