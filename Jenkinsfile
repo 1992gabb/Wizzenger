@@ -1,4 +1,6 @@
-node {
+pipeline {
+    agent any
+    stages {
 		stage('Update'){
 			steps{
 				checkout scm
@@ -37,5 +39,5 @@ node {
 			}
 				
 		}
-    
+    }
 }
