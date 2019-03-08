@@ -1,7 +1,6 @@
 node {
 	stage('Update'){
-		checkout scm
-		bat 'git submodule update --init'	
+		git submodule update --init
 	}
 	
     stage('Build') {
@@ -12,7 +11,7 @@ node {
 		echo "Building flavor ${flavor}"
 
 		//build your gradle flavor, passes the current build number as a parameter to gradle
-		bat "./gradlew clean assemble${flavor}Debug -PBUILD_NUMBER=${env.BUILD_NUMBER}"    
+		sh "./gradlew clean assemble${flavor}Debug -PBUILD_NUMBER=${env.BUILD_NUMBER}"    
 	}
        
 	stage('Test') {
