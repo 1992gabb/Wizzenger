@@ -1,22 +1,13 @@
 node {
 	stage('Update'){
-		
+		git pull https://github.com/gbombardier/Android_Wizzenger.git	
 	}
 	
-    stage('Build') {
+    	stage('Build') {
 		build 'Wizzenger_Test'   
 	}
        
-	stage('Test') {
-        echo 'Testing..'  
-    }
-	
-	stage('Deploy') {
-        echo 'Deploying....'   
-    }
-		
-	stage('Archive') {
-		archiveArtifacts 'app/build/outputs/apk/debug/app-debug.apk'			
-	}
-    
+	stage('UI Test') {
+        	echo 'Testing..'  
+    	}
 }
