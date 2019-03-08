@@ -1,6 +1,7 @@
 node {
 	stage('Update'){
-		
+		checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+     		userRemoteConfigs: [[url: 'http://git-server/user/repository.git']]])	
 	}
 	
     	stage('Build') {
