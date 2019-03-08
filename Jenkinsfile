@@ -1,14 +1,10 @@
-pipeline {
-    agent any
-    stages {
+node {
 		stage('Update'){
-			steps{
 				checkout scm
 				sh 'git submodule update --init'
-			}
+			
 		}
         stage('Build') {
-            steps {
 				//branch name from Jenkins environment variables
 				echo "My branch is: ${env.BRANCH_NAME}"
 
@@ -18,26 +14,23 @@ pipeline {
 				//build your gradle flavor, passes the current build number as a parameter to gradle
 				sh "./gradlew clean assemble${flavor}Debug -PBUILD_NUMBER=${env.BUILD_NUMBER}"
                 
-            }		    
+            }	    
 	    }
        
         stage('Test') {
-            steps {
                 echo 'Testing..'
-            }
+            
         }
 		
         stage('Deploy') {
-            steps {
                 echo 'Deploying....'
-            }
+            
         }
 		
 		stage('Archive') {
-			steps{
 				archiveArtifacts 'app/build/outputs/apk/*'
-			}
+			
 				
 		}
-    }
+    
 }
