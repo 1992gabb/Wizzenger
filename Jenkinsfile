@@ -1,6 +1,6 @@
 node {
 	stage('Update'){
-		git submodule update --init
+		git update
 	}
 	
     stage('Build') {
