@@ -5,11 +5,16 @@ node {
 	}
 	
     	stage('Build') {
-		sh 'make' 
-                archiveArtifacts artifacts: 'app/build/outputs/apk/*', fingerprint: true  
+		//sh 'make' 
+		sh 'chmod +x gradlew && ./gradlew --no-daemon --stacktrace clean :app:assembleDebug'
+                
 	}
        
 	stage('UI Test') {
         	echo 'Testing..'  
+    	}
+	
+	stage('Archivage') {
+        	archiveArtifacts artifacts: 'app/build/outputs/apk/*', fingerprint: true    
     	}
 }
