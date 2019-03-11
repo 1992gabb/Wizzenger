@@ -1,22 +1,21 @@
 node {
 	stage('Update'){
-		
+		checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+     		userRemoteConfigs: [[url: 'https://github.com/gbombardier/Android_Wizzenger.git']]])	
 	}
 	
-    stage('Build') {
-		build 'Wizzenger_Test'   
+    	stage('Build') {
+		//sh 'make' 
+		bat 'gradlew.bat assembleDebug'
 	}
        
-	stage('Test') {
-        echo 'Testing..'  
-    }
+	stage('UI Test') {
+        	echo 'Testing..' 
+		bat 'C:/Users/gbombardier/AppData/Local/Android/Sdk/tools/emulator.exe -avd "Pixel_2_API_28"'
+		bat 'gradlew.bat test'
+    	}
 	
-	stage('Deploy') {
-        echo 'Deploying....'   
-    }
-		
-	stage('Archive') {
-		archiveArtifacts 'app/build/outputs/apk/*'			
-	}
-    
+	//stage('Archivage') {
+        	//archiveArtifacts artifacts: 'app/build/outputs/apk/*', fingerprint: true    
+    	//}
 }
