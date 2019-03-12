@@ -1,8 +1,8 @@
 node {
 	stage('Update'){
 		echo 'Update..'
-		sh 'cd Android_Wizzenger'
-		exec bash
+		sh 'function myprog() { "cd Android_Wizzenger"}'
+		sh 'myprog'
 		sh 'pwd'
 		//sh 'git pull'
 		//checkout([$class: 'GitSCM', branches: [[name: '*/master']],
