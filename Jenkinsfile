@@ -2,6 +2,7 @@ node {
 	stage('Update'){
 		echo 'Update..'
 		sh 'dir Android_Wizzenger'
+		exec bash
 		sh 'pwd'
 		//sh 'git pull'
 		//checkout([$class: 'GitSCM', branches: [[name: '*/master']],
@@ -22,6 +23,7 @@ node {
     	}
 	
 	//stage('Archivage') {
-        	//archiveArtifacts artifacts: 'app/build/outputs/apk/*', fingerprint: true    
+        	//archiveArtifacts artifacts: 'app/build/outputs/apk/*', fingerprint: true
+	
     	//}
 }
