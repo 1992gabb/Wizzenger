@@ -1,14 +1,14 @@
 node {
 	stage('Update'){
 		echo 'Update..'
-		git pull
+		//git pull
 		//checkout([$class: 'GitSCM', branches: [[name: '*/master']],
      		//userRemoteConfigs: [[url: 'https://github.com/gbombardier/Android_Wizzenger.git']]])	
 	}
 	
     	stage('Build') {
 		echo 'Build..'
-		//sh 'make' 
+		sh 'make' 
 		//bat 'gradlew.bat assembleDebug'
 	}
        
