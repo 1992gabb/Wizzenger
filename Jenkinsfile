@@ -8,7 +8,8 @@ node {
 	
     	stage('Build') {
 		echo 'Build..'
-		sh 'make' 
+		//sh 'make' 
+		sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/gradlew assembleDebug'
 		//bat 'gradlew.bat assembleDebug'
 	}
        
