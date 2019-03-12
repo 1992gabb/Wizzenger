@@ -1,7 +1,7 @@
 node {
 	stage('Update'){
 		echo 'Update..'
-		sh 'dir Android_Wizzenger'
+		sh 'cd Android_Wizzenger'
 		exec bash
 		sh 'pwd'
 		//sh 'git pull'
