@@ -1,7 +1,7 @@
 node {
 	stage('Update'){
 		echo 'Update..'
-		sh 'cd Android_Wizzenger | pwd'
+		sh 'cd Android_Wizzenger'
 		sh 'pwd'
 		//sh 'git pull'
 		//checkout([$class: 'GitSCM', branches: [[name: '*/master']],
@@ -11,7 +11,7 @@ node {
     	stage('Build') {
 		echo 'Build..'
 		//sh 'make' 
-		sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/gradlew assembleDebug'
+		sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/Android_Wizzenger gradlew assembleDebug'
 		//bat 'gradlew.bat assembleDebug'
 	}
        
