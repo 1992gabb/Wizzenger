@@ -1,7 +1,8 @@
 node {
 	stage('Update'){
 		echo 'Update..'
-		sh 'git fetch'
+		sh 'cd Android_Wizzenger'
+		sh 'sudo git fetch'
 		//checkout([$class: 'GitSCM', branches: [[name: '*/master']],
      		//userRemoteConfigs: [[url: 'https://github.com/gbombardier/Android_Wizzenger.git']]])	
 	}
