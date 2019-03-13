@@ -10,7 +10,7 @@ node {
     	stage('Build') {
 		echo 'Build..'
 		//sh 'make' 
-		sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/Android_Wizzenger gradlew assembleDebug'
+		sh './gradlew assembleDebug'
 		//bat 'gradlew.bat assembleDebug'
 	}
        
