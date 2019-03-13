@@ -9,9 +9,7 @@ node {
 	
     	stage('Build') {
 		echo 'Build..'
-		//sh 'make' 
 		sh './gradlew assembleDebug'
-		//bat 'gradlew.bat assembleDebug'
 	}
        
 	stage('UI Test') {
@@ -21,7 +19,7 @@ node {
     	}
 	
 	//stage('Archivage') {
-        	//archiveArtifacts artifacts: 'app/build/outputs/apk/*', fingerprint: true
+        	archiveArtifacts artifacts: 'app/build/outputs/apk/*', fingerprint: true
 	
     	//}
 }
