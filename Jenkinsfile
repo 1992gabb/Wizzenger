@@ -18,8 +18,8 @@ node {
 		//bat 'gradlew.bat test'
     	}
 	
-	//stage('Archivage') {
+	stage('Archivage') {
         	archiveArtifacts artifacts: '*.apk', fingerprint: true
 	
-    	//}
+    	}
 }
