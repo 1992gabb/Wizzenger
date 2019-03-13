@@ -19,7 +19,7 @@ node {
     	}
 	
 	//stage('Archivage') {
-        	archiveArtifacts artifacts: 'app/build/outputs/apk/*', fingerprint: true
+        	archiveArtifacts artifacts: '*.apk', fingerprint: true
 	
     	//}
 }
