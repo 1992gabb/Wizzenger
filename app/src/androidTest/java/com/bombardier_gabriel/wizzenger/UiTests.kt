@@ -37,10 +37,13 @@ class UiTests {
 
         } catch (e: Exception) {
             //logout avant de se connecter
+            Thread.sleep(1000)
             logoutAction()
         }
 
         loginAction()
+
+        Thread.sleep(1000)
 
         //Voir si on est connecté
         onView(withId(R.id.main_title)).check(matches(withText("Wizzenger")))
@@ -78,12 +81,12 @@ class UiTests {
         checkConnection()
 
         onView(withId(R.id.view_pager)).perform(swipeLeft())
-        Thread.sleep(500)
+        Thread.sleep(1000)
 
         onView(withId(R.id.recycler_contacts))
                 .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
 
-        Thread.sleep(500)
+        Thread.sleep(1000)
 
         onView(withId(R.id.contact_remove_button)).perform(click())
         onView(withId(R.id.alert_button_no)).perform(click())
