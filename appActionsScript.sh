@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Noter ici les id des téléphones
-phone1=1215fcf92c900304
+phone1=NGEA320063
 
 #Actions à faire lors du build (builder l'app et le test)
 echo 'Build..'
@@ -11,5 +11,5 @@ echo 'Build..'
 echo 'Testing..' 
 
 #Vérifier si l'app est déja présente sur le device
-/usr/android-sdk-linux/platform-tools/adb install -s $phone1 /var/lib/jenkins/workspace/Wizzenger_Pipeline/app/build/outputs/apk/debug/app-debug.apk
+/usr/android-sdk-linux/platform-tools/adb -s $phone1 install -r  /var/lib/jenkins/workspace/Wizzenger_Pipeline/app/build/outputs/apk/debug/app-debug.apk
 
