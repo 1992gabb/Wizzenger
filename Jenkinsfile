@@ -1,10 +1,8 @@
 node {
 	stage('Update'){
 		echo 'Update..'
-		//sh 'git clone https://github.com/gbombardier/Android_Wizzenger.git .'
-		sh 'git pull'
-		//checkout([$class: 'GitSCM', branches: [[name: '*/master']],
-     		//userRemoteConfigs: [[url: 'https://github.com/gbombardier/Android_Wizzenger.git']]])	
+		sh 'git clone https://github.com/gbombardier/Android_Wizzenger.git .'
+		sh 'git pull'	
 	}
 	stage('App Related Actions'){
 		sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/appActionsScript.sh'
