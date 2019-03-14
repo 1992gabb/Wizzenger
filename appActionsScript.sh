@@ -7,7 +7,7 @@ buildTest(){
   return 0
 }
 
-buildTest()
+buildTest
 
 #Si failure, on sort du jenkins.
 
