@@ -13,9 +13,11 @@ node {
 	}
     	
 	stage('Archivage') {
-		echo currentBuild?.getPreviousBuild()?.result
-		if (currentBuild?.getPreviousBuild()?.result == 'SUCCESS') {
+		if (currentBuild?.getPreviousBuild()?.result == 'SUCCES') {
   			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
+		}else{
+			currentBuild.result = 'FAILURE';
+			return;
 		}
     	}
 }
