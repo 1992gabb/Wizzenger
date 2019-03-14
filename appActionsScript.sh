@@ -2,6 +2,7 @@
 
 #Noter ici les id des téléphones
 phone1=1215fcf92c900304
+phone2=05157df5bd0d0412
 
 #Actions à faire lors du build (builder l'app et le test)
 echo 'Build..'
