@@ -1,9 +1,13 @@
 #!/bin/bash
 
 #Actions à faire lors du build (builder l'app et le test)
-echo 'Building and testing..'
-./gradlew connectedAndroidTest
-return 0
+buildTest(){
+  echo 'Building and testing..'
+  ./gradlew connectedAndroidTest
+  return 0
+}
+
+buildTest()
 
 #Si failure, on sort du jenkins.
 
