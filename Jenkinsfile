@@ -1,8 +1,11 @@
 node {
 	stage('Update'){
 		echo 'Update..'
+		when ('fileExists(JenkinsFile)'){
+			sh 'git pull'
+		}
 		sh 'git clone https://github.com/gbombardier/Android_Wizzenger.git .'
-		sh 'git pull'	
+			
 	}
 	stage('App Related Actions'){
 		sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/appActionsScript.sh'
