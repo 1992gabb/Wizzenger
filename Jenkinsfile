@@ -7,7 +7,7 @@ node {
      		//userRemoteConfigs: [[url: 'https://github.com/gbombardier/Android_Wizzenger.git']]])	
 	}
 	
-    	sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/appActionsScript.sh'
+    	sh 'sudo /var/lib/jenkins/workspace/Wizzenger_Pipeline/appActionsScript.sh'
 	
 	stage('Archivage') {
         	archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
