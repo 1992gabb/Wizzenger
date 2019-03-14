@@ -14,8 +14,8 @@ node {
     	
 	stage('Archivage') {
 		//Archiver seulement si le build de tests a fonctionné
-		sh 'echo "la valeur de lautre $?"'
-		if (currentBuild?.getPreviousBuild()?.result == 'SUCCES') {
+		sh 'echo "$?"'
+		if (sh 'echo "$?"' == 1) {
   			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
 		}else{
 			currentBuild.result = 'FAILURE';
