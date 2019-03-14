@@ -1,7 +1,7 @@
 node {
 	stage('Update'){
 		echo 'Update..'
-		if (fileExists('JenkinsFile')) {
+		if (fileExists('Jenkinsfile')) {
     			sh 'git pull'
 		} else {
     			sh 'git clone https://github.com/gbombardier/Android_Wizzenger.git .'
