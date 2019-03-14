@@ -13,5 +13,5 @@ echo 'Testing..'
 
 #Vérifier si l'app est déja présente sur le device
 #/usr/android-sdk-linux/platform-tools/adb -s $phone1 install -r  /var/lib/jenkins/workspace/Wizzenger_Pipeline/app/build/outputs/apk/debug/app-debug.apk
-/usr/android-sdk-linux/platform-tools/adb -s $phone1 install -r -t  /var/lib/jenkins/workspace/Wizzenger_Pipeline/app/build/outputs/apk/debug/app-debug.apk
+#/usr/android-sdk-linux/platform-tools/adb -s $phone1 install -r -t  /var/lib/jenkins/workspace/Wizzenger_Pipeline/app/build/outputs/apk/debug/app-debug.apk
 
