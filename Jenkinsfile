@@ -13,7 +13,9 @@ node {
 	}
     	
 	stage('Archivage') {
-        	archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
-		
+		echo currentBuild?.getPreviousBuild()?.result
+		if (currentBuild?.getPreviousBuild()?.result == 'SUCCESS') {
+  			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
+		}
     	}
 }
