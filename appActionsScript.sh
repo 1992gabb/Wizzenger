@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Noter ici les id des téléphones
-phone1=NGEA320063
+phone1=1215fcf92c900304
 
 #Actions à faire lors du build (builder l'app et le test)
 echo 'Build..'
