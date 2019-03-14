@@ -5,7 +5,8 @@ phone1=1215fcf92c900304
 
 #Actions à faire lors du build (builder l'app et le test)
 echo 'Build..'
-./gradlew assembleDebug
+#./gradlew assembleDebug
+./gradlew test
 
 #Phase de test
 echo 'Testing..' 
