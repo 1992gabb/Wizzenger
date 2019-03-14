@@ -3,7 +3,7 @@
 #Actions à faire lors du build (builder l'app et le test)
 buildTest(){
   echo 'Building and testing..'
-  ./gradlew connectedAndroidTest
+  //./gradlew connectedAndroidTest
   
   #Si fonctionne, on build 
   #./gradlew assembleDebug
