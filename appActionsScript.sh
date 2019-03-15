@@ -10,7 +10,7 @@ echo 'Building and testing..'
 result= tail -n1 logErrors.txt | cut -d' ' -f2
 echo $result
 
-if [ $result=='FAILURE' ]
+if [ $result=="FAILURE" ]
 then
   #Si failure, on sort du jenkins
   exit 0
@@ -19,13 +19,6 @@ else
   #Si fonctionne, on build
   #./gradlew assembleDebug
 fi
-
-
-
-
-
-
-  
 
 #Si on voulait installer lapp pour lutiliser et non tester
 
