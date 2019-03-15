@@ -25,7 +25,9 @@ node {
 			echo 'wouhou success'
   			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
 		}else{
-			echo "wat"	
+			echo "wat"
+			currentBuild.result = 'FAILURE';
+			return;
 		}
     	}
 }
