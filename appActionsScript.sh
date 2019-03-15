@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Actions à faire lors du build (builder l'app et le test)
-buildTest(){
+function buildTest(){
   echo 'Building and testing..'
   #./gradlew connectedAndroidTest
   
@@ -13,7 +13,7 @@ buildTest(){
   #return 0
 }
 
-#buildTest
+buildTest
 
 
 
