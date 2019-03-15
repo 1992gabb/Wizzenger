@@ -8,7 +8,7 @@ echo 'Building and testing..'
 #wait
 
 result= tail -n1 logErrors.txt | cut -d' ' -f2
-echo $result
+echo $result > play.properties
 
 if [ $result=="FAILURE" ]
 then
