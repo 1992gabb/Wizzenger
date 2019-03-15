@@ -10,7 +10,7 @@ echo 'Building and testing..'
 #wait
 
 result= tail -n1 logErrors.txt | cut -d' ' -f2
-echo $result > scriptResult.txt
+echo result > scriptResult.txt
 
 if [ $result=="FAILURE" ]
 then
