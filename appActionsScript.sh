@@ -5,8 +5,9 @@
 
 echo 'Building and testing..'
 chmod +x ./gradlew
+script jenkinsLog.txt
 # ./gradlew connectedAndroidTest 
-./gradlew connectedAndroidTest > jenkinsLog.txt
+./gradlew connectedAndroidTest
 
 #Si failure, on sort du jenkins
 exit 0
