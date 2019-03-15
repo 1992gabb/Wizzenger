@@ -2,6 +2,7 @@
 
 #Actions à faire lors du build (builder l'app et le test)
 
+exit 0
 echo 'Building and testing..'
 #./gradlew connectedAndroidTest
 
