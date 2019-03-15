@@ -14,14 +14,14 @@ node {
     	
 	stage('Archivage') {
 		//Archiver seulement si le build de tests a fonctionné
-		
-		if (0 == 1) {
-			echo 'wouhou success'
-  			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
-		}else{
+		def result = sh "echo tail -n1 logErrors.txt | cut -d' ' -f2"
+		if (result == 'FAILED') {
 			echo 'tes nullllll'
 			currentBuild.result = 'FAILURE';
 			return;
+		}else{
+			echo 'wouhou success'
+  			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
 		}
     	}
 }
