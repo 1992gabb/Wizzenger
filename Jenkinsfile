@@ -2,9 +2,9 @@ node {
 	stage('Update'){
 		echo 'Update..'
 		if (fileExists('Jenkinsfile')) {
-    			sh 'git pull'
+    			sh 'sudo git pull'
 		} else {
-    			sh 'git clone https://github.com/gbombardier/Android_Wizzenger.git .'
+    			sh 'sudo git clone https://github.com/gbombardier/Android_Wizzenger.git .'
 		}
 	}
 	
