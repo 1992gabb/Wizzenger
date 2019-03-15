@@ -12,7 +12,7 @@ echo 'Building and testing..'
 result= tail -n1 logErrors.txt | cut -d' ' -f2
 echo $result' > scriptResult.txt
 
-if [ $result.trim()=="FAILURE" ]
+if [ $result=="FAILURE" ]
 then
   #Si failure, on sort du jenkins
   echo "Test failure, not building new apk."
