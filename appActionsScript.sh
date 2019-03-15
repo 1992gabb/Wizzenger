@@ -4,19 +4,19 @@
 function buildTest(){
   echo 'Building and testing..'
   #./gradlew connectedAndroidTest
-  
-  #Si fonctionne, on build 
+
+  #Si fonctionne, on build
   #./gradlew assembleDebug
-  return 13
-  
-   #Si failure, on sort du jenkins
+  return 1
+
+  #Si failure, on sort du jenkins
   #return 0
 }
 buildTest
 
 
 
-#Si on voulait installer l'app pour l'utiliser et non tester
+#Si on voulait installer lapp pour lutiliser et non tester
 
 #phone1=1215fcf92c900304
 #phone2=05157df5bd0d0412
