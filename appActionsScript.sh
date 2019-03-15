@@ -10,6 +10,7 @@ script jenkinsLog.txt
 ./gradlew connectedAndroidTest
 
 #Si failure, on sort du jenkins
+wait
 exit 0
 
 #Si fonctionne, on build
