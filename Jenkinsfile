@@ -17,7 +17,7 @@ node {
 	stage('Archivage') {
 		//Archiver seulement si le build de tests a fonctionné
 		result = sh "tail -n1 logErrors.txt | cut -d' ' -f2"
-		echo result
+		echo $result
 		if (result == 'FAILED') {
 			echo 'tes nullllll'
 			currentBuild.result = 'FAILURE';
