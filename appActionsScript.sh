@@ -12,9 +12,7 @@ function buildTest(){
    #Si failure, on sort du jenkins
   #return 0
 }
-
 buildTest
-echo $?
 
 
 
