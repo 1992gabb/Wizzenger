@@ -16,7 +16,7 @@ node {
 		//Archiver seulement si le build de tests a fonctionné
 		def result = readFile("${WORKSPACE}/scriptResult.txt")
 		//def result = 'FAILED'
-		echo result
+		echo result.trim()
 		if (result == 'SUCCESS') {
   			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
 		}else if (result == 'FAILED'){
