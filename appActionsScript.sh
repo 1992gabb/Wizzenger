@@ -7,7 +7,7 @@ function buildTest(){
   
   #Si fonctionne, on build 
   #./gradlew assembleDebug
-  return 'success'
+  return 13
   
    #Si failure, on sort du jenkins
   #return 0
