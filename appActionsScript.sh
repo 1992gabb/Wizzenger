@@ -13,12 +13,14 @@ echo $result
 if [ $result=="FAILURE" ]
 then
   #Si failure, on sort du jenkins
+  echo "Test failure, not building new apk."
   exit 0
 else
-  echo 'BRAVOOOOOOOOO'
   #Si fonctionne, on build
-  #./gradlew assembleDebug
+  echo "Tests succeeded, building new apk."
+  ./gradlew assembleDebug
 fi
+
 
 #Si on voulait installer lapp pour lutiliser et non tester
 
