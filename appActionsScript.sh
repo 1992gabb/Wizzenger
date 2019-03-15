@@ -2,14 +2,17 @@
 
 #Actions à faire lors du build (builder l'app et le test)
 
-exit 0
+
 echo 'Building and testing..'
 #./gradlew connectedAndroidTest
+
+#Si failure, on sort du jenkins
+exit 0
 
 #Si fonctionne, on build
 #./gradlew assembleDebug
 
-#Si failure, on sort du jenkins
+
   
 
 #Si on voulait installer lapp pour lutiliser et non tester
