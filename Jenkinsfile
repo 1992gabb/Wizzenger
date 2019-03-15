@@ -15,7 +15,7 @@ node {
 	stage('Archivage') {
 		//Archiver seulement si le build de tests a fonctionné
 		
-		if (result == 1) {
+		if (0 == 1) {
 			echo 'wouhou success'
   			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
 		}else{
