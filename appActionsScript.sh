@@ -19,12 +19,9 @@ then
   echo "Test failure, not building new apk."
   exit 0
 else
-  if [ $result=="" ]
-    then
-    #Si fonctionne, on build
-    echo "Tests succeeded, building new apk."
-    #./gradlew assembleDebug
-  fi
+  #Si fonctionne, on build
+  echo "Tests succeeded, building new apk."
+  #./gradlew assembleDebug
 fi
 
 
