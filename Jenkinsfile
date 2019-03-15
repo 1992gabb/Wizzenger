@@ -17,13 +17,15 @@ node {
 		def result = sh "tail -n1 logErrors.txt | cut -d' ' -f2"
 		//def result = 'SUCCESS'
 		echo result
-		if (result == 'FAILED') {
+		if (result == 'SUCCESS') {
 			echo 'tes nullllll'
 			currentBuild.result = 'FAILURE';
 			return;
-		}else{
+		}else if (result == 'FAILED'){
 			echo 'wouhou success'
   			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
+		}else{
+			echo "wat"	
 		}
     	}
 }
