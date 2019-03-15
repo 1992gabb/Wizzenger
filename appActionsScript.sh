@@ -13,7 +13,7 @@ wait
 result= tail -n1 logErrors.txt | cut -d' ' -f2 
 tail -n1 logErrors.txt | cut -d' ' -f2  > scriptResult.txt
 echo $result
-if [ $result=="FAILURE" ]
+if [ $result="FAILURE" ]
 then
   #Si failure, on sort du jenkins
   echo "Test failure, not building new apk."
