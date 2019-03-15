@@ -2,11 +2,13 @@
 
 #Actions à faire lors du build (builder l'app et le test)
 
-
 echo 'Building and testing..'
-chmod +x ./gradlew
 
 ./gradlew connectedAndroidTest 2> logErrors.txt
+wait
+
+result= tail -n1 logErrors.txt | cut -d' ' -f2
+echo $result
 
 #Si failure, on sort du jenkins
 exit 0
