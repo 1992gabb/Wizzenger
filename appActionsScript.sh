@@ -5,7 +5,7 @@
 
 #-------------- Builder et Tester App ----------------
 echo 'Building and testing..'
-
+./gradlew assembleDebug
 ./gradlew connectedAndroidTest 2> logErrors.txt
 wait
 
