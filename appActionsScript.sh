@@ -10,15 +10,15 @@ echo 'Building and testing..'
 result= tail -n1 logErrors.txt | cut -d' ' -f2
 echo $result
 
-if($result=='FAILURE'){
+if [ $result=='FAILURE']
+then
   #Si failure, on sort du jenkins
   exit 0
-}
-else{
+else
   echo 'BRAVOOOOOOOOO'
   #Si fonctionne, on build
   #./gradlew assembleDebug
-}
+fi
 
 
 
