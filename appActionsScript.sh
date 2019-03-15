@@ -14,7 +14,7 @@ function buildTest(){
 }
 
 buildTest
-
+echo $?
 
 
 
