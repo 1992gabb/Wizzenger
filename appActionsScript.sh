@@ -4,7 +4,7 @@
 
 
 echo 'Building and testing..'
-#./gradlew connectedAndroidTest
+./gradlew connectedAndroidTest
 
 #Si failure, on sort du jenkins
 exit 0
