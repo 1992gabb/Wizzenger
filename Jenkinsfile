@@ -17,9 +17,9 @@ node {
 		def result = readFile("${WORKSPACE}/scriptResult.txt")
 		//def result = 'FAILED'
 		echo result.trim()
-		if (result == 'SUCCESS') {
+		if (result.trim() == 'SUCCESS') {
   			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
-		}else if (result == 'FAILED'){
+		}else if (result.trim() == 'FAILED'){
 			currentBuild.result = 'FAILURE';
 			return;
 		}else{
