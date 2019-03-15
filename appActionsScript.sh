@@ -13,7 +13,7 @@ buildTest(){
   #return 0
 }
 
-buildTest
+#buildTest
 
 
 
