@@ -10,7 +10,8 @@ node {
 	
 	stage('App Related Actions'){
 		//sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/appActionsScript.sh'
-		def result = sh returnStdout: true, script: '/var/lib/jenkins/workspace/Wizzenger_Pipeline/appActionsScript.sh'
+		sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/appActionsScript.sh; echo $? > status'
+		def result = readFile('status').trim()
 	}
     	
 	stage('Archivage') {
