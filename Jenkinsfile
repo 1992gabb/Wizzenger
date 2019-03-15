@@ -14,8 +14,8 @@ node {
     	
 	stage('Archivage') {
 		//Archiver seulement si le build de tests a fonctionné
-		//def result = sh "tail -n1 logErrors.txt | cut -d' ' -f2"
-		def result = 'FAILED'
+		def result = readFile(scriptResult.txt)
+		//def result = 'FAILED'
 		echo result
 		if (result == 'SUCCESS') {
   			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
