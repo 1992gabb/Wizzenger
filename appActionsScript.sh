@@ -4,6 +4,7 @@
 
 
 echo 'Building and testing..'
+chmod +x ./gradlew
 ./gradlew connectedAndroidTest
 
 #Si failure, on sort du jenkins
