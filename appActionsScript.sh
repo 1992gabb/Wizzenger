@@ -4,17 +4,25 @@
 
 echo 'Building and testing..'
 
-./gradlew connectedAndroidTest 2> logErrors.txt
-wait
+#./gradlew connectedAndroidTest 2> logErrors.txt
+#wait
 
 result= tail -n1 logErrors.txt | cut -d' ' -f2
 echo $result
 
-#Si failure, on sort du jenkins
-exit 0
+if($result=='FAILURE'){
+  #Si failure, on sort du jenkins
+  exit 0
+}
+else{
+  echo 'BRAVOOOOOOOOO'
+  #Si fonctionne, on build
+  #./gradlew assembleDebug
+}
 
-#Si fonctionne, on build
-#./gradlew assembleDebug
+
+
+
 
 
   
