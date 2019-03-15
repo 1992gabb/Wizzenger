@@ -10,7 +10,8 @@ echo 'Building and testing..'
 #./gradlew connectedAndroidTest 2> logErrors.txt
 wait
 
-result= tail -n1 logErrors.txt | cut -d' ' -f2 
+#result= tail -n1 logErrors.txt | cut -d' ' -f2 
+result="FAILURE"
 tail -n1 logErrors.txt | cut -d' ' -f2  > scriptResult.txt
 echo $result
 if [ "$result" == "FAILURE" ]
