@@ -6,6 +6,7 @@
 #-------------- Builder et Tester App ----------------
 echo 'Building and testing..'
 
+/usr/android-sdk-linux/platform-tools/adb uninstall com.bombardier_gabriel.wizzenger
 ./gradlew connectedAndroidTest 2> logErrors.txt
 wait
 
