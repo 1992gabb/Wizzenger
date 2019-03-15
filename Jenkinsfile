@@ -16,7 +16,7 @@ node {
 		//Archiver seulement si le build de tests a fonctionné
 		//def result = sh "tail -n1 logErrors.txt | cut -d' ' -f2"
 		def result = 'SUCCESS'
-		echo $result
+		echo result
 		if (result == 'FAILED') {
 			echo 'tes nullllll'
 			currentBuild.result = 'FAILURE';
