@@ -10,7 +10,7 @@ echo 'Building and testing..'
 #wait
 
 result= tail -n1 logErrors.txt | cut -d' ' -f2
-echo BUILD_RESULT=$result > play.properties
+echo BUILD_RESULT= tail -n1 logErrors.txt | cut -d' ' -f2 > play.properties
 
 if [ $result=="FAILURE" ]
 then
