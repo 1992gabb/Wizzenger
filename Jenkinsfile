@@ -17,8 +17,10 @@ node {
 		def result = sh '$?'
 		echo result
 		if (result == 1) {
+			echo 'wouhou success'
   			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
 		}else{
+			echo 'tes nullllll'
 			currentBuild.result = 'FAILURE';
 			return;
 		}
