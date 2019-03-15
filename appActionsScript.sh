@@ -6,8 +6,8 @@
 #-------------- Builder et Tester App ----------------
 echo 'Building and testing..'
 
-#./gradlew connectedAndroidTest 2> logErrors.txt
-#wait
+./gradlew connectedAndroidTest 2> logErrors.txt
+wait
 
 result= tail -n1 logErrors.txt | cut -d' ' -f2
 tail -n1 logErrors.txt | cut -d' ' -f2  > scriptResult.txt
