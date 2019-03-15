@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Creer play.properties et logErrors.txt si ce n'est pas fait.
+#Creer logErrors.txt si ce n'est pas fait.
 
 
 #-------------- Builder et Tester App ----------------
@@ -10,18 +10,19 @@ echo 'Building and testing..'
 #wait
 
 result= tail -n1 logErrors.txt | cut -d' ' -f2
-echo 'BUILD_RESULT=$result' > play.properties
 
-echo $result
 if [ $result=="FAILURE" ]
 then
   #Si failure, on sort du jenkins
   echo "Test failure, not building new apk."
   exit 0
 else
-  #Si fonctionne, on build
-  echo "Tests succeeded, building new apk."
-  ./gradlew assembleDebug
+  if [ $result=="SUCCESS" ]
+    then
+    #Si fonctionne, on build
+    echo "Tests succeeded, building new apk."
+    ./gradlew assembleDebug
+  fi
 fi
 
 
