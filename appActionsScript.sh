@@ -12,6 +12,7 @@ echo 'Building and testing..'
 result= tail -n1 logErrors.txt | cut -d' ' -f2
 echo BUILD_RESULT=$result > play.properties
 
+echo $result
 if [ $result=="FAILURE" ]
 then
   #Si failure, on sort du jenkins
