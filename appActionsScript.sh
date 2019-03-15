@@ -1,21 +1,15 @@
 #!/bin/bash
 
 #Actions à faire lors du build (builder l'app et le test)
-function buildTest(){
-  echo 'Building and testing..'
-  #./gradlew connectedAndroidTest
 
-  #Si fonctionne, on build
-  #./gradlew assembleDebug
-  return 1
+echo 'Building and testing..'
+#./gradlew connectedAndroidTest
 
-  #Si failure, on sort du jenkins
+#Si fonctionne, on build
+#./gradlew assembleDebug
+
+#Si failure, on sort du jenkins
   
-}
-
-buildTest
-
-
 
 #Si on voulait installer lapp pour lutiliser et non tester
 
