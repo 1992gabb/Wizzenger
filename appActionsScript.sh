@@ -7,7 +7,7 @@
 echo 'Building and testing..'
 
 #/usr/android-sdk-linux/platform-tools/adb uninstall com.bombardier_gabriel.wizzenger
-./gradlew connectedAndroidTest 2> logErrors.txt
+./gradlew connectedAndroidTest > logErrors.txt
 wait
 
 result= tail -n1 logErrors.txt | cut -d' ' -f2
