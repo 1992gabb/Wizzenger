@@ -9,8 +9,8 @@ echo 'Building and testing..'
 #./gradlew connectedAndroidTest 2> logErrors.txt
 #wait
 
-$result= tail -n1 logErrors.txt | cut -d' ' -f2
-echo BUILD_RESULT='echo $result' > play.properties
+result= tail -n1 logErrors.txt | cut -d' ' -f2
+echo BUILD_RESULT=$result > play.properties
 
 if [ $result=="FAILURE" ]
 then
