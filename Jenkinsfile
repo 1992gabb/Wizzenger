@@ -12,6 +12,7 @@ node {
 		//sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/appActionsScript.sh'
 		sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/appActionsScript.sh; echo $? > status'
 		def result = readFile('status').trim()
+		echo result
 	}
     	
 	stage('Archivage') {
