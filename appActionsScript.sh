@@ -1,7 +1,9 @@
 #!/bin/bash
 
-#Actions à faire lors du build (builder l'app et le test)
+#Creer play.properties et logErrors.txt si ce n'est pas fait.
 
+
+#-------------- Builder et Tester App ----------------
 echo 'Building and testing..'
 
 #./gradlew connectedAndroidTest 2> logErrors.txt
