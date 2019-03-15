@@ -12,7 +12,7 @@ wait
 
 result= tail -n1 logErrors.txt | cut -d' ' -f2 
 tail -n1 logErrors.txt | cut -d' ' -f2  > scriptResult.txt
-echo result
+echo $result
 if [ $result=="FAILURE" ]
 then
   #Si failure, on sort du jenkins
