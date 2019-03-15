@@ -3,8 +3,16 @@
 #Actions à faire lors du build (builder l'app et le test)
 function buildTest(){
   echo 'Building and testing..'
+  #./gradlew connectedAndroidTest
+
+  #Si fonctionne, on build
+  #./gradlew assembleDebug
+  return 1
+
+  #Si failure, on sort du jenkins
   
 }
+
 buildTest
 
 
