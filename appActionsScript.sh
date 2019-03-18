@@ -15,7 +15,7 @@ fi
 wait
 
 result="$(grep 'Task :app:connectedDebugAndroidTest FAILED' logErrors.txt)"
-echo $result
+echo "Le resultat est: $result"
 #Si un test échoue, la ligne suivante est printée : Task :app:connectedDebugAndroidTest FAILED
 
 if [ "$result" != "" ]
