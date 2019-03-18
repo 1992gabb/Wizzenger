@@ -14,9 +14,8 @@ fi
 #./gradlew connectedAndroidTest | tee logErrors.txt
 wait
 
-result= tail -n1 logErrors.txt | cut -d' ' -f2 
-
 result = $(grep 'Task :app:connectedDebugAndroidTest FAILED' logErrors.txt)
+echo $result
 #Si un test échoue, la ligne suivante est printée : Task :app:connectedDebugAndroidTest FAILED
 
 if [ "$result" != "" ]
