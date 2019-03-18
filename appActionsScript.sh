@@ -11,7 +11,7 @@ fi
 
 #-------------- Builder et Tester App ----------------
 #/usr/android-sdk-linux/platform-tools/adb uninstall com.bombardier_gabriel.wizzenger.test
-./gradlew connectedAndroidTest | tee logErrors.txt
+#./gradlew connectedAndroidTest | tee logErrors.txt
 wait
 
 #Si un test échoue, la ligne suivante est printée : Task :app:connectedDebugAndroidTest FAILED
