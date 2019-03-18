@@ -2,9 +2,10 @@ node {
 	stage('Update'){
 		echo 'Update..'
 		if (fileExists('Jenkinsfile')) {
-    			sh 'sudo git pull'
+    		sh 'sudo git pull'
 		} else {
-    			sh 'sudo git clone https://github.com/gbombardier/Android_Wizzenger.git .'
+			#Modifier pour le repo actuel
+    		sh 'sudo git clone https://github.com/gbombardier/Android_Wizzenger.git .'
 		}
 	}
 	
@@ -14,15 +15,14 @@ node {
 	}
     	
 	stage('Archivage') {
-		//Archiver seulement si le build de tests a fonctionné
+		//Archiver seulement si le build de tests a fonctionne
 		def file = readFile "logErrors.txt"
-		def result = file.split("Task :app:connectedDebugAndroidTest FAILED")
+		
 		if (file.contains("Task :app:connectedDebugAndroidTest FAILED")) {
   			currentBuild.result = 'FAILURE';
 			return;
 		}else{
 			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
-			
 		}
-    	}
+    }
 }
