@@ -17,7 +17,7 @@ node {
 		//Archiver seulement si le build de tests a fonctionné
 		def file = readFile "logErrors.txt"
 		def result = file.split("Task :app:connectedDebugAndroidTest FAILED")
-		echo $result
+		echo "$result"
 		if (result == '') {
   			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
 		}else{
