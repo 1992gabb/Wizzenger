@@ -11,12 +11,12 @@ fi
 
 #-------------- Builder et Tester App ----------------
 #/usr/android-sdk-linux/platform-tools/adb uninstall com.bombardier_gabriel.wizzenger.test
-#./gradlew connectedAndroidTest | tee logErrors.txt
+./gradlew connectedAndroidTest | tee logErrors.txt
 wait
 
-result="$(grep 'Task :app:connectedDebugAndroidTest FAILED' logErrors.txt)"
-echo "Le resultat est: $result"
 #Si un test échoue, la ligne suivante est printée : Task :app:connectedDebugAndroidTest FAILED
+result="$(grep 'Task :app:connectedDebugAndroidTest FAILED' logErrors.txt)" 
+echo "Le resultat est: $result"
 
 if [ "$result" != "" ]
 then
