@@ -6,6 +6,7 @@ then
     sudo touch logErrors.txt
     sudo chmod 777 logErrors.txt
     sudo chmod 777 gradlew
+    sudo chmod 777 /var/lib/jenkins/workspace/Wizzenger_Pipeline/app
 fi
 
 #-------------- Builder et Tester App ----------------
