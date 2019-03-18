@@ -9,6 +9,7 @@ node {
 	}
 	
 	stage('App Related Actions'){
+		echo 'Building and testing..'
 		sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/appActionsScript.sh'
 	}
     	
