@@ -11,13 +11,15 @@ fi
 
 #-------------- Builder et Tester App ----------------
 #/usr/android-sdk-linux/platform-tools/adb uninstall com.bombardier_gabriel.wizzenger.test
-./gradlew connectedAndroidTest | tee logErrors.txt
+#./gradlew connectedAndroidTest | tee logErrors.txt
 wait
 
 result= tail -n1 logErrors.txt | cut -d' ' -f2 
-#tail -n1 logErrors.txt | cut -d' ' -f2  > scriptResult.txt
 
-if [ "$result" == "FAILURE" ]
+result = (grep 'Task :app:connectedDebugAndroidTest FAILED' logErrors.txt)
+#Si un test échoue, la ligne suivante est printée : Task :app:connectedDebugAndroidTest FAILED
+
+if [ "$result" != "" ]
 then
   #Si failure, on sort du jenkins
   echo "Test failure, not building new apk."
