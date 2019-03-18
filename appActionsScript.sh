@@ -4,6 +4,8 @@
 if [ ! -e logErrors.txt ]
 then
     sudo touch logErrors.txt
+    sudo chmod 777 logErrors.txt
+    sudo chmod 777 gradlew
 fi
 
 #-------------- Builder et Tester App ----------------
