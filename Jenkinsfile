@@ -17,7 +17,7 @@ node {
 		//Archiver seulement si le build de tests a fonctionné
 		def file = readFile "logErrors.txt"
 		def result = file.split("Task :app:connectedDebugAndroidTest FAILED")
-		if (file.contains("Task :app:connectedDebugAndroidTest FAILED")) {
+		if (file.contains("BUILD")) {
   			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
 		}else{
 			currentBuild.result = 'FAILURE';
