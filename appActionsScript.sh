@@ -1,17 +1,18 @@
 #!/bin/bash
 
 #Creer logErrors.txt si ce n'est pas fait.
-
+if [ ! -e logErrors.txt ]
+then
+    sudo touch logErrors.txt
+fi
 
 #-------------- Builder et Tester App ----------------
-echo 'Building and testing..'
-
-#/usr/android-sdk-linux/platform-tools/adb uninstall com.bombardier_gabriel.wizzenger
-#./gradlew connectedAndroidTest 2> logErrors.txt
+#/usr/android-sdk-linux/platform-tools/adb uninstall com.bombardier_gabriel.wizzenger.test
+./gradlew connectedAndroidTest | tee logErrors.txt
 wait
 
 result= tail -n1 logErrors.txt | cut -d' ' -f2 
-tail -n1 logErrors.txt | cut -d' ' -f2  > scriptResult.txt
+#tail -n1 logErrors.txt | cut -d' ' -f2  > scriptResult.txt
 
 if [ "$result" == "FAILURE" ]
 then
