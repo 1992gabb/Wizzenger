@@ -61,7 +61,7 @@ class UiTests {
         onView(withId(R.id.login_title)).check(matches(withText("Wizzenger")))
     }
 
-    //@Test
+    @Test
     fun sendMessage() {
         checkConnection()
 
@@ -76,7 +76,7 @@ class UiTests {
         Thread.sleep(1000)
     }
 
-    //@Test
+    @Test
     fun removeContact(){
         checkConnection()
 
