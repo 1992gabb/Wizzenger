@@ -15,14 +15,11 @@ node {
     	
 	stage('Archivage') {
 		//Archiver seulement si le build de tests a fonctionné
-		def result = 'SUCCESS'
-		if (result.trim() == 'SUCCESS') {
+		def file = readFile "${env.WORKSPACE}/logErrors.txt"
+		def result = file.split("Task :app:connectedDebugAndroidTest FAILED")
+		if (result.trim() == '') {
   			archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
-		}else if (result.trim() == 'FAILED'){
-			currentBuild.result = 'FAILURE';
-			return;
 		}else{
-			echo "wat"
 			currentBuild.result = 'FAILURE';
 			return;
 		}
