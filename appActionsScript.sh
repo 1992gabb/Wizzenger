@@ -26,7 +26,7 @@ then
 else
   #Si fonctionne, on build
   echo "Tests succeeded, building new apk."
-  #./gradlew assembleDebug
+  ./gradlew assembleDebug
 fi
 
 
