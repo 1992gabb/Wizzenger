@@ -4,7 +4,7 @@ node {
 		if (fileExists('Jenkinsfile')) {
     		sh 'sudo git pull'
 		} else {
-			#Modifier pour le repo actuel
+			//Modifier pour le repo actuel
     		sh 'sudo git clone https://github.com/gbombardier/Android_Wizzenger.git .'
 		}
 	}
