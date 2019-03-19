@@ -29,7 +29,7 @@ grantPermissions () {
 
 createFiles(){
 
-    if [ ! -e logErrors.txt ]
+    if [ ! -e log.txt ]
     then
 	echo "Creating necessary files in repo"
         sudo touch log.txt
@@ -44,14 +44,14 @@ launchTests(){
     #/usr/android-sdk-linux/platform-tools/adb uninstall com.bombardier_gabriel.wizzenger.test
     
 	echo "Tests launching on connected devices. Logs will be in log.txt"
-	./gradlew connectedAndroidTest | tee logErrors.txt
+	./gradlew connectedAndroidTest | tee log.txt
     wait
 }
 
 
 verifyResults(){
 	#Si un test échoue, la ligne suivante est printée : Task :app:connectedDebugAndroidTest FAILED
-    result="$(grep 'Task :app:connectedDebugAndroidTest FAILED' logErrors.txt)" 
+    result="$(grep 'Task :app:connectedDebugAndroidTest FAILED' log.txt)" 
    
 
     if [ "$result" != "" ]
