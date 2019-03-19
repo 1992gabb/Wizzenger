@@ -16,7 +16,7 @@ node {
     	
 	stage('Archivage') {
 		//Archiver seulement si le build de tests a fonctionne
-		def file = readFile "logErrors.txt"
+		def file = readFile "log.txt"
 		
 		if (file.contains("Task :app:connectedDebugAndroidTest FAILED")) {
   			currentBuild.result = 'FAILURE';
