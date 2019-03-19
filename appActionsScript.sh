@@ -33,7 +33,7 @@ createFiles(){
     then
 	echo "Creating necessary files in repo"
         sudo touch log.txt
-        sudo chmod 777 logErrors.txt
+        sudo chmod 777 log.txt
         sudo chmod 777 gradlew
         sudo chmod 777 ./app
     fi
