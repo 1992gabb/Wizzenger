@@ -5,8 +5,8 @@
 checkIfAnyAvdsRunning () {
 	echo "***** check if any avds is running"
 	IsAnyAvdsRunnig=$(/usr/android-sdk-linux/platform-tools/adb devices | wc -l) 
-	if [ $IsAnyAvdsRunnig != '2' ]; then
-		echo "***** There are avds running... exiting script..."
+	if [ $IsAnyAvdsRunnig == '2' ]; then
+		echo "***** There are no avds running... exiting script..."
 		exit 1
 	fi
 }
