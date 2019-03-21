@@ -3,7 +3,7 @@
 #Pour certaines fonction, on doit passer l'id du téléphone en paramètre lorsque l'on run le script. 
 
 checkConnectedDevices () {
-	nbConnectedDevices=$(/usr/android-sdk-linux/platform-tools/adb devices | wc -l) 
+	nbConnectedDevices=$($ANDROID_HOME/platform-tools/adb devices | wc -l) 
 	if [ $nbConnectedDevices == '2' ]; then
 		echo "*********** No devices are connected, exiting script ***********"
 		exit 1
