@@ -1,4 +1,4 @@
-node {
+node('Automation_Node') {
 	stage('Update'){
 		echo 'Update..'
 		if (fileExists('Jenkinsfile')) {
