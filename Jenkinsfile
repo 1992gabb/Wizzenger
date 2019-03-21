@@ -11,7 +11,7 @@ node('Automation_Node') {
 	
 	stage('Tests'){
 		echo 'Building and testing..'
-		sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/appActionsScript.sh'
+		sh './appActionsScript.sh'
 	}
     	
 	stage('Archivage') {
