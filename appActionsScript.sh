@@ -2,10 +2,9 @@
 
 #Pour certaines fonction, on doit passer l'id du téléphone en paramètre lorsque l'on run le script. 
 
-checkIfAnyAvdsRunning () {
-	echo "***** check if any avds is running"
-	IsAnyAvdsRunnig=$(adb devices | wc -l) 
-	if [ $IsAnyAvdsRunnig != '2' ]; then
+checkConnectedDevices () {
+	nbConnectedDevices=$($ANDROID_HOME/platform-tools/adb devices | wc -l) 
+	if [ $nbConnectedDevices == '2' ]; then
 		echo "*********** No devices are connected, exiting script ***********"
 		exit 1
 	fi
@@ -28,12 +27,11 @@ grantPermissions () {
 }
 
 createFiles(){
-
-    if [ ! -e logErrors.txt ]
+    if [ ! -e log.txt ]
     then
 	echo "*********** Creating necessary files in repo ***********"
         sudo touch log.txt
-        sudo chmod 777 logErrors.txt
+        sudo chmod 777 log.txt
         sudo chmod 777 gradlew
         sudo chmod 777 ./app
     fi
@@ -44,14 +42,14 @@ launchTests(){
     #/usr/android-sdk-linux/platform-tools/adb uninstall com.bombardier_gabriel.wizzenger.test
     
 	echo "*********** Tests launching on connected devices. Logs will be in log.txt ***********"
-	./gradlew connectedAndroidTest | tee logErrors.txt
+	./gradlew connectedAndroidTest | tee log.txt
     wait
 }
 
 
 verifyResults(){
 	#Si un test échoue, la ligne suivante est printée : Task :app:connectedDebugAndroidTest FAILED
-    result="$(grep 'Task :app:connectedDebugAndroidTest FAILED' logErrors.txt)" 
+    result="$(grep 'Task :app:connectedDebugAndroidTest FAILED' log.txt)" 
    
 
     if [ "$result" != "" ]
@@ -67,7 +65,7 @@ verifyResults(){
 }
 
 
-checkIfAnyAvdsRunning
+checkConnectedDevices
 createFiles
 launchTests
 verifyResults

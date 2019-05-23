@@ -1,4 +1,4 @@
-node {
+node('Automation_Node') {
 	stage('Update'){
 		echo 'Update..'
 		if (fileExists('Jenkinsfile')) {
@@ -11,7 +11,7 @@ node {
 	
 	stage('Tests'){
 		echo 'Building and testing..'
-		sh '/var/lib/jenkins/workspace/Wizzenger_Pipeline/appActionsScript.sh'
+		sh './appActionsScript.sh'
 	}
     	
 	stage('Archivage') {
